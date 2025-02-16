@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class OTP extends Model
+class State extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,14 +15,12 @@ class OTP extends Model
      */
     protected $guarded = [];
 
-
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
      */
     protected $hidden = [
-        'deleted_at',
         'created_at',
         'updated_at',
     ];
@@ -40,16 +39,24 @@ class OTP extends Model
     }
 
     /**
-     * Define the relationship between the current model and the User model.
-     *
-     * This method defines a "belongs to" relationship, where the current model
-     * is associated with a single User. The foreign key for this relationship
-     * is expected to be present in the current model's table (typically `user_id`).
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *******************
      */
-    public function user(): BelongsTo
+
+    /**
+     * Model belongs to Country.
+     * @return BelongsTo<Country, State>
+     */
+    public function country(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Country::class);
+    }
+
+    /**
+     * Model may have many cities.
+     * @return HasMany<City, Country>
+     */
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class);
     }
 }

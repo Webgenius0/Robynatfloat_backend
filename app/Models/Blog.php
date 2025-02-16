@@ -3,17 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class OTP extends Model
+class Blog extends Model
 {
+    use SoftDeletes;
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $guarded = [];
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -40,16 +41,16 @@ class OTP extends Model
     }
 
     /**
-     * Define the relationship between the current model and the User model.
-     *
-     * This method defines a "belongs to" relationship, where the current model
-     * is associated with a single User. The foreign key for this relationship
-     * is expected to be present in the current model's table (typically `user_id`).
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * *********************
      */
-    public function user(): BelongsTo
+
+    /**
+     * Define a polymorphic one-to-many relationship with the Image model
+     * Indicates that this model can have multiple associated images.
+     * @return MorphMany<Image, Blog>
+     */
+    public function images(): MorphMany
     {
-        return $this->belongsTo(User::class);
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

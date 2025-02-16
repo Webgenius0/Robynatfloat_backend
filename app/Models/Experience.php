@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OTP extends Model
+class Experience extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -14,14 +14,12 @@ class OTP extends Model
      */
     protected $guarded = [];
 
-
     /**
      * The attributes that should be hidden for serialization.
      *
      * @var list<string>
      */
     protected $hidden = [
-        'deleted_at',
         'created_at',
         'updated_at',
     ];
@@ -34,21 +32,23 @@ class OTP extends Model
     protected function casts(): array
     {
         return [
+            'quantity' => 'integer',
+            'price' => 'float',
+            'discount' => 'float',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
     }
 
     /**
-     * Define the relationship between the current model and the User model.
-     *
-     * This method defines a "belongs to" relationship, where the current model
-     * is associated with a single User. The foreign key for this relationship
-     * is expected to be present in the current model's table (typically `user_id`).
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     *******************
      */
-    public function user(): BelongsTo
+
+    /**
+     * This model belongs to a User.
+     * @return BelongsTo<User, Product>
+     */
+    public function use(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }

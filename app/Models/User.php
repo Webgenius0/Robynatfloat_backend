@@ -4,8 +4,11 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
@@ -13,7 +16,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
 class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -74,6 +77,10 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * ****************
+     */
+
+    /**
      * Define the relationship between the current model and the Profile model.
      *
      * This method defines a "has one" relationship, where the current model
@@ -87,7 +94,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Profile::class);
     }
 
-        /**
+    /**
      * Define the relationship between the current model and the Otp model.
      *
      * This method defines a "has many" relationship, where the current model
@@ -100,5 +107,86 @@ class User extends Authenticatable implements JWTSubject
     public function otps(): HasMany
     {
         return $this->hasMany(OTP::class);
+    }
+
+    /**
+     * every user assign to a Role
+     * @return BelongsTo<Role, User>
+     */
+    public function role(): BelongsTo
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    /**
+     * This model may have multiple products
+     * @return HasMany<Product, User>
+     */
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * This model may have multiple products
+     * @return HasMany<Product, User>
+     */
+    public function services(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * This model may have multiple carts
+     * @return HasMany<Cart, Product>
+     */
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
+
+    /**
+     * This model may have multiple carts
+     * @return HasMany<Experience, User>
+     */
+    public function experience(): HasMany
+    {
+        return $this->hasMany(Experience::class);
+    }
+
+    /**
+     * Model may have many locations
+     * @return HasMany<Location, City>
+     */
+    public function locations(): HasMany
+    {
+        return $this->hasMany(Location::class);
+    }
+
+    /**
+     * belongs to many certificates
+     * @return BelongsToMany<Certificate, User>
+     */
+    public function certificates(): BelongsToMany
+    {
+        return $this->belongsToMany(Certificate::class);
+    }
+
+    /**
+     * belongs to many skills
+     * @return BelongsToMany<Certificate, User>
+     */
+    public function skills(): BelongsToMany
+    {
+        return $this->belongsToMany(Skill::class);
+    }
+
+    /**
+     * belongs to many languages
+     * @return BelongsToMany<Language, User>
+     */
+    public function languages(): BelongsToMany
+    {
+        return $this->belongsToMany(Language::class);
     }
 }

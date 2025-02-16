@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class OTP extends Model
+class Cart extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -13,7 +13,6 @@ class OTP extends Model
      * @var list<string>
      */
     protected $guarded = [];
-
 
     /**
      * The attributes that should be hidden for serialization.
@@ -40,16 +39,33 @@ class OTP extends Model
     }
 
     /**
-     * Define the relationship between the current model and the User model.
-     *
-     * This method defines a "belongs to" relationship, where the current model
-     * is associated with a single User. The foreign key for this relationship
-     * is expected to be present in the current model's table (typically `user_id`).
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     ****************
      */
-    public function user(): BelongsTo
+
+    /**
+     * This model belongs to a User.
+     * @return BelongsTo<User, Product>
+     */
+    public function use(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * This model belongs to a Product.
+     * @return BelongsTo<Product, Cart>
+     */
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * This model belongs to a Service.
+     * @return BelongsTo<Service, Cart>
+     */
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
     }
 }
