@@ -116,4 +116,13 @@ class User extends Authenticatable implements JWTSubject
     {
         return $this->belongsTo(Role::class);
     }
+
+    /**
+     * This model may have multiple products
+     * @return HasMany<Product, User>
+     */
+    public function products():HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
 }
