@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class Image extends Model
 {
@@ -11,8 +12,7 @@ class Image extends Model
      *
      * @var list<string>
      */
-    protected $guarded = [];
-
+    protected $fillable = ['url'];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -35,5 +35,34 @@ class Image extends Model
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
+    }
+
+    /**
+     * Define a polymorphic relationship.
+     * Indicates that this model can belongto multiple other models.
+     * @return MorphTo<Model, Image>
+     */
+    public function imageable():MorphTo
+    {
+        return $this->morphTo();
+    }
+
+
+    /**
+     * accessor for url Attribute
+     * @param mixed $url
+     * @return string
+     */
+    public function getUrlAttribute($url): string
+    {
+        if ($url) {
+            if (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0) {
+                return $url;
+            } else {
+                return asset('storage/' . $url);
+            }
+        } else {
+            return asset('assets/custom/img/user.jpg');
+        }
     }
 }

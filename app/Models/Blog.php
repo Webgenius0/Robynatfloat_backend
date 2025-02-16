@@ -3,10 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Profile extends Model
+class Blog extends Model
 {
     use SoftDeletes;
     /**
@@ -41,14 +41,16 @@ class Profile extends Model
     }
 
     /**
-     * Establishes an inverse one-to-many relationship with the User model.
-     *
-     * This method defines that the current model belongs to a single User.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * *********************
      */
-    public function user(): BelongsTo
+
+    /**
+     * Define a polymorphic one-to-many relationship with the Image model
+     * Indicates that this model can have multiple associated images.
+     * @return MorphMany<Image, Blog>
+     */
+    public function images(): MorphMany
     {
-        return $this->belongsTo(User::class);
+        return $this->morphMany(Image::class, 'imageable');
     }
 }
