@@ -167,7 +167,7 @@ class User extends Authenticatable implements JWTSubject
      * belongs to many certificates
      * @return BelongsToMany<Certificate, User>
      */
-    public function certificates():BelongsToMany
+    public function certificates(): BelongsToMany
     {
         return $this->belongsToMany(Certificate::class);
     }
@@ -176,8 +176,17 @@ class User extends Authenticatable implements JWTSubject
      * belongs to many skills
      * @return BelongsToMany<Certificate, User>
      */
-    public function skills():BelongsToMany
+    public function skills(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class);
+    }
+
+    /**
+     * belongs to many languages
+     * @return BelongsToMany<Language, User>
+     */
+    public function languages(): BelongsToMany
+    {
+        return $this->belongsToMany(Language::class);
     }
 }
