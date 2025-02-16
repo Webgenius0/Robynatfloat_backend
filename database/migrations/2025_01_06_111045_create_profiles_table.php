@@ -15,14 +15,18 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
 
-            $table->enum('gender', ['male', 'female', 'others'])->nullable();
-            
             $table->string('phone')->nullable();
-            $table->text('address')->nullable();
 
-            $table->date('date_of_birth')->nullable();
-            $table->longText('bio')->nullable();
+            $table->string('web')->nullable();
+            $table->longText('bio')->comment('profile about')->nullable();
 
+            $table->string('cv_url')->nullable();
+            $table->string('facebookl')->nullable();
+            $table->string('instragram')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('linkedin')->nullable();
+ 
+            $table->softDeletes();
             $table->timestamps();
         });
     }
