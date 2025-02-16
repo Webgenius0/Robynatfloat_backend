@@ -93,7 +93,7 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasOne(Profile::class);
     }
 
-        /**
+    /**
      * Define the relationship between the current model and the Otp model.
      *
      * This method defines a "has many" relationship, where the current model
@@ -112,7 +112,7 @@ class User extends Authenticatable implements JWTSubject
      * every user assign to a Role
      * @return BelongsTo<Role, User>
      */
-    public function role():BelongsTo
+    public function role(): BelongsTo
     {
         return $this->belongsTo(Role::class);
     }
@@ -121,7 +121,16 @@ class User extends Authenticatable implements JWTSubject
      * This model may have multiple products
      * @return HasMany<Product, User>
      */
-    public function products():HasMany
+    public function products(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    /**
+     * This model may have multiple products
+     * @return HasMany<Product, User>
+     */
+    public function services(): HasMany
     {
         return $this->hasMany(Product::class);
     }
