@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
@@ -51,9 +52,17 @@ class Product extends Model
      * This model belongs to a User.
      * @return BelongsTo<User, Product>
      */
-    public function use():BelongsTo
+    public function use(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * This model may have multiple carts
+     * @return HasMany<Cart, Product>
+     */
+    public function carts(): HasMany
+    {
+        return $this->hasMany(Cart::class);
+    }
 }

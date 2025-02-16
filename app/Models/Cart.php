@@ -4,13 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Service extends Model
+class Cart extends Model
 {
-    use SoftDeletes;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -24,6 +20,7 @@ class Service extends Model
      * @var list<string>
      */
     protected $hidden = [
+        'deleted_at',
         'created_at',
         'updated_at',
     ];
@@ -36,15 +33,13 @@ class Service extends Model
     protected function casts(): array
     {
         return [
-            'price' => 'float',
-            'discount' => 'float',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
     }
 
     /**
-     *******************
+     ****************
      */
 
     /**
@@ -57,11 +52,20 @@ class Service extends Model
     }
 
     /**
-     * This model may have multiple carts
-     * @return HasMany<Cart, Product>
+     * This model belongs to a Product.
+     * @return BelongsTo<Product, Cart>
      */
-    public function carts(): HasMany
+    public function product(): BelongsTo
     {
-        return $this->hasMany(Cart::class);
+        return $this->belongsTo(Product::class);
+    }
+
+    /**
+     * This model belongs to a Service.
+     * @return BelongsTo<Service, Cart>
+     */
+    public function service(): BelongsTo
+    {
+        return $this->belongsTo(Service::class);
     }
 }
