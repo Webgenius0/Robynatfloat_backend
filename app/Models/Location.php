@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class City extends Model
+class Location extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -21,6 +20,7 @@ class City extends Model
      * @var list<string>
      */
     protected $hidden = [
+        'deleted_at',
         'created_at',
         'updated_at',
     ];
@@ -33,39 +33,32 @@ class City extends Model
     protected function casts(): array
     {
         return [
+            'latitude'  => 'double',
+            'longitude' => 'double',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
     }
 
     /**
-     *******************
+     ****************
      */
 
     /**
-     * Model belongs to Country.
-     * @return BelongsTo<Country, State>
+     * The model belongs to User.
+     * @return BelongsTo<User, Location>
      */
-    public function country(): BelongsTo
+    public function user(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
-     * Model belongs to State.
-     * @return BelongsTo<State, City>
+     * Model Belongs to City.
+     * @return BelongsTo<City, Location>
      */
-    public function state(): BelongsTo
+    public function city(): BelongsTo
     {
-        return $this->belongsTo(State::class);
-    }
-
-    /**
-     * Model may have many locations
-     * @return HasMany<Location, City>
-     */
-    public function locations(): HasMany
-    {
-        return $this->hasMany(Location::class);
+        return $this->belongsTo(City::class);
     }
 }
