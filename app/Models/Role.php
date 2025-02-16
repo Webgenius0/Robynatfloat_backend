@@ -16,13 +16,6 @@ class Role extends Model
      */
     protected $guarded = [];
 
-    /**
-     * Get the route key for the model.
-     */
-    public function getRouteKeyName(): string
-    {
-        return 'slug';
-    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -34,7 +27,6 @@ class Role extends Model
         'created_at',
         'updated_at',
     ];
-
 
     /**
      * Get the attributes that should be cast.
@@ -49,6 +41,13 @@ class Role extends Model
         ];
     }
 
+    /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
     /**
      * ***************************
      */
