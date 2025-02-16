@@ -4,9 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class State extends Model
+class City extends Model
 {
     /**
      * The attributes that are mass assignable.
@@ -52,11 +51,11 @@ class State extends Model
     }
 
     /**
-     * Model may have many cities.
-     * @return HasMany<City, Country>
+     * Model belongs to State.
+     * @return BelongsTo<State, City>
      */
-    public function cities(): HasMany
+    public function state(): BelongsTo
     {
-        return $this->hasMany(City::class);
+        return $this->belongsTo(State::class);
     }
 }

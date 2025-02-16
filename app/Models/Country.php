@@ -49,4 +49,13 @@ class Country extends Model
     {
         return $this->hasMany(State::class);
     }
+
+    /**
+     * Model may have many cities.
+     * @return HasMany<City, Country>
+     */
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class);
+    }
 }
