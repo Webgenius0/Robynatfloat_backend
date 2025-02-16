@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -74,6 +75,10 @@ class User extends Authenticatable implements JWTSubject
     }
 
     /**
+     * ****************
+     */
+
+    /**
      * Define the relationship between the current model and the Profile model.
      *
      * This method defines a "has one" relationship, where the current model
@@ -100,5 +105,14 @@ class User extends Authenticatable implements JWTSubject
     public function otps(): HasMany
     {
         return $this->hasMany(OTP::class);
+    }
+
+    /**
+     * every user assign to a Role
+     * @return BelongsTo<Role, User>
+     */
+    public function role():BelongsTo
+    {
+        return $this->belongsTo(Role::class);
     }
 }
