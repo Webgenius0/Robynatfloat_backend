@@ -26,6 +26,5 @@ class DatabaseSeeder extends Seeder
         $this->call([CityTableSeeder::class ]);
         $this->call([LocationTableSeeder::class ]);
 
-
     }
 }
