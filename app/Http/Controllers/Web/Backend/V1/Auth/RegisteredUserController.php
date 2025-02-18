@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -45,7 +46,7 @@ class RegisteredUserController extends Controller
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
-                'handle' => Helper::generateUniqueSlug($request->first_name + $request->last_name, 'users', 'handle'),
+                'handle' => Helper::generateUniqueSlug($request->first_name.$request->last_name, 'users', 'handle'),
                 'email' => $request->email,
                 'role_id' => 1,
                 'password' => Hash::make($request->password),
@@ -56,13 +57,12 @@ class RegisteredUserController extends Controller
             event(new Registered($user));
 
             Auth::login($user);
-            
+
             return redirect(route('dashboard', absolute: false));
         } catch(Exception $e) {
+            Log::error("App\Http\Controllers\Web\Backend\V1\Auth::store", ['error'=>$e->getMessage()]);
             DB::rollBack();
-            return redirect()->back();
+            return redirect()->back()->with('t-error', 'Something went wrong..!');
         }
-
-
     }
 }

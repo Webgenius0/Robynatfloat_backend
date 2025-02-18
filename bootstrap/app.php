@@ -50,7 +50,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'guest.api' => EnsureGuestJwt::class,
             'helper' => HelperMiddleware::class,
             'user' => UserMiddleware::class,
-            'verified' => IsVerifyed::class,
+            'verified-api' => IsVerifyed::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

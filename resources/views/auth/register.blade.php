@@ -26,12 +26,21 @@ min-vh-100">
                     <!-- Form -->
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
-                        <!-- name -->
+                        <!-- first_name -->
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
-                            <input type="text" id="name" class="form-control" name="name" placeholder="Name"
-                                >
-                            @error('name')
+                            <label for="first_name" class="form-label">First Name</label>
+                            <input type="text" id="first_name" class="form-control" name="first_name"
+                                placeholder="First name" value="{{ old('first_name') }}">
+                            @error('first_name')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
+                        </div>
+                        <!-- last_name -->
+                        <div class="mb-3">
+                            <label for="last_name" class="form-label">First Name</label>
+                            <input type="text" id="last_name" class="form-control" name="last_name"
+                                placeholder="First name" value="{{ old('last_name') }}">
+                            @error('last_name')
                                 <p class="v-error-message"> {{ $message }}</p>
                             @enderror
                         </div>
@@ -39,7 +48,7 @@ min-vh-100">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" id="email" class="form-control" name="email"
-                                placeholder="Email address here" >
+                                placeholder="Email address here" value="{{ old('email') }}">
                             @error('email')
                                 <p class="v-error-message"> {{ $message }}</p>
                             @enderror
@@ -48,7 +57,7 @@ min-vh-100">
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" id="password" class="form-control" name="password"
-                                placeholder="**************" >
+                                placeholder="**************">
                             @error('password')
                                 <p class="v-error-message"> {{ $message }}</p>
                             @enderror
@@ -58,7 +67,7 @@ min-vh-100">
                             <label for="password_confirmation" class="form-label">Confirm
                                 Password</label>
                             <input type="password" id="password_confirmation" class="form-control"
-                                name="password_confirmation" placeholder="**************" >
+                                name="password_confirmation" placeholder="**************">
                         </div>
                         <!-- Checkbox -->
                         <div class="mb-3">
