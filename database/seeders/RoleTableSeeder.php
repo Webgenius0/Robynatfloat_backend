@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Helpers\Helper;
 use App\Models\Role;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -26,7 +27,7 @@ class RoleTableSeeder extends Seeder
        foreach ($roles as $role) {
         DB::table('roles')->insert([
             'name' => $role,
-            'slug' => Str::slug($role),
+            'slug' => Helper::generateUniqueSlug($role, 'roles'),
         ]);
        }
     }
