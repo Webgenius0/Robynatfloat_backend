@@ -40,25 +40,18 @@ use Symfony\Component\HttpKernel\Exception\UnsupportedMediaTypeHttpException;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
-        web: __DIR__ . '/../routes/web.php',
-        api: __DIR__ . '/../routes/api.php',
+        web: __DIR__ . '/../routes/web/v1/web.php',
+        api: __DIR__ . '/../routes/api/v1/api.php',
         commands: __DIR__ . '/../routes/console.php',
         health: '/up',
-
-        then: function () {
-            // api
-            Route::middleware([])
-                ->prefix('api/v1/auth')
-                ->name('api.auth.')
-                ->group(base_path('routes/api/v1/auth.php'));
-        }
     )
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'guest.api' => EnsureGuestJwt::class,
             'helper' => HelperMiddleware::class,
             'user' => UserMiddleware::class,
-            'verified' => IsVerifyed::class,
+            'api.verified' => IsVerifyed::class,
+            'web.verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
