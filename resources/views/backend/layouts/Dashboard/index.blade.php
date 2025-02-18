@@ -1,5 +1,9 @@
 @extends('backend.app')
 
+@section('title')
+    Admin
+@endsection
+
 @section('main')
     <div class="app-content-area">
         <div class="bg-primary pt-10 pb-21 mt-n6 mx-n4"></div>

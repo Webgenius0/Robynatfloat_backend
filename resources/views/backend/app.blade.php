@@ -8,29 +8,34 @@
     <meta name="author" content="Codescandy">
     {{-- All CSS Links --}}
     @include('.backend.partials.styles')
-    <title>Project | Dash UI - Responsive Bootstrap 5 Admin Dashboard</title>
+    {{-- All CSS Links End --}}
+    <title>@yield('title')</title>
 </head>
 
 <body>
+    {{-- main start --}}
     <main id="main-wrapper" class="main-wrapper">
         {{-- header --}}
         <x-backend.partials.header />
+        {{-- header end --}}
+
         <!-- navbar vertical -->
         <x-backend.partials.nav-bar />
+        <!-- navbar vertical -->
 
-
-        <!-- Page content -->
+        <!-- page content -->
         <div id="app-content">
             <!-- Container fluid -->
             @yield('main')
+            <!-- Container fluid end -->
         </div>
+        <!-- page content end -->
     </main>
+    {{-- main end --}}
 
-    <!-- Scripts -->
+    <!-- scripts -->
     @include('backend.partials.scripts')
-
+    <!-- scripts end -->
 </body>
-
-
 
 </html>
