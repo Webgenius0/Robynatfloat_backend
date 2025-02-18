@@ -1,47 +1,76 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('backend.auth')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
+@section('title')
+    Login
+@endsection
 
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
+@section('main')
+    <div class="row align-items-center justify-content-center g-0
+min-vh-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xxl-4 py-8 py-xl-0">
+            <a href="#" class="form-check form-switch theme-switch btn btn-light btn-icon rounded-circle d-none ">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+
+            </a>
+            <!-- Card -->
+            <div class="card smooth-shadow-md">
+                <!-- Card body -->
+                <div class="card-body p-6">
+                    <div class="mb-4">
+                        <a href="../index-2.html"><img src="../assets/images/brand/logo/logo-2.svg"
+                                class="mb-2 text-inverse" alt="Image"></a>
+                        <p class="mb-6">Please enter your user information.</p>
+                    </div>
+                    <!-- Form -->
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+                        <!-- Username -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">email</label>
+                            <input type="email" id="email" class="form-control" name="email"
+                                placeholder="Email address here" value="{{ old('email') }}">
+                            @error('email')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
+                        </div>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" name="password"
+                                placeholder="**************">
+                            @error('password')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
+                        </div>
+                        <!-- Checkbox -->
+                        <div class="d-lg-flex justify-content-between align-items-center mb-4">
+                            <div class="form-check custom-checkbox">
+                                <input type="checkbox" class="form-check-input" id="rememberme" name="remember">
+                                <label class="form-check-label" for="rememberme">Remember
+                                    me</label>
+                            </div>
+                        </div>
+                        <div>
+                            <!-- Button -->
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Sign
+                                    in</button>
+                            </div>
+                            <div class="d-md-flex justify-content-between mt-4">
+                                <div class="mb-2 mb-md-0">
+                                    <a href="{{route('register')}}" class="fs-5">Create An
+                                        Account </a>
+                                </div>
+                                <div>
+                                    <a href="{{route('password.request')}}" class="text-inherit fs-5">Forgot your
+                                        password?</a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection

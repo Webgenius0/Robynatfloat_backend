@@ -1,10 +1,14 @@
 <style>
     :root {
-        --v-error: #df4655;
+        --m-error: #df4655;
+        --m-success: #48b180;
     }
 
     .v-error-message {
-        color: var(--v-error);
+        color: var(--m-error);
+    }
+    .success-color {
+        color: var(--m-success);
     }
 </style>
 
