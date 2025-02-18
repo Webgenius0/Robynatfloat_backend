@@ -25,5 +25,5 @@ Route::get('/test', function () {
 });
 
 Route::get('/test-login', function () {
-    return view('backend.layouts.authentication.login');
+    return view('backend.layouts.authentication.register');
 });

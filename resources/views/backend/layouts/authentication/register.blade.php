@@ -24,40 +24,54 @@ min-vh-100">
 
                     </div>
                     <!-- Form -->
-                    <form>
-                        <!-- Username -->
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+                        <!-- name -->
                         <div class="mb-3">
-                            <label for="username" class="form-label">User Name</label>
-                            <input type="text" id="username" class="form-control" name="username"
-                                placeholder="User Name" required="">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" id="name" class="form-control" name="name" placeholder="Name"
+                                >
+                            @error('name')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
                         </div>
                         <!-- Email -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" id="email" class="form-control" name="email"
-                                placeholder="Email address here" required="">
+                                placeholder="Email address here" >
+                            @error('email')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
                         </div>
                         <!-- Password -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" id="password" class="form-control" name="password"
-                                placeholder="**************" required="">
+                                placeholder="**************" >
+                            @error('password')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
                         </div>
                         <!-- Password -->
                         <div class="mb-3">
-                            <label for="confirm-password" class="form-label">Confirm
+                            <label for="password_confirmation" class="form-label">Confirm
                                 Password</label>
-                            <input type="password" id="confirm-password" class="form-control" name="password"
-                                placeholder="**************" required="">
+                            <input type="password" id="password_confirmation" class="form-control"
+                                name="password_confirmation" placeholder="**************" >
                         </div>
                         <!-- Checkbox -->
                         <div class="mb-3">
-                            <div class="form-check custom-checkbox">
-                                <input type="checkbox" class="form-check-input" id="agreeCheck">
-                                <label class="form-check-label" for="agreeCheck"><span class="fs-5">I agree to the <a
+                            <div class="form-check custom-checkbox" style="padding-left: 0px;">
+                                <input type="checkbox" class="policy" id="policy" name="policy">
+                                <label class="form-check-label" for="policy"><span class="fs-5">I agree to the <a
                                             href="terms-condition-page.html">Terms of
                                             Service </a>and
-                                        <a href="terms-condition-page.html">Privacy Policy.</a></span></label>
+                                        <a href="terms-condition-page.html">Privacy Policy.</a></span>
+                                </label>
+                                @error('policy')
+                                    <p class="v-error-message"> {{ $message }}</p>
+                                @enderror
                             </div>
                         </div>
                         <div>
@@ -70,15 +84,13 @@ min-vh-100">
 
                             <div class="d-md-flex justify-content-between mt-4">
                                 <div class="mb-2 mb-md-0">
-                                    <a href="sign-up.html" class="fs-5">Already
+                                    <a href="{{ route('login') }}" class="fs-5">Already
                                         member? Login </a>
                                 </div>
                                 <div>
-                                    <a href="forget-password.html" class="text-inherit
-                fs-5">Forgot your
+                                    <a href="{{ route('password.request') }}" class="text-inherit fs-5">Forgot your
                                         password?</a>
                                 </div>
-
                             </div>
                         </div>
 
