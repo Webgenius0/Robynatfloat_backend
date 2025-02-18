@@ -21,5 +21,9 @@ require __DIR__.'/auth.php';
 
 
 Route::get('/test', function () {
-    return view('backend.layouts.Dashboard.index');
+    return view('backend.layouts.dashboard.index');
+});
+
+Route::get('/test-login', function () {
+    return view('backend.layouts.authentication.login');
 });

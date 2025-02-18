@@ -6,26 +6,28 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="author" content="Codescandy">
-    {{-- All CSS Links --}}
+
+    {{-- all style start --}}
     @include('.backend.partials.styles')
-    {{-- All CSS Links End --}}
+    {{-- all style end --}}
+
     <title>@yield('title')</title>
 </head>
 
 <body>
-    {{-- main start --}}
+    {{-- main start start --}}
     <main id="main-wrapper" class="main-wrapper">
-        {{-- header --}}
+        {{-- header start --}}
         <x-backend.partials.header />
         {{-- header end --}}
 
-        <!-- navbar vertical -->
+        <!-- navbar vertical start -->
         <x-backend.partials.nav-bar />
-        <!-- navbar vertical -->
+        <!-- navbar vertical end -->
 
-        <!-- page content -->
+        <!-- page content start -->
         <div id="app-content">
-            <!-- Container fluid -->
+            <!-- Container fluid start -->
             @yield('main')
             <!-- Container fluid end -->
         </div>
@@ -33,7 +35,7 @@
     </main>
     {{-- main end --}}
 
-    <!-- scripts -->
+    <!-- scripts start -->
     @include('backend.partials.scripts')
     <!-- scripts end -->
 </body>
