@@ -24,6 +24,7 @@ min-vh-100">
                     </div>
                     <!-- Form -->
                     <form method="POST" action="{{ route('password.confirm') }}">
+                        @csrf
                         <!-- Password -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
