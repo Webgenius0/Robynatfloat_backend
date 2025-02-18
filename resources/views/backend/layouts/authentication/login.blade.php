@@ -23,28 +23,33 @@ min-vh-100">
                         <p class="mb-6">Please enter your user information.</p>
                     </div>
                     <!-- Form -->
-                    <form>
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
                         <!-- Username -->
                         <div class="mb-3">
-                            <label for="email" class="form-label">Username or email</label>
+                            <label for="email" class="form-label">email</label>
                             <input type="email" id="email" class="form-control" name="email"
-                                placeholder="Email address here" required="">
+                                placeholder="Email address here" value="{{ old('email') }}">
+                            @error('email')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
                         </div>
                         <!-- Password -->
                         <div class="mb-3">
                             <label for="password" class="form-label">Password</label>
                             <input type="password" id="password" class="form-control" name="password"
-                                placeholder="**************" required="">
+                                placeholder="**************">
+                            @error('password')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
                         </div>
                         <!-- Checkbox -->
-                        <div class="d-lg-flex justify-content-between align-items-center
-          mb-4">
+                        <div class="d-lg-flex justify-content-between align-items-center mb-4">
                             <div class="form-check custom-checkbox">
-                                <input type="checkbox" class="form-check-input" id="rememberme">
+                                <input type="checkbox" class="form-check-input" id="rememberme" name="remember">
                                 <label class="form-check-label" for="rememberme">Remember
                                     me</label>
                             </div>
-
                         </div>
                         <div>
                             <!-- Button -->
@@ -52,22 +57,17 @@ min-vh-100">
                                 <button type="submit" class="btn btn-primary">Sign
                                     in</button>
                             </div>
-
                             <div class="d-md-flex justify-content-between mt-4">
                                 <div class="mb-2 mb-md-0">
-                                    <a href="sign-up.html" class="fs-5">Create An
+                                    <a href="{{route('register')}}" class="fs-5">Create An
                                         Account </a>
                                 </div>
                                 <div>
-                                    <a href="forget-password.html" class="text-inherit
-                fs-5">Forgot your
+                                    <a href="{{route('password.request')}}" class="text-inherit fs-5">Forgot your
                                         password?</a>
                                 </div>
-
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
