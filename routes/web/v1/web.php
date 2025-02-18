@@ -4,11 +4,11 @@ use App\Http\Controllers\Web\Backend\V1\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('login');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('admin/dashboard', function () {
+    return view('backend.layouts.dashboard.index');
 })->middleware(['auth', 'web.verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
@@ -18,12 +18,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-
-Route::get('/test', function () {
-    return view('backend.layouts.dashboard.index');
-});
-
-Route::get('/test-login', function () {
-    return view('backend.layouts.authentication.forget-password');
-});
