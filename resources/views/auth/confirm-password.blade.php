@@ -1,27 +1,54 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600">
-        {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
+@extends('backend.auth')
+
+@section('title')
+    Forget Password
+@endsection
+
+@section('main')
+    <div class="row align-items-center justify-content-center g-0
+min-vh-100">
+        <div class="col-12 col-md-8 col-lg-6 col-xxl-4 py-8 py-xl-0">
+            <a href="#" class="form-check form-switch theme-switch btn btn-light btn-icon rounded-circle d-none ">
+                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault"></label>
+
+            </a>
+            <!-- Card -->
+            <div class="card smooth-shadow-md">
+                <!-- Card body -->
+                <div class="card-body p-5">
+                    <div class="mb-4">
+                        <a href="../index-2.html"><img src="../assets/images/brand/logo/logo-2.svg"
+                                class="mb-2  text-inverse" alt="Image"></a>
+                        <p class="mb-6">This is a secure area of the application. Please confirm your password before continuing.</p>
+                    </div>
+                    <!-- Form -->
+                    <form method="POST" action="{{ route('password.confirm') }}">
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" name="password"
+                                placeholder="**************" >
+                            @error('password')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
+                        </div>
+                        <!-- password_confirmation -->
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirm
+                                Password</label>
+                            <input type="password" id="password_confirmation" class="form-control"
+                                name="password_confirmation" placeholder="**************" >
+                        </div>
+                        <!-- Button -->
+                        <div class="mb-3 d-grid">
+                            <button type="submit" class="btn btn-primary">
+                                Confirm
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <form method="POST" action="{{ route('password.confirm') }}">
-        @csrf
-
-        <!-- Password -->
-        <div>
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <div class="flex justify-end mt-4">
-            <x-primary-button>
-                {{ __('Confirm') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
+@endsection
