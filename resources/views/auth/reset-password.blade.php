@@ -1,44 +1,3 @@
-<x-guest-layout>
-    <form method="POST" action="{{ route('password.store') }}">
-        @csrf
-
-        <!-- Password Reset Token -->
-        <input type="hidden" name="token" value="{{ $request->route('token') }}">
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email', $request->email)" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-            <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Confirm Password -->
-        <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
-
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
-                                type="password"
-                                name="password_confirmation" required autocomplete="new-password" />
-
-            <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            <x-primary-button>
-                {{ __('Reset Password') }}
-            </x-primary-button>
-        </div>
-    </form>
-</x-guest-layout>
-
-
 @extends('backend.auth')
 
 @section('title')
@@ -61,18 +20,37 @@ min-vh-100">
                     <div class="mb-4">
                         <a href="../index-2.html"><img src="../assets/images/brand/logo/logo-2.svg"
                                 class="mb-2  text-inverse" alt="Image"></a>
-                        <p class="mb-6">Forgot your password? No problem. Just let us know your email address and we will
-                            email you a password reset link that will allow you to choose a new one.</p>
                         <p class="mb-6 success-color">{{ session('status') }}
                         </p>
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('password.store') }}">
+                        <!-- Password Reset Token -->
+                        <input type="hidden" name="token" value="{{ $request->route('token') }}">
                         <!-- Email -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
                             <input type="email" id="email" class="form-control" name="email"
                                 placeholder="Enter Your Email">
+                            @error('email')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
+                        </div>
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" id="password" class="form-control" name="password"
+                                placeholder="**************">
+                            @error('password')
+                                <p class="v-error-message"> {{ $message }}</p>
+                            @enderror
+                        </div>
+                        <!-- password_confirmation -->
+                        <div class="mb-3">
+                            <label for="password_confirmation" class="form-label">Confirm
+                                Password</label>
+                            <input type="password" id="password_confirmation" class="form-control"
+                                name="password_confirmation" placeholder="**************">
                         </div>
                         <!-- Button -->
                         <div class="mb-3 d-grid">
@@ -80,7 +58,6 @@ min-vh-100">
                                 Reset Password
                             </button>
                         </div>
-                        <span>Don't have an account? <a href="{{ route('register') }}">sign in</a></span>
                     </form>
                 </div>
             </div>

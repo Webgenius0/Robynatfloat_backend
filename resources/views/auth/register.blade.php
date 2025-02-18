@@ -53,7 +53,7 @@ min-vh-100">
                                 <p class="v-error-message"> {{ $message }}</p>
                             @enderror
                         </div>
-                        <!-- Password -->
+                        <!-- password_confirmation -->
                         <div class="mb-3">
                             <label for="password_confirmation" class="form-label">Confirm
                                 Password</label>
