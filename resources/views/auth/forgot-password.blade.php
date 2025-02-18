@@ -39,7 +39,7 @@ min-vh-100">
                                 Reset Password
                             </button>
                         </div>
-                        <span>Don't have an account? <a href="{{ route('register') }}">sign in</a></span>
+                        <span>Don't have an account? <a href="{{ route('register') }}">sign up</a></span>
                     </form>
                 </div>
             </div>
