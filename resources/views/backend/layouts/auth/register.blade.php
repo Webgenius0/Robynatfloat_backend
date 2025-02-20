@@ -24,7 +24,7 @@ min-vh-100">
 
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('admin.register') }}">
                         @csrf
                         <!-- first_name -->
                         <div class="mb-3">
@@ -93,11 +93,11 @@ min-vh-100">
 
                             <div class="d-md-flex justify-content-between mt-4">
                                 <div class="mb-2 mb-md-0">
-                                    <a href="{{ route('login') }}" class="fs-5">Already
+                                    <a href="{{ route('admin.login') }}" class="fs-5">Already
                                         member? Login </a>
                                 </div>
                                 <div>
-                                    <a href="{{ route('password.request') }}" class="text-inherit fs-5">Forgot your
+                                    <a href="{{ route('admin.password.request') }}" class="text-inherit fs-5">Forgot your
                                         password?</a>
                                 </div>
                             </div>

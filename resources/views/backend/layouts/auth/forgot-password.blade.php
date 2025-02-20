@@ -26,7 +26,7 @@ min-vh-100">
                         </p>
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('admin.password.email') }}">
                         @csrf
                         <!-- Email -->
                         <div class="mb-3">
@@ -40,7 +40,7 @@ min-vh-100">
                                 Reset Password
                             </button>
                         </div>
-                        <span>Don't have an account? <a href="{{ route('register') }}">sign up</a></span>
+                        <span>Don't have an account? <a href="{{ route('admin.register') }}">sign up</a></span>
                     </form>
                 </div>
             </div>
