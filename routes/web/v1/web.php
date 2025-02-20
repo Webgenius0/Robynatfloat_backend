@@ -22,11 +22,11 @@ Route::prefix('/admin')->name('admin.')->group(function () {
     });
 
     require __DIR__.'/auth.php';
-    require __DIR__.'/users/admin.blade.php';
-    require __DIR__.'/users/cure.blade.php';
-    require __DIR__.'/users/freelancer.blade.php';
-    require __DIR__.'/users/suppliers.blade.php';
-    require __DIR__.'/users/yacth.blade.php';
+    require __DIR__.'/users/admin.php';
+    require __DIR__.'/users/cure.php';
+    require __DIR__.'/users/freelancer.php';
+    require __DIR__.'/users/supplier.php';
+    require __DIR__.'/users/yacth.php';
 
 });
 
