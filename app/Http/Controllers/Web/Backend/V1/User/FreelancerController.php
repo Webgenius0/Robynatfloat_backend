@@ -12,7 +12,8 @@ class FreelancerController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.layouts.users.freelancer.index');
+
     }
 
     /**

@@ -12,7 +12,7 @@ class CrueController extends Controller
      */
     public function index()
     {
-        //
+        return view('backend.layouts.users.crue.index');
     }
 
     /**
