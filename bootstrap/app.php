@@ -1,6 +1,7 @@
 <?php
 
 use App\Helpers\Helper;
+use App\Http\Middleware\EnsureEmailIsVerified;
 use App\Http\Middleware\EnsureGuestJwt;
 use App\Http\Middleware\HelperMiddleware;
 use App\Http\Middleware\IsVerifyed;
@@ -51,7 +52,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'helper' => HelperMiddleware::class,
             'user' => UserMiddleware::class,
             'api.verified' => IsVerifyed::class,
-            'web.verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+            'web.verified' => EnsureEmailIsVerified::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
