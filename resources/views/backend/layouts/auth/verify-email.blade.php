@@ -30,7 +30,7 @@ min-vh-100">
                         @endif
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('admin.verification.notice') }}">
+                    <form method="POST" action="{{ route('verification.send') }}">
                         @csrf
                         <!-- Button -->
                         <div class="mb-3 d-grid">
@@ -39,7 +39,7 @@ min-vh-100">
                             </button>
                         </div>
                     </form>
-                    <form method="POST" action="{{ route('admin.logout') }}">
+                    <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <!-- Button -->
                         <div class="mb-3 d-grid">

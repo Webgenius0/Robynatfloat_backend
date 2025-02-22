@@ -24,7 +24,7 @@ min-vh-100">
                         </p>
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('admin.password.store') }}">
+                    <form method="POST" action="{{ route('password.request') }}">
                         <!-- Password Reset Token -->
                         <input type="hidden" name="token" value="{{ $request->route('token') }}">
                         <!-- Email -->

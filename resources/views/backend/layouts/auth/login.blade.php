@@ -23,7 +23,7 @@ min-vh-100">
                         <p class="mb-6">Please enter your user information.</p>
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('admin.login') }}">
+                    <form method="POST" action="{{ route('login') }}">
                         @csrf
                         <!-- Username -->
                         <div class="mb-3">
@@ -59,11 +59,11 @@ min-vh-100">
                             </div>
                             <div class="d-md-flex justify-content-between mt-4">
                                 <div class="mb-2 mb-md-0">
-                                    <a href="{{route('admin.register')}}" class="fs-5">Create An
+                                    <a href="{{route('register')}}" class="fs-5">Create An
                                         Account </a>
                                 </div>
                                 <div>
-                                    <a href="{{route('admin.password.request')}}" class="text-inherit fs-5">Forgot your
+                                    <a href="{{route('password.request')}}" class="text-inherit fs-5">Forgot your
                                         password?</a>
                                 </div>
                             </div>

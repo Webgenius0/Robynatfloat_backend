@@ -58,9 +58,9 @@ class RegisteredUserController extends Controller
 
             Auth::login($user);
 
-            return redirect(route('admin.dashboard', absolute: false));
+            return redirect(route('dashboard', absolute: false));
         } catch(Exception $e) {
-            Log::error("App\Http\Controllers\Web\Backend\V1\Auth::store", ['error'=>$e->getMessage()]);
+            Log::error("App\Http\Controllers\Web\Backend\V1\Auth\RegisteredUserController::store", ['error'=>$e->getMessage()]);
             DB::rollBack();
             return redirect()->back()->with('t-error', 'Something went wrong..!');
         }

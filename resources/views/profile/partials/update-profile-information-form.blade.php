@@ -9,7 +9,7 @@
         </p>
     </header>
 
-    <form id="send-verification" method="post" action="{{ route('admin.verification.notice') }}">
+    <form id="send-verification" method="post" action="{{ route('verification.notice') }}">
         @csrf
     </form>
 

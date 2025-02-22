@@ -181,7 +181,7 @@
                                 </a>
                             </li>
                             <li>
-                                <form method="POST" action="{{ route('admin.logout') }}">
+                                <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <!-- Button -->
                                     <button type="submit" class="dropdown-item">
