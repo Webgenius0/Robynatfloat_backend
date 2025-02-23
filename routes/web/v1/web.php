@@ -1,8 +1,5 @@
 <?php
 
-use App\Http\Controllers\Web\Backend\V1\Auth\EmailVerificationPromptController;
-use App\Http\Controllers\Web\Backend\V1\Auth\VerifyEmailController;
-use App\Http\Controllers\Web\Backend\V1\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
