@@ -4,12 +4,24 @@ namespace App\Http\Controllers\Web\Backend\V1\Dropdown;
 
 use App\Http\Controllers\Controller;
 use App\Models\YachtType;
+use App\Services\Web\Backend\V1\Dropdown\YachtTypeService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class YachtTypeController extends Controller
 {
+    protected YachtTypeService $yachtTypeService;
+
+    /**
+     * construct
+     * @param \App\Services\Web\Backend\V1\Dropdown\YachtTypeService $yachtTypeService
+     */
+    public function __construct(YachtTypeService $yachtTypeService)
+    {
+        $this->yachtTypeService = $yachtTypeService;
+    }
+
     /**
      * Display a listing of the resource.
      */
