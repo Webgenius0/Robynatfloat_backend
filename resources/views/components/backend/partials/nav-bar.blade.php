@@ -43,9 +43,8 @@
                     <div id="admin" class="collapse " data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
-
-                                    Product Detail
+                                <a class="nav-link has-arrow " href="{{route("admin.user.index")}}">
+                                    Admin List
                                 </a>
                             </li>
                         </ul>
@@ -106,8 +105,7 @@
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
-
-                                    Product Detail
+                                    Crue List
                                 </a>
                             </li>
                         </ul>
@@ -152,8 +150,7 @@
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
-
-                                    Product Detail
+                                    Freelancers List
                                 </a>
                             </li>
                         </ul>
@@ -195,7 +192,7 @@
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
-                                    Product Detail
+                                    Suppliers List
                                 </a>
                             </li>
                         </ul>
@@ -240,7 +237,7 @@
                         <ul class="nav flex-column">
                             <li class="nav-item">
                                 <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
-                                    Product Detail
+                                    Yacth List
                                 </a>
                             </li>
                         </ul>

@@ -24,9 +24,13 @@ Route::prefix('/admin')->group(function () {
     });
 
     require __DIR__ . '/auth.php';
-    require __DIR__ . '/users/admin.php';
-    require __DIR__ . '/users/cure.php';
-    require __DIR__ . '/users/freelancer.php';
-    require __DIR__ . '/users/supplier.php';
-    require __DIR__ . '/users/yacth.php';
+
+
+    Route::name('admin.')->group(function () {
+        require __DIR__ . '/users/admin.php';
+        require __DIR__ . '/users/cure.php';
+        require __DIR__ . '/users/freelancer.php';
+        require __DIR__ . '/users/supplier.php';
+        require __DIR__ . '/users/yacth.php';
+    });
 });
