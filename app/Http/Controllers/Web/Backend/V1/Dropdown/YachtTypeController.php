@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Backend\V1\Dropdown;
 
 use App\Http\Controllers\Controller;
+use App\Models\YachtType;
 use Illuminate\Http\Request;
 
 class YachtTypeController extends Controller
@@ -32,17 +33,9 @@ class YachtTypeController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(YachtType $yachtType)
     {
         //
     }
@@ -50,7 +43,7 @@ class YachtTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, YachtType $yachtType)
     {
         //
     }
@@ -58,7 +51,7 @@ class YachtTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(YachtType $yachtType)
     {
         //
     }
