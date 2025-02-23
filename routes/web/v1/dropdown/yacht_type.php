@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
 Route::prefix('/yacht-type')->name('yacht.type')->controller(YachtTypeController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::get('/store', 'store')->name('store');
-    Route::get('/edit/{yachtType}', 'edit')->name('edit');
-    Route::get('/update/{yachtType}', 'update')->name('update');
-    Route::get('/destroy/{yachtType}', 'destroy')->name('destroy');
+    Route::get('/edit/{yachtType:slug}', 'edit')->name('edit');
+    Route::get('/update/{yachtType:slug}', 'update')->name('update');
+    Route::get('/destroy/{yachtType:slug}', 'destroy')->name('destroy');
 });
