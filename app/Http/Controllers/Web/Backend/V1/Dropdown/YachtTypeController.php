@@ -30,7 +30,7 @@ class YachtTypeController extends Controller
         try {
 
         }catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\DropdownYachtTypeController::index', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::index', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
     }
@@ -43,7 +43,7 @@ class YachtTypeController extends Controller
         try {
 
         }catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\DropdownYachtTypeController::create', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::create', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
     }
@@ -56,7 +56,7 @@ class YachtTypeController extends Controller
         try {
 
         }catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\DropdownYachtTypeController::store', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::store', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
     }
@@ -69,7 +69,7 @@ class YachtTypeController extends Controller
         try {
 
         }catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\DropdownYachtTypeController::edit', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::edit', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
     }
@@ -82,7 +82,7 @@ class YachtTypeController extends Controller
         try {
 
         }catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\DropdownYachtTypeController::update', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::update', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
     }
@@ -95,7 +95,7 @@ class YachtTypeController extends Controller
         try {
 
         }catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\DropdownYachtTypeController::destroy', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::destroy', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
     }
