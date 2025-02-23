@@ -6,6 +6,17 @@
 
 @push('styles')
     <link rel="stylesheet" href="{{ asset('assets/dev/css/datatables.min.css') }}">
+    <style>
+        .dt-info {
+            display: flex;
+            justify-content: center;
+        }
+        .paging_full_numbers {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+    </style>
 @endpush
 
 @section('main')
@@ -62,18 +73,17 @@
                                     <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
                                         <thead class="table-light">
                                             <tr>
-                                                <th class="ps-1">Name</th>
+                                                <th>Name</th>
                                                 <th>Email</th>
                                                 <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="card-footer d-md-flex justify-content-between align-items-center">
+                            {{-- <div class="card-footer d-md-flex justify-content-between align-items-center">
                                 <span>Showing 1 to 8 of 12 entries</span>
                                 <nav class="mt-2 mt-md-0">
                                     <ul class="pagination mb-0 ">
@@ -84,7 +94,7 @@
                                         <li class="page-item"><a class="page-link" href="#!">Next</a></li>
                                     </ul>
                                 </nav>
-                            </div>
+                            </div> --}}
 
                         </div>
                     </div>
@@ -178,8 +188,7 @@
                             d.search = $('#search-input').val();
                         }
                     },
-                    columns: [
-                        {
+                    columns: [{
                             data: 'name',
                             name: 'name',
                             orderable: true,
