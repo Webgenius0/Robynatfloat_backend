@@ -24,9 +24,9 @@
                 </li>
                 <!-- Nav item admin start -->
                 <li class="nav-item">
-                    <a class="nav-link has-arrow  collapsed " href="#!" data-bs-toggle="collapse"
+                    <a class="nav-link has-arrow  collapsed {{request()->routeIs('admin.user.admin.*') ? 'active' : ''}}" href="#!" data-bs-toggle="collapse"
                         data-bs-target="#admin" aria-expanded="false" aria-controls="admin">
-                        <svg style="margin-right:7px" fill="#9199a5" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <svg style="margin-right:7px" fill="{{request()->routeIs('admin.user.admin.*') ? '#624bff' : '#9199a5'}}" width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                             <g id="SVGRepo_iconCarrier">
@@ -40,10 +40,10 @@
                         </svg> Admin
                     </a>
 
-                    <div id="admin" class="collapse " data-bs-parent="#sideNavbar">
+                    <div id="admin" class="collapse {{ request()->routeIs('admin.user.admin.*') ? 'show' : '' }}" data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow " href="{{route("admin.user.admin.index")}}">
+                                <a class="nav-link has-arrow {{request()->routeIs('admin.user.admin.index') ? 'active' : ''}}" href="{{route("admin.user.admin.index")}}">
                                     Admin List
                                 </a>
                             </li>
