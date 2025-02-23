@@ -43,7 +43,16 @@ class AdminService
                                 </div>
                             </td>';
                 })
-                ->rawColumns(['name'])
+                ->addColumn('email', function ($data) {
+                    return '<td>'.$data->email.'</td>';
+                })
+                ->addColumn('status', function ($data) {
+                    if ($data->status) {
+                        return '<td><span class="badge badge-success-soft text-success">Active</span></td>';
+                    }
+                    return '<td><span class="badge badge-danger-soft text-danger">Block</span></td>';
+                })
+                ->rawColumns(['name', 'email', 'status'])
                 ->make(true);
         } catch (Exception $e) {
             Log::error('App\Services\Web\Backend\V1\User\AdminService::index', ['error' => $e->getMessage()]);

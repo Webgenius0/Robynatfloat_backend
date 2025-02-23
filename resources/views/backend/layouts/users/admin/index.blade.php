@@ -71,7 +71,8 @@
                                             <tr>
                                                 <td class="ps-1">
                                                     <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="{{asset('/assets/images/avatar/avatar-11.jpg')}}"
+                                                        <a href="#!"><img
+                                                                src="{{ asset('/assets/images/avatar/avatar-11.jpg') }}"
                                                                 alt="Image" class="avatar avatar-sm rounded-circle"></a>
                                                         <div class="ms-2">
                                                             <h5 class="mb-0"><a href="#!" class="text-inherit">Harold
@@ -109,8 +110,7 @@
 
 
     {{-- modal start --}}
-    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -186,7 +186,7 @@
                     pagingType: "full_numbers",
                     dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                     ajax: {
-                        url: "{{route('admin.user.admin.index')}}",
+                        url: "{{ route('admin.user.admin.index') }}",
                         type: "GET",
                         data: (d) => {
                             d.search = $('#search-input').val();
