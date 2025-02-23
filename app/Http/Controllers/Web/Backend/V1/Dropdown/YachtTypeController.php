@@ -28,7 +28,7 @@ class YachtTypeController extends Controller
     public function index(Request $request)
     {
         try {
-
+            return view('backend.layouts.dropdown.yacht_type.index');
         }catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::index', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
