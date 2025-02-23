@@ -23,9 +23,12 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ForgetPasswordRepositoryInterface::class, ForgetPasswordRepository::class);
         $this->app->bind(OTPRepositoryInterface::class, OTPRepository::class);
         $this->app->bind(PasswordRepositoryInterface::class, PasswordRepository::class);
+
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
     }
 
-    /**
+    /**F
      * Bootstrap any application services.
      */
     public function boot(): void
