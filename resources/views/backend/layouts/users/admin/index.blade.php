@@ -68,21 +68,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img
-                                                                src="{{ asset('/assets/images/avatar/avatar-11.jpg') }}"
-                                                                alt="Image" class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!" class="text-inherit">Harold
-                                                                    Gonzalez</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>harold1985@einrot.com</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                            </tr>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
