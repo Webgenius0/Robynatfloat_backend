@@ -4,5 +4,8 @@ namespace App\Repositories\Web\Backend\V1\User;
 
 interface AdminRepositoryInterface
 {
-    public function latestAdminList();
+    /**
+     * admin list order by dec based on Created_at
+     */
+    public function latestAdminList(): mixed;
 }

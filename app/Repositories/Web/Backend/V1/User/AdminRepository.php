@@ -10,12 +10,11 @@ class AdminRepository implements AdminRepositoryInterface
 {
     /**
      * admin list order by dec based on Created_at
-     * @return \Illuminate\Database\Eloquent\Collection<int, User>
      */
-    public function latestAdminList()
+    public function latestAdminList():mixed
     {
         try {
-            return User::select(['first_name', 'last_name', 'handle', 'email', 'status', 'role_id'])->whereRoleId(1)->get();
+            return User::select(['first_name', 'last_name', 'handle', 'email', 'status', 'role_id'])->whereRoleId(1);
         }catch(Exception $e){
             Log::error('App\Repositories\Web\Backend\V1\User\AdminRepository::AdminListOrderByDesc', ['error' => $e->getMessage()]);
             throw $e;

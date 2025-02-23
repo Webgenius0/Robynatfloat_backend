@@ -40,31 +40,9 @@
                             <div class="card-header  ">
 
                                 <div class="row justify-content-between">
-                                    <div class="col-md-6 mb-3 ">
-
-                                        <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#addCustomerModal">+ Add Customer</a>
-
-                                    </div>
-                                    <div class="col-md-6 text-lg-end mb-3">
-                                        <a href="#!" class="btn btn-light me-1"><i data-feather="trash-2"
-                                                class="icon-xs"></i></a>
-                                        <a href="#!" class="btn btn-light me-1">Import</a>
-                                        <a href="#!" class="btn btn-light ">Export</a>
-                                    </div>
                                     <div class=" col-lg-4 col-md-6">
-                                        <input type="search" class="form-control "
-                                            placeholder="Search for customer, email, phone, status or something">
-
-                                    </div>
-                                    <div class="col-lg-2 col-md-6  mt-3 mt-md-0">
-
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Status</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Blocked</option>
-
-                                        </select>
+                                        <input type="search" id="search-input" class="form-control "
+                                            placeholder="Search for name, email">
                                     </div>
                                 </div>
                             </div>
@@ -83,19 +61,6 @@
                                     </table>
                                 </div>
                             </div>
-                            {{-- <div class="card-footer d-md-flex justify-content-between align-items-center">
-                                <span>Showing 1 to 8 of 12 entries</span>
-                                <nav class="mt-2 mt-md-0">
-                                    <ul class="pagination mb-0 ">
-                                        <li class="page-item "><a class="page-link" href="#!">Previous</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#!">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#!">Next</a></li>
-                                    </ul>
-                                </nav>
-                            </div> --}}
-
                         </div>
                     </div>
 
@@ -203,8 +168,8 @@
                         {
                             data: 'status',
                             name: 'status',
-                            orderable: true,
-                            searchable: true
+                            orderable: false,
+                            searchable: false,
                         },
                     ]
                 });
