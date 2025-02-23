@@ -1,12 +1,13 @@
 <div class="header">
+    @php
+        $user = auth()->user();
+    @endphp
     <!-- navbar -->
     <div class="navbar-custom navbar navbar-expand-lg">
         <div class="container-fluid px-0">
             <a class="navbar-brand d-block d-md-none" href="index-2.html">
-                <img src="assets/images/brand/logo/logo-2.svg" alt="Image">
+                <img src="{{asset('assets/images/brand/logo/logo-2.svg')}}" alt="Image">
             </a>
-
-
 
             <a id="nav-toggle" href="#!" class="ms-auto ms-md-0 me-0 me-lg-3 ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor"
@@ -18,8 +19,6 @@
             <div class="d-none d-md-none d-lg-block">
                 <!-- Form -->
                 <form action="#">
-
-
                     <div class="input-group ">
                         <input class="form-control rounded-3" type="search" value="" id="searchInput"
                             placeholder="Search">
@@ -142,7 +141,7 @@
                     <a class="rounded-circle" href="#!" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-md avatar-indicators avatar-online">
-                            <img alt="avatar" src="assets/images/avatar/avatar-11.jpg" class="rounded-circle">
+                            <img alt="avatar" src="{{$user->avatar}}" class="rounded-circle">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
