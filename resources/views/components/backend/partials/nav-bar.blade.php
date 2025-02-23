@@ -43,7 +43,7 @@
                     <div id="admin" class="collapse " data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow " href="{{route("admin.user.index")}}">
+                                <a class="nav-link has-arrow " href="{{route("admin.user.admin.index")}}">
                                     Admin List
                                 </a>
                             </li>
@@ -104,7 +104,7 @@
                     <div id="crue" class="collapse " data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
+                                <a class="nav-link has-arrow " href="{{route('admin.user.crue.index')}}">
                                     Crue List
                                 </a>
                             </li>
@@ -149,7 +149,7 @@
                     <div id="freelancers" class="collapse " data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
+                                <a class="nav-link has-arrow " href="{{route('admin.user.freelancer.index')}}">
                                     Freelancers List
                                 </a>
                             </li>
@@ -191,7 +191,7 @@
                     <div id="suppliers" class="collapse " data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
+                                <a class="nav-link has-arrow " href="{{route('admin.user.supplier.index')}}">
                                     Suppliers List
                                 </a>
                             </li>
@@ -236,7 +236,7 @@
                     <div id="yacth" class="collapse " data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow " href="pages/ecommerce-products-details.html">
+                                <a class="nav-link has-arrow " href="{{route('admin.user.yacth.index')}}">
                                     Yacth List
                                 </a>
                             </li>
