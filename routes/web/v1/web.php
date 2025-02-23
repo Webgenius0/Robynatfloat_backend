@@ -14,7 +14,7 @@ Route::prefix('/admin')->group(function () {
         return view('backend.layouts.dashboard.index');
     })->middleware(['auth', 'web.verified'])->name('dashboard');
 
-    require __DIR__ . '/auth.php';
+    require __DIR__ . 'auth/auth.php';
     Route::name('admin.')->group(function () {
         require __DIR__ . '/users/admin.php';
         require __DIR__ . '/users/cure.php';
