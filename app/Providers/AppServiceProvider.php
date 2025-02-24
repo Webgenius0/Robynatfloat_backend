@@ -12,6 +12,8 @@ use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
 use App\Repositories\Web\Backend\V1\User\AdminRepository;
 use App\Repositories\Web\Backend\V1\User\AdminRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\CrueRepository;
+use App\Repositories\Web\Backend\V1\User\CrueRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -32,6 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
         // backend
         $this->app->bind(AdminRepositoryInterface::class, AdminRepository::class);
+        $this->app->bind(CrueRepositoryInterface::class, CrueRepository::class);
     }
 
     /**F

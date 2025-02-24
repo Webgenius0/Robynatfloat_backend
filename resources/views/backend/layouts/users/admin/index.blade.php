@@ -11,6 +11,7 @@
             display: flex;
             justify-content: center;
         }
+
         .paging_full_numbers {
             display: flex;
             justify-content: center;
@@ -38,7 +39,6 @@
                         <!-- card -->
                         <div class="card mb-4">
                             <div class="card-header  ">
-
                                 <div class="row justify-content-between">
                                     <div class=" col-lg-4 col-md-6">
                                         <input type="search" id="search-input" class="form-control "
@@ -179,5 +179,27 @@
                 });
             }
         });
+
+        function flexSwitchCheckChecked(id) {
+            console.log("Check");
+            $.ajax({
+                url: "{{ route('admin.user.admin.updateStatus', 'id') }}".replace('id', id),
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    if (response.success) {
+                        console.log('Status updated successfully');
+                    } else {
+                        console.log('Error updating status');
+                    }
+                },
+                error: function() {
+                    // Handle AJAX request error
+                    console.log('An error occurred');
+                }
+            });
+        }
     </script>
 @endpush

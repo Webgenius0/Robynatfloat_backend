@@ -42,6 +42,16 @@ class AdminController extends Controller
         }
     }
 
+    public function updateStatus(string $id)
+    {
+        try {
+            return $this->adminService->adminStatusUpdate($id);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\User\AdminController::updateStatus', ['error' => $e->getMessage()]);
+            return redirect()->back()->with('t-error', 'Something went wrong! Please try again.');
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      */
