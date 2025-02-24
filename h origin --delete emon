@@ -1,0 +1,455 @@
+[33mcommit 37c238f837806438a0eb9eaf2524d96ebfdf1cbc[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32memon[m[33m)[m
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Mon Feb 24 19:02:52 2025 +0600
+
+    admin and crue user list show
+
+[33mcommit ff234a02938902f22c91541d7e295aa4dab54b3b[m[33m ([m[1;31morigin/dev[m[33m, [m[1;32mdev[m[33m)[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 15:02:13 2025 +0600
+
+    format library
+
+[33mcommit dc4a04d2df11add847a67ecfd8a42971a57fdd6f[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 14:55:43 2025 +0600
+
+    admin user index
+
+[33mcommit ce177edeed2d855292c85d05178c82881bbdd77f[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 14:44:03 2025 +0600
+
+    pagination setup
+
+[33mcommit 47ed34b267fcdabba1c6e3ee6079c9e7eed8129e[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 14:36:49 2025 +0600
+
+    removing body from admin table
+
+[33mcommit eb73ea2541ca0d66f5c132e7040d1d66d6af9617[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 14:36:14 2025 +0600
+
+    status changed
+
+[33mcommit 2347796b78d142c8e521ec0ea1b3a44acfd3bc8e[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 14:28:15 2025 +0600
+
+    data fetching and showing in Yajar
+
+[33mcommit 579568544bfd7e054bd100fe5e385f2656e23e5e[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 12:39:35 2025 +0600
+
+    user table yajra connected
+
+[33mcommit 5dd1efb09390c0c679fe515bc93f093a99d56f5b[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 11:41:57 2025 +0600
+
+    debugbar install
+
+[33mcommit 7d4fc2bf0ba7e9e0ddbff62b4197ecabb3aa51ea[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 10:54:00 2025 +0600
+
+    route dynamic
+
+[33mcommit 16d77434301eb8e01ed8a21d53da21a63b4a98cc[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 10:36:43 2025 +0600
+
+    admin route active sidebar
+
+[33mcommit 1d0f73ba156adaaff55c2140ab42148dce8fbb7f[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 10:23:39 2025 +0600
+
+    nav route link
+
+[33mcommit 90b3b2dfc81d72d9f5964e4011a6aeb6f9d3b40d[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 10:21:38 2025 +0600
+
+    route update
+
+[33mcommit d00dff821e79a42ef5824c631a9455f804289d39[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 23 10:10:59 2025 +0600
+
+    route name update
+
+[33mcommit b4bfbe8358b06d9b61d3ff4f4bebe34ad6ccfb79[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sat Feb 22 18:02:01 2025 +0600
+
+    route fixed
+
+[33mcommit 53ed9dac2a609b2b59acd3a47a11f61970283f58[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sat Feb 22 17:59:23 2025 +0600
+
+    reset password complete
+
+[33mcommit c39e773f52272772decdece8e761ae4d79e7071c[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sat Feb 22 17:47:11 2025 +0600
+
+    some route fix
+
+[33mcommit 325584479b7efed1b65bd6dc67810fdc3d01ecef[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sat Feb 22 11:43:05 2025 +0600
+
+    laravel custom middleware
+
+[33mcommit 13c50b6878aac83aff7743d507d6f2f5f7dbb14b[m[33m ([m[1;31morigin/tushar[m[33m)[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Thu Feb 20 17:08:43 2025 +0600
+
+    route setup for every controller
+
+[33mcommit aff723a26b17bd3b7e1171c238f65e85ae68c852[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Thu Feb 20 17:04:14 2025 +0600
+
+    user controller index define
+
+[33mcommit 2a04f0d5f6ed8d70b556d84fac6fe20153754200[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Thu Feb 20 17:02:08 2025 +0600
+
+    user controller for admin
+
+[33mcommit cbaa0ea7f7e2185b8fa0b664b36a62c490368e9c[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Thu Feb 20 17:00:01 2025 +0600
+
+    admin user index
+
+[33mcommit cce8de26b33b8353076d0f6f0a74216a25a3580f[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Thu Feb 20 16:24:58 2025 +0600
+
+    route update
+
+[33mcommit f87d34fe43b9424ebdc964697e6bd669fc364397[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Wed Feb 19 11:43:20 2025 +0600
+
+    nav bar completed
+
+[33mcommit 0b3f2a1569f253d97283a6cfffa85bdc8a442156[m[33m ([m[1;31morigin/breeze[m[33m)[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 17:53:51 2025 +0600
+
+    dashboard
+
+[33mcommit 73da386033fe0264010136537d08fa0391c385e1[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 17:51:33 2025 +0600
+
+    dashboard complete
+
+[33mcommit aa4e2aa8ec48d4333d66dbdd345b31539b9cace3[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 17:45:21 2025 +0600
+
+    auth folder sturcture change
+
+[33mcommit 987f762f4000662c26e95dd61cd16ef2be739602[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 17:40:01 2025 +0600
+
+    email validation complete backend
+
+[33mcommit 2b93df928041bfc86369529adfc220a628d4cec7[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 17:08:50 2025 +0600
+
+    admin login created
+
+[33mcommit 76c77566e754bdf88df4d352ad4953701f1a8e6c[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 16:56:23 2025 +0600
+
+    register and login created
+
+[33mcommit 4f1d1524f1f7b104d5b24111a253278f26d72beb[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 16:17:41 2025 +0600
+
+    data seeding update
+
+[33mcommit b129b659b11febe168a4998b0f2162cacebb5594[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 16:16:44 2025 +0600
+
+    backend admin registration update
+
+[33mcommit 939007786ffb47cd157395c7f4cfa45a8ba67f96[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 16:16:29 2025 +0600
+
+    role seeder update
+
+[33mcommit 01c4a0a565bd4d619a0e7636fe83cb40ae6b08ed[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 15:41:08 2025 +0600
+
+    php artisan make:model
+
+[33mcommit 57d2bf85f003d13fc7bf1ff7c9cf57262f4e46ef[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 15:34:00 2025 +0600
+
+    route file updated
+
+[33mcommit 89cae0f2c70070f772876c20ed17984b5ef380c5[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 15:25:14 2025 +0600
+
+    reset password
+
+[33mcommit 46a2ea0a65f0bd552cf2dd10b767ac269fea55d8[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 15:15:40 2025 +0600
+
+    confirm password
+
+[33mcommit b36c51b75581b0e9f77e02fac1106415e5330754[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 15:11:55 2025 +0600
+
+    sign in to up
+
+[33mcommit 3c4411559f6c7a3f42fe3a91674a0e34834ce001[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 14:48:31 2025 +0600
+
+    reset password
+
+[33mcommit 06e5b326f3bd321c93a2d4d85cce424fc8bb7741[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 14:44:02 2025 +0600
+
+    forget password
+
+[33mcommit 253842864f7877e722ccedac04c4f6e3a2e08ab9[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 14:33:16 2025 +0600
+
+    registration completed
+
+[33mcommit b6691b7398cf2cdca03cc4f644c681317af2f9d7[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 14:17:22 2025 +0600
+
+    login page complete
+
+[33mcommit 24f364f2a9112b4e213eab52ed1030a46c649ca5[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 12:29:10 2025 +0600
+
+    forget password complete
+
+[33mcommit 3a4a0a017c7dee7e838bedf1840135f99f4d7f32[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 12:25:18 2025 +0600
+
+    auth login page dynamic
+
+[33mcommit 88810627b6b45ac61e8637aa13e8791a22b8a25e[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 12:12:04 2025 +0600
+
+    config change for jwt
+
+[33mcommit a6b7afb84161c6c303dcff92e843c0d40e973761[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 12:03:54 2025 +0600
+
+    title section
+
+[33mcommit 063b9098dff6f9af2238db0b3ecab978c92550cd[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 11:52:26 2025 +0600
+
+    dashboard partials mastering
+
+[33mcommit 80e59cc9b7dd16e147dcdbe76438de362382d3b1[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 09:56:02 2025 +0600
+
+    breeze installed
+
+[33mcommit 3c8962826ac4d4a832f54204410fe5ba02cb5c95[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Tue Feb 18 09:44:19 2025 +0600
+
+    composer update
+
+[33mcommit 6edffdd5e6a97be8e27020161d76ae906d4f5ef9[m
+Merge: 9851edf 8009f7a
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Sun Feb 16 17:52:43 2025 +0600
+
+    Merge branch 'emon' of https://github.com/Webgenius0/Robynatfloat_backend into emon
+
+[33mcommit 9851edf35996e338738c0a11981145b7e9f5d965[m
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Sun Feb 16 17:44:34 2025 +0600
+
+    yatch user compete
+
+[33mcommit bae2d3c6c95dc55801e8f2e7b8cf4ca27a879bfe[m
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Sun Feb 16 15:26:35 2025 +0600
+
+    user and role seeder compeleted
+
+[33mcommit 8009f7af4affff6323e5145700532428cb3377df[m
+Merge: c52325f fc9442b
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Sun Feb 16 17:48:57 2025 +0600
+
+    resolve conflict
+
+[33mcommit c52325fda1ac9fb18365e540c835a220fb389b48[m
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Sun Feb 16 17:44:34 2025 +0600
+
+    yatch user compete
+
+[33mcommit 44c357dfb6594d621497b4f1db25e8eab351bdf7[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 16:41:21 2025 +0600
+
+    ftp setup
+
+[33mcommit 7f99609448beb62667d38cc831d5bc8be405821b[m
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Sun Feb 16 15:26:35 2025 +0600
+
+    user and role seeder compeleted
+
+[33mcommit fc9442bc3f098c402b5ec674ae41bab2d78bebac[m
+Author: Emon82 <mdemonhowlader6@gmail.com>
+Date:   Sun Feb 16 15:26:35 2025 +0600
+
+    user and role seeder compeleted
+
+[33mcommit c99462d52604eda9016698f24b1a358ebd840d02[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 15:16:05 2025 +0600
+
+    language model
+
+[33mcommit a0d8d871a2f321935330233ba5192ed905f461ab[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 15:12:55 2025 +0600
+
+    skill
+
+[33mcommit 420b36ad441af8d74dcacc80e86ca225bbc02cfc[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 15:02:44 2025 +0600
+
+    certificates
+
+[33mcommit 2caade45c27036a71269156027ad01e03fe52bda[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 14:50:01 2025 +0600
+
+    location saved
+
+[33mcommit b392af5604482f90cddd94c0108b7f65c20003e4[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 14:41:27 2025 +0600
+
+    city state country
+
+[33mcommit 8f6ffd355b41de88b75f76cc234f23855c4d8757[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 14:32:27 2025 +0600
+
+    country and state
+
+[33mcommit 49ab3a58a9e24cabe473e4720997770f197309d0[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 12:46:39 2025 +0600
+
+    experience
+
+[33mcommit 7180c06e635e3595ebd511c08558e7a0ea4992db[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 12:36:27 2025 +0600
+
+    cart modle and migraton relationship
+
+[33mcommit 42b03bb0c98b65c4bfb74156b93b9a5de0414428[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 12:03:13 2025 +0600
+
+    service migration and model
+
+[33mcommit 230c09225ad310a837b75d1dc408aff4751efc8b[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 11:59:13 2025 +0600
+
+    product relation with user
+
+[33mcommit 2d66d477bb4a3a84c3e10fa876ece53a31c15b88[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 11:38:33 2025 +0600
+
+    user and yacths relationship
+
+[33mcommit 3fecfdfb3f874759ff4c0b28d0a3886a31b089ba[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 11:32:57 2025 +0600
+
+    blog model and migration
+
+[33mcommit 8d760b89d2a203575732bc56530581be5e5c94fa[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 11:12:40 2025 +0600
+
+    Image Model
+
+[33mcommit 1770f5cca814c32b24ec6875fb0f790ddccfe2a1[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 11:04:10 2025 +0600
+
+    yacht
+    
+    model, and tables
+
+[33mcommit a3b0471a1a6f1349397ad70975d533e547e02d66[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 10:36:13 2025 +0600
+
+    model reation
+    
+    role with user
+
+[33mcommit d8a098644496c67b526281b665a15e7da0815308[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 10:01:56 2025 +0600
+
+    user role update
+
+[33mcommit 084bf0358fd613be9a792616038fb799f731bedc[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sun Feb 16 09:59:44 2025 +0600
+
+    user and profile migraton
+
+[33mcommit 7e36b1dbae7e61e2c8f3ed246ed2e8db4bbe592f[m[33m ([m[1;32mmain[m[33m)[m
+Author: mdiktushar <md.tushar1804@gmail.com>
+Date:   Sat Feb 15 17:57:16 2025 +0600
+
+    initial commit
