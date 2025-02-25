@@ -25,6 +25,7 @@ class SupplierController extends Controller
         $this->supplierService = $supplierService;
     }
 
+
     /**
      * Display a listing of the resource.
      */
@@ -34,6 +35,7 @@ class SupplierController extends Controller
             if ($request->ajax()) {
                 return $this->supplierService->index($request);
             }
+
 
 
             return view('backend.layouts.users.supplier.index');
