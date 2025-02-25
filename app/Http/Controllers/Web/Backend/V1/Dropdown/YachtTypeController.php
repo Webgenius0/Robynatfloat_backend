@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Web\Backend\V1\Dropdown;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Web\Backend\V1\Dropdown\YachtType\CreateRequest;
+use App\Http\Requests\Web\Backend\V1\Dropdown\YachtType\YachtTypeRequest;
 use App\Models\YachtType;
 use App\Services\Web\Backend\V1\Dropdown\YachtTypeService;
 use App\Traits\V1\ApiResponse;
@@ -47,11 +47,11 @@ class YachtTypeController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     * @param \App\Http\Requests\Web\Backend\V1\Dropdown\YachtType\CreateRequest $createRequest
+     * Summary of store
+     * @param YachtTypeRequest $createRequest
      * @return JsonResponse
      */
-    public function store(CreateRequest $createRequest): JsonResponse
+    public function store(YachtTypeRequest $createRequest): JsonResponse
     {
         try {
             $validatedData = $createRequest->validated();
@@ -66,7 +66,7 @@ class YachtTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(YachtType $yachtType)
+    public function edit(YachtType $yachtType): JsonResponse
     {
         try {
             $response = $this->yachtTypeService->showModelToEdit($yachtType);
@@ -78,11 +78,16 @@ class YachtTypeController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update yachtype
+     * @param \App\Http\Requests\Web\Backend\V1\Dropdown\YachtType\YachtTypeRequest $updateRequest
+     * @param \App\Models\YachtType $yachtType
+     * @return JsonResponse
      */
-    public function update(Request $request, YachtType $yachtType)
+    public function update(YachtTypeRequest $updateRequest, YachtType $yachtType): JsonResponse
     {
         try {
+            $validatedData = $updateRequest->validated();
+            $this->yachtTypeService->update($validatedData, $yachtType);
             return $this->success(202, 'Updated Successfully');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::update', ['error' => $e->getMessage()]);
