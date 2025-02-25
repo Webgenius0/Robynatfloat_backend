@@ -6,7 +6,7 @@ use App\Models\YachtType;
 
 class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
 {
-    public function listOfYachtType(): YachtType
+    public function listOfYachtType()
     {
         return YachtType::select(['id', 'name', 'slug']);
     }

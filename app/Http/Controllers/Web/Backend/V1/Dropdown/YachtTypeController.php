@@ -28,6 +28,9 @@ class YachtTypeController extends Controller
     public function index(Request $request)
     {
         try {
+            if ($request->ajax()) {
+                return $this->yachtTypeService->index($request);
+            }
             return view('backend.layouts.dropdown.yacht_type.index');
         }catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::index', ['error' => $e->getMessage()]);

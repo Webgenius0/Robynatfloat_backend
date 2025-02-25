@@ -147,7 +147,7 @@
                         pagingType: "full_numbers",
                         dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                         ajax: {
-                            url: "{{ route('admin.user.admin.index') }}",
+                            url: "{{ route('admin.yacht.type.index') }}",
                             type: "GET",
                             data: (d) => {
                                 d.search = $('#search-input').val();
