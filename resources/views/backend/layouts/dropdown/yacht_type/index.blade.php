@@ -60,6 +60,7 @@
                                         <thead class="table-light">
                                             <tr>
                                                 <th>Name</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -154,7 +155,13 @@
                             name: 'name',
                             orderable: true,
                             searchable: true
-                        }, ]
+                        },
+                        {
+                            data: 'action',
+                            name: 'action',
+                            orderable: false,
+                            searchable: false
+                        },]
                     });
                     // Custom search functionality
                     $('#search-input').on('keyup', function() {
@@ -169,7 +176,7 @@
             $('#yacht_type_name').keypress(function(e) {
                 if (e.which === 13) { // Check if Enter key is pressed
                     e.preventDefault();
-                    $('#saveBtn').click(); 
+                    $('#saveBtn').click();
                 }
             });
             /**

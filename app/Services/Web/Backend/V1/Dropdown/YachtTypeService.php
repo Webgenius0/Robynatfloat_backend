@@ -53,7 +53,17 @@ class YachtTypeService
                                 </div>
                             </td>';
                 })
-                ->rawColumns(['name'])
+                ->addColumn('action', function ($data) {
+                    return '<td class="ps-1">
+                                <div class="d-flex align-items-center">
+                                    <a>
+                                        <button type="button" class="btn btn-secondary-soft mb-2">Secondary</button>
+                                        <button type="button" class="btn btn-danger-soft mb-2">Danger</button>
+                                    </div>
+                                </div>
+                            </td>';
+                })
+                ->rawColumns(['name', 'action'])
                 ->make(true);
         } catch (Exception $e) {
             Log::error('App\Services\Web\Backend\V1\Dropdown\YachtTypeService::index', ['error' => $e->getMessage()]);
