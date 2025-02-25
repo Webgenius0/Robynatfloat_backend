@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\YachtType;
 use App\Services\Web\Backend\V1\Dropdown\YachtTypeService;
 use Exception;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -23,9 +26,11 @@ class YachtTypeController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Summary of index
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function index(Request $request)
+    public function index(Request $request): JsonResponse|RedirectResponse|View
     {
         try {
             if ($request->ajax()) {

@@ -6,7 +6,7 @@ use App\Models\YachtType;
 
 class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
 {
-    public function listOfYachtType()
+    public function listOfYachtType(): mixed
     {
         return YachtType::select(['id', 'name', 'slug']);
     }

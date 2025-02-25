@@ -6,7 +6,7 @@ use App\Models\YachtType;
 
 interface YachtTypeReopsitoryInterface
 {
-    public function listOfYachtType();
+    public function listOfYachtType(): mixed;
 
     public function createYachtType(array $credential);
 
