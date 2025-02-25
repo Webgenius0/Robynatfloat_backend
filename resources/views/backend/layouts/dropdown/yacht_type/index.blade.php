@@ -261,5 +261,36 @@
                 console.error(error);
             }
         }
+
+
+        /**
+         * Delete Alert
+         * */
+        const deleteAlert = (slug) => {
+            try {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#624bff",
+                    cancelButtonColor: "#929292",
+                    confirmButtonText: "Yes",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteContend(slug)
+                    }
+                });
+            } catch (error) {
+                toastr.error('Something went wrong');
+                console.error(error);
+            }
+        }
+
+
+        const deleteContend = (slug) => {
+            console.log(slug);
+
+        }
     </script>
 @endpush
