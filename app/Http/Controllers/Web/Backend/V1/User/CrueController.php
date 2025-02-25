@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Web\Backend\V1\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\Web\Backend\V1\User\CrueService;
+use App\Traits\V1\ApiResponse;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
@@ -15,6 +17,7 @@ use Illuminate\Support\Facades\Log;
 
 class CrueController extends Controller
 {
+    use ApiResponse;
     protected CrueService $crueService;
 
     public function __construct(CrueService $crueService)
@@ -44,12 +47,20 @@ class CrueController extends Controller
         }
     }
 
-    public function crueUpdateStatus($id){
+    /**
+     * Status update for crue users.
+     * @param User $user
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function updateStatus(User $user): JsonResponse{
+
         try {
-            return $this->crueService->crueUpdateStatus($id);
+         $this->crueService->crueUpdateStatus($user);
+         return $this->success(200, 'status updated');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\User\CreuController::crueUpdateStatus', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('t-error', 'Something went wrong! Please try again.');
+            return $this->error(500, 'server error', $e->getMessage());
+
         }
     }
 
