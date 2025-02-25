@@ -9,9 +9,7 @@
 <script src="{{ asset('assets/js/vendors/chart.js') }}"></script>
 
 
-{{-- development ................................................. --}}
-{{-- jquery --}}
-<script src="{{ asset('assets/js/jquery-3.7.1.min.js') }}"></script>
+{{-- development ................................................. --}
 {{-- toastr --}}
 <script src="{{ asset('assets/dev/js/toastr.min.js') }}"></script>
 <script>

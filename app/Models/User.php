@@ -99,6 +99,16 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         }
     }
 
+
+    /**
+     * route key name change
+     * @return string
+     */
+    public function getRouteKeyName():string
+    {
+        return 'handle';
+    }
+
     /**
      * ****************
      */

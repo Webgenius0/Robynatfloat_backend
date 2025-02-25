@@ -127,77 +127,88 @@
     </script>
     <script>
         $(document).ready(function() {
-            if (!$.fn.DataTable.isDataTable('#data-table')) {
-                var dTable = $('#data-table').DataTable({
-                    ordering: false,
-                    lengthMenu: [
-                        [10, 25, 50, 100, 200, 500, -1],
-                        [10, 25, 50, 100, 200, 500, "All"]
-                    ],
-                    processing: true,
-                    responsive: true,
-                    serverSide: true,
-                    searching: false,
-                    language: {
-                        processing: ''
-                    },
-                    scroller: {
-                        loadingIndicator: true
-                    },
-                    pagingType: "full_numbers",
-                    dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
-                    ajax: {
-                        url: "{{ route('admin.user.admin.index') }}",
-                        type: "GET",
-                        data: (d) => {
-                            d.search = $('#search-input').val();
-                        }
-                    },
-                    columns: [{
-                            data: 'name',
-                            name: 'name',
-                            orderable: true,
-                            searchable: true
+            try {
+                if (!$.fn.DataTable.isDataTable('#data-table')) {
+                    var dTable = $('#data-table').DataTable({
+                        ordering: false,
+                        lengthMenu: [
+                            [10, 25, 50, 100, 200, 500, -1],
+                            [10, 25, 50, 100, 200, 500, "All"]
+                        ],
+                        processing: true,
+                        responsive: true,
+                        serverSide: true,
+                        searching: false,
+                        language: {
+                            processing: ''
                         },
-                        {
-                            data: 'email',
-                            name: 'email',
-                            orderable: true,
-                            searchable: true
+                        scroller: {
+                            loadingIndicator: true
                         },
-                        {
-                            data: 'status',
-                            name: 'status',
-                            orderable: false,
-                            searchable: false,
+                        pagingType: "full_numbers",
+                        dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
+                        ajax: {
+                            url: "{{ route('admin.user.admin.index') }}",
+                            type: "GET",
+                            data: (d) => {
+                                d.search = $('#search-input').val();
+                            },
+                            error: function(xhr, status, error) {
+                                // Handle the error if the AJAX request fails
+                                toastr.error('Failed to load data from the server.');
+                                console.error(`AJAX Error: ${status} - ${error}`);
+                            }
                         },
-                    ]
-                });
-                // Custom search functionality
-                $('#search-input').on('keyup', function() {
-                    dTable.draw(); // Redraw the table with the custom search value
-                });
+                        columns: [{
+                                data: 'name',
+                                name: 'name',
+                                orderable: true,
+                                searchable: true
+                            },
+                            {
+                                data: 'email',
+                                name: 'email',
+                                orderable: true,
+                                searchable: true
+                            },
+                            {
+                                data: 'status',
+                                name: 'status',
+                                orderable: false,
+                                searchable: false,
+                            },
+                        ]
+                    });
+                    // Custom search functionality
+                    $('#search-input').on('keyup', function() {
+                        dTable.draw(); // Redraw the table with the custom search value
+                    });
+                }
+            } catch (e) {
+                toastr.error('something went wrong');
+                console.error(e);
             }
         });
 
-        function flexSwitchCheckChecked(id) {
-            console.log("Check");
+        function flexSwitchCheckChecked(handle) {
+            console.log(handle);
             $.ajax({
-                url: "{{ route('admin.user.admin.updateStatus', 'id') }}".replace('id', id),
+                url: "{{ route('admin.user.admin.update.status', ':user') }}".replace(':user', handle),
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                    if (response.success) {
-                        console.log('Status updated successfully');
-                    } else {
-                        console.log('Error updating status');
+                    try {
+                        console.log(response);
+
+                    } catch (e) {
+                        log.error(e);
                     }
                 },
                 error: function() {
                     // Handle AJAX request error
-                    console.log('An error occurred');
+                    toastr.error('something went wrong');
                 }
             });
         }

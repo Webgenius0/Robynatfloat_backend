@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Web\Backend\V1\User;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Services\Web\Backend\V1\User\AdminService;
+use App\Traits\V1\ApiResponse;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -13,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
+    use ApiResponse;
     protected AdminService $adminService;
 
     /**
@@ -42,13 +45,19 @@ class AdminController extends Controller
         }
     }
 
-    public function updateStatus(string $id)
+    /**
+     * updateStatus
+     * @param \App\Models\User $user
+     * @return JsonResponse
+     */
+    public function updateStatus(User $user): JsonResponse
     {
         try {
-            return $this->adminService->adminStatusUpdate($id);
+            $this->adminService->adminStatusUpdate($user);
+            return $this->success(200, 'status updated');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\User\AdminController::updateStatus', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('t-error', 'Something went wrong! Please try again.');
+            return $this->error(500, 'server error', $e->getMessage());
         }
     }
 

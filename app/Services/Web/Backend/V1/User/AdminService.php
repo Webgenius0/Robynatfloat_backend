@@ -2,7 +2,9 @@
 
 namespace App\Services\Web\Backend\V1\User;
 
+use App\Models\User;
 use App\Repositories\Web\Backend\V1\User\AdminRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\UserRepositoryInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
@@ -10,14 +12,17 @@ use Yajra\DataTables\Facades\DataTables;
 
 class AdminService
 {
+    protected UserRepositoryInterface $userRepository;
     protected AdminRepositoryInterface $adminRepository;
 
     /**
      * construct
+     * @param \App\Repositories\Web\Backend\V1\User\UserRepositoryInterface $userRepository
      * @param \App\Repositories\Web\Backend\V1\User\AdminRepositoryInterface $adminRepository
      */
-    public function __construct(AdminRepositoryInterface $adminRepository)
+    public function __construct(UserRepositoryInterface $userRepository,AdminRepositoryInterface $adminRepository)
     {
+        $this->userRepository = $userRepository;
         $this->adminRepository = $adminRepository;
     }
 
@@ -60,9 +65,8 @@ class AdminService
                 })
                 ->addColumn('status', function ($data) {
                     return '<td>
-
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" onclick="flexSwitchCheckChecked('.($data->id).')" '.($data->status == 1 ? 'checked' : '').'>
+                                    <input class="form-check-input" type="checkbox" onclick="flexSwitchCheckChecked(\''.($data->handle).'\')" '.($data->status == 1 ? 'checked' : '').'>
                                 </div>
                             </td>';
                 })
@@ -74,10 +78,15 @@ class AdminService
         }
     }
 
-    public function adminStatusUpdate($id):mixed
+    /**
+     * admin Status Update
+     * @param \App\Models\User $user
+     * @return void
+     */
+    public function adminStatusUpdate(User $user)
     {
         try {
-            return $this->adminRepository->adminStatusUpdate($id);
+            $this->userRepository->changeStatus($user);
         }catch(Exception $e){
             Log::error('App\Services\Web\Backend\V1\User\AdminService::adminStatusUpdate', ['error' => $e->getMessage()]);
             throw $e;
