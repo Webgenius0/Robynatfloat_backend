@@ -6,7 +6,10 @@ use App\Models\YachtType;
 
 class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
 {
-    public function listOfYachtType() {}
+    public function listOfYachtType(): YachtType
+    {
+        return YachtType::select(['id', 'name', 'slug']);
+    }
 
     public function createYachtType(array $credential) {}
 

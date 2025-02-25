@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Log;
 
 class UserRepository implements UserRepositoryInterface
 {
-        /**
+    /**
      * changing the status of the user
      * @param \App\Models\User $user
      * @return void
