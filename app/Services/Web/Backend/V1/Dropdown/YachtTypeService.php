@@ -62,11 +62,12 @@ class YachtTypeService
     }
 
 
-    public function create(array $credentials)
+    public function store(array $credentials)
     {
         try {
+            return $this->yachtTypeReopsitory->createYachtType($credentials);
         } catch (Exception $e) {
-            Log::error('App\Services\Web\Backend\V1\Dropdown\YachtTypeService::create', ['error' => $e->getMessage()]);
+            Log::error('App\Services\Web\Backend\V1\Dropdown\YachtTypeService::store', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

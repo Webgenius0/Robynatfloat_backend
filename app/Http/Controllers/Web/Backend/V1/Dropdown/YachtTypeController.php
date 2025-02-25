@@ -40,7 +40,7 @@ class YachtTypeController extends Controller
                 return $this->yachtTypeService->index($request);
             }
             return view('backend.layouts.dropdown.yacht_type.index');
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::index', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
@@ -48,14 +48,18 @@ class YachtTypeController extends Controller
 
     /**
      * Store a newly created resource in storage.
+     * @param \App\Http\Requests\Web\Backend\V1\Dropdown\YachtType\CreateRequest $createRequest
+     * @return JsonResponse
      */
-    public function store(CreateRequest $createRequest)
+    public function store(CreateRequest $createRequest): JsonResponse
     {
         try {
-            return $this->success(201, 'Created Successfully');
-        }catch (Exception $e) {
+            $validatedData = $createRequest->validated();
+            $response = $this->yachtTypeService->store($validatedData);
+            return $this->success(201, 'Created Successfully.', $response);
+        } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::store', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('t-error', 'Something went wring..!');
+            return $this->error(500, 'Server Error.');
         }
     }
 
@@ -65,8 +69,7 @@ class YachtTypeController extends Controller
     public function edit(YachtType $yachtType)
     {
         try {
-
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::edit', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
@@ -78,8 +81,7 @@ class YachtTypeController extends Controller
     public function update(Request $request, YachtType $yachtType)
     {
         try {
-
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::update', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }
@@ -91,8 +93,7 @@ class YachtTypeController extends Controller
     public function destroy(YachtType $yachtType)
     {
         try {
-
-        }catch (Exception $e) {
+        } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::destroy', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');
         }

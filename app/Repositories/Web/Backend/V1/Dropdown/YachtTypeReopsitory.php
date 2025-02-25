@@ -2,16 +2,35 @@
 
 namespace App\Repositories\Web\Backend\V1\Dropdown;
 
+use App\Helpers\Helper;
 use App\Models\YachtType;
+use Exception;
+use Illuminate\Support\Facades\Log;
 
 class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
 {
     public function listOfYachtType(): mixed
     {
-        return YachtType::select(['id', 'name', 'slug']);
+        try {
+            return YachtType::select(['id', 'name', 'slug']);
+        } catch (Exception $e) {
+            Log::error('App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory::listOfYachtType', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
-    public function createYachtType(array $credential) {}
+    public function createYachtType(array $credential): YachtType
+    {
+        try {
+            return YachtType::create([
+                'name' => $credential['name'],
+                'slug' => Helper::generateUniqueSlug($credential['name'], 'yacht_types'),
+            ]);
+        } catch (Exception $e) {
+            Log::error('App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory::createYachtType', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 
     public function updateYachtType(array $credential, YachtType $yachtType) {}
 }

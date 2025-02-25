@@ -8,7 +8,7 @@ interface YachtTypeReopsitoryInterface
 {
     public function listOfYachtType(): mixed;
 
-    public function createYachtType(array $credential);
+    public function createYachtType(array $credential): YachtType;
 
     public function updateYachtType(array $credential, YachtType $yachtType);
 }
