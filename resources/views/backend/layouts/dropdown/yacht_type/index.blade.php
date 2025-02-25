@@ -11,6 +11,7 @@
             display: flex;
             justify-content: center;
         }
+
         .paging_full_numbers {
             display: flex;
             justify-content: center;
@@ -52,7 +53,6 @@
                                         <thead class="table-light">
                                             <tr>
                                                 <th>Name</th>
-                                                <th>Email</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -126,50 +126,48 @@
     </script>
     <script>
         $(document).ready(function() {
-            if (!$.fn.DataTable.isDataTable('#data-table')) {
-                var dTable = $('#data-table').DataTable({
-                    ordering: false,
-                    lengthMenu: [
-                        [10, 25, 50, 100, 200, 500, -1],
-                        [10, 25, 50, 100, 200, 500, "All"]
-                    ],
-                    processing: true,
-                    responsive: true,
-                    serverSide: true,
-                    searching: false,
-                    language: {
-                        processing: ''
-                    },
-                    scroller: {
-                        loadingIndicator: true
-                    },
-                    pagingType: "full_numbers",
-                    dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
-                    ajax: {
-                        url: "{{ route('admin.user.admin.index') }}",
-                        type: "GET",
-                        data: (d) => {
-                            d.search = $('#search-input').val();
-                        }
-                    },
-                    columns: [{
+            try {
+                if (!$.fn.DataTable.isDataTable('#data-table')) {
+                    var dTable = $('#data-table').DataTable({
+                        ordering: false,
+                        lengthMenu: [
+                            [10, 25, 50, 100, 200, 500, -1],
+                            [10, 25, 50, 100, 200, 500, "All"]
+                        ],
+                        processing: true,
+                        responsive: true,
+                        serverSide: true,
+                        searching: false,
+                        language: {
+                            processing: ''
+                        },
+                        scroller: {
+                            loadingIndicator: true
+                        },
+                        pagingType: "full_numbers",
+                        dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
+                        ajax: {
+                            url: "{{ route('admin.user.admin.index') }}",
+                            type: "GET",
+                            data: (d) => {
+                                d.search = $('#search-input').val();
+                            }
+                        },
+                        columns: [{
                             data: 'name',
                             name: 'name',
                             orderable: true,
                             searchable: true
-                        },
-                        {
-                            data: 'email',
-                            name: 'email',
-                            orderable: true,
-                            searchable: true
-                        },
-                    ]
-                });
-                // Custom search functionality
-                $('#search-input').on('keyup', function() {
-                    dTable.draw(); // Redraw the table with the custom search value
-                });
+                        }, ]
+                    });
+                    // Custom search functionality
+                    $('#search-input').on('keyup', function() {
+                        dTable.draw(); // Redraw the table with the custom search value
+                    });
+                }
+            } catch (e) {
+                toastr.error('something went wrong');
+                console.error(e);
             }
         });
     </script>
