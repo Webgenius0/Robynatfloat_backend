@@ -77,7 +77,7 @@
     </div>
 
 
-    {{-- modal start --}}
+    {{-- create modal start --}}
     <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -104,7 +104,13 @@
             </div>
         </div>
     </div>
-    {{-- modal end --}}
+    {{-- create modal end --}}
+
+    {{-- update modal start --}}
+    <div class="modal fade" id="update" tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true">
+
+    </div>
+    {{-- update modal end --}}
 @endsection
 
 
@@ -151,17 +157,18 @@
                             }
                         },
                         columns: [{
-                            data: 'name',
-                            name: 'name',
-                            orderable: true,
-                            searchable: true
-                        },
-                        {
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                            searchable: false
-                        },]
+                                data: 'name',
+                                name: 'name',
+                                orderable: true,
+                                searchable: true
+                            },
+                            {
+                                data: 'action',
+                                name: 'action',
+                                orderable: false,
+                                searchable: false
+                            },
+                        ]
                     });
                     // Custom search functionality
                     $('#search-input').on('keyup', function() {
