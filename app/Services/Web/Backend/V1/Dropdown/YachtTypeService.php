@@ -57,7 +57,7 @@ class YachtTypeService
                     return '<td class="ps-1">
                                 <div class="d-flex align-items-center">
                                     <a>
-                                        <button type="button" class="btn btn-secondary-soft mb-2">Secondary</button>
+                                        <button type="button" class="btn btn-secondary-soft mb-2" onclick="editModal(\'' . $data->slug . '\')">Secondary</button>
                                         <button type="button" class="btn btn-danger-soft mb-2">Danger</button>
                                     </div>
                                 </div>
@@ -71,8 +71,12 @@ class YachtTypeService
         }
     }
 
-
-    public function store(array $credentials)
+    /**
+     * storing Yacht type
+     * @param array $credentials
+     * @return YachtType
+     */
+    public function store(array $credentials): YachtType
     {
         try {
             return $this->yachtTypeReopsitory->createYachtType($credentials);
@@ -86,6 +90,7 @@ class YachtTypeService
     public function showModelToEdit(YachtType $yachtType)
     {
         try {
+            return ['html' => view('backend.layouts.dropdown.yacht_type.components.update', compact('yachtType'))->render()];
         } catch (Exception $e) {
             Log::error('App\Services\Web\Backend\V1\Dropdown\YachtTypeService::showModelToEdit', ['error' => $e->getMessage()]);
             throw $e;

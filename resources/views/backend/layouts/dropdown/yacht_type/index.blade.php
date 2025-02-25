@@ -107,9 +107,7 @@
     {{-- create modal end --}}
 
     {{-- update modal start --}}
-    <div class="modal fade" id="update" tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true">
-
-    </div>
+    <div class="modal fade" id="updateModel" tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true"></div>
     {{-- update modal end --}}
 @endsection
 
@@ -234,5 +232,34 @@
                 }
             });
         });
+
+
+        /**
+         *  show edit modal
+         * */
+        const editModal = (slug) => {
+            try {
+                $('#overlay').show();
+                $.ajax({
+                    url: `{{ route('admin.yacht.type.edit', '') }}/${slug}`,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: (response) => {
+                        $('#overlay').hide();
+                        $('#updateModel').html(response.data.html);
+                        $('#updateModel').modal('show');
+                    },
+                    error: (xhr, status, error) => {
+                        $('#overlay').hide();
+                        toastr.error('Something Went Wrong.!');
+                        console.error(error);
+                    }
+                });
+            } catch (error) {
+                $('#overlay').hide();
+                toastr.error('Something went wrong');
+                console.error(error);
+            }
+        }
     </script>
 @endpush

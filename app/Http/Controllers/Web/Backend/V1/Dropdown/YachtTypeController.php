@@ -69,9 +69,11 @@ class YachtTypeController extends Controller
     public function edit(YachtType $yachtType)
     {
         try {
+            $response = $this->yachtTypeService->showModelToEdit($yachtType);
+            return $this->success(200, 'Successfull', $response);
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::edit', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('t-error', 'Something went wring..!');
+            return $this->error(500, 'Server Error.');
         }
     }
 
@@ -81,9 +83,10 @@ class YachtTypeController extends Controller
     public function update(Request $request, YachtType $yachtType)
     {
         try {
+            return $this->success(202, 'Updated Successfully');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::update', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('t-error', 'Something went wring..!');
+            return $this->error(500, 'Server Error.');
         }
     }
 
