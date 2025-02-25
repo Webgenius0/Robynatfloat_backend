@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Log;
 
 class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
 {
+    /**
+     *  list Of YachtType
+     * @return YachtType
+     */
     public function listOfYachtType(): mixed
     {
         try {
@@ -19,6 +23,11 @@ class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
         }
     }
 
+    /**
+     * create YachtType
+     * @param array $credential
+     * @return YachtType
+     */
     public function createYachtType(array $credential): YachtType
     {
         try {
@@ -32,5 +41,24 @@ class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
         }
     }
 
-    public function updateYachtType(array $credential, YachtType $yachtType) {}
+    /**
+     * update Yacht Type
+     * @param array $credential
+     * @param \App\Models\YachtType $yachtType
+     * @return void
+     */
+    public function updateYachtType(array $credential, YachtType $yachtType) {
+        try {
+            if ($credential['name'] != $yachtType->name) {
+                $yachtType->slug = Helper::generateUniqueSlug($credential['name'], 'yacht_types');
+            }
+            $yachtType->name = $credential['name'];
+
+            $yachtType->save();
+
+        } catch (Exception $e) {
+            Log::error('App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory::updateYachtType', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }
