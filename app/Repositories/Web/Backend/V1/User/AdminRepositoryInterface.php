@@ -9,5 +9,4 @@ interface AdminRepositoryInterface
      */
     public function latestAdminList(): mixed;
 
-    public function adminStatusUpdate($id): mixed;
 }

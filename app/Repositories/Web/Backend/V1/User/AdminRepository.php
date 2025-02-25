@@ -20,18 +20,4 @@ class AdminRepository implements AdminRepositoryInterface
             throw $e;
         }
     }
-
-    public function adminStatusUpdate($id):mixed
-    {
-        try {
-
-            $admin = User::find($id);
-            $newstatus = $admin->status == 1 ? 0 : 1;
-            return $admin->update(['status' => $newstatus]);
-
-        }catch(Exception $e){
-            Log::error('App\Repositories\Web\Backend\V1\User\AdminRepository::adminStatusUpdate', ['error' => $e->getMessage()]);
-            throw $e;
-        }
-    }
 }

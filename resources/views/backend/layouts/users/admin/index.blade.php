@@ -190,27 +190,32 @@
             }
         });
 
+        /**
+         * updating the status of the user
+         * */
         function flexSwitchCheckChecked(handle) {
-            console.log(handle);
-            $.ajax({
+            try {
+                $.ajax({
                 url: "{{ route('admin.user.admin.update.status', ':user') }}".replace(':user', handle),
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                    try {
-                        console.log(response);
-
-                    } catch (e) {
-                        log.error(e);
+                    if (response.code == 200) {
+                        toastr.success('Status Updated successfully');
+                    }else {
+                        toastr.error('Failed to update status');
                     }
                 },
                 error: function() {
                     // Handle AJAX request error
-                    toastr.error('something went wrong');
+                    toastr.error('Something Went Wrong');
                 }
             });
+            }catch(e) {
+                toastr.error('Something Went Wrong');
+            }
         }
     </script>
 @endpush
