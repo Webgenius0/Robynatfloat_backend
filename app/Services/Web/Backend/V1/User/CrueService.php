@@ -68,15 +68,5 @@ class CrueService
 
     }
 
-    public function crueUpdateStatus($id){
-        try {
-            $this->crueRepository->crueStatusUpdate($id);
-            return response()->json(['success'=>'Status updated successfully']);
-        } catch (Exception $e) {
-            Log::error('App\Services\Web\Backend\V1\User\CrueService::crueUpdateStatus', ['error' => $e->getMessage()]);
-            throw $e;
-        }
-    }
-
 }
 
