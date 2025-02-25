@@ -287,9 +287,39 @@
             }
         }
 
-
+        /**
+         * delete function
+         **/
         const deleteContend = (slug) => {
-            console.log(slug);
+            try {
+                $('#overlay').show();
+                const formData = {
+                    _method: 'DELETE'
+                };
+                $.ajax({
+                    url: `{{ route('admin.yacht.type.destroy', '') }}/${slug}`,
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: (response) => {
+                        if (response.code == 202) {
+                            dTable.draw();
+                            $('#overlay').hide();
+                            toastr.success('Yacht Type Created successfully!');
+                        } else {
+                            $('#overlay').hide();
+                            toastr.error('Something Went Wrong.!');
+                        }
+                    },
+                    error: (xhr, status, error) => {
+                        $('#overlay').hide();
+                        toastr.error('Something Went Wrong.!');
+                    }
+                });
+            } catch (e) {
+                $('#overlay').hide();
+                toastr.error('Something Went Wrong.!');
+            }
 
         }
     </script>

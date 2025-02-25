@@ -96,11 +96,15 @@ class YachtTypeController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     *  destroy
+     * @param \App\Models\YachtType $yachtType
+     * @return JsonResponse|RedirectResponse
      */
     public function destroy(YachtType $yachtType)
     {
         try {
+            $yachtType->delete();
+            return $this->success(202, 'Updated Successfully');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::destroy', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');

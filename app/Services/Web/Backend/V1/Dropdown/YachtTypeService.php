@@ -117,13 +117,4 @@ class YachtTypeService
         }
     }
 
-
-    public function delete(YachtType $yachtType)
-    {
-        try {
-        } catch (Exception $e) {
-            Log::error('App\Services\Web\Backend\V1\Dropdown\YachtTypeService::delete', ['error' => $e->getMessage()]);
-            throw $e;
-        }
-    }
 }

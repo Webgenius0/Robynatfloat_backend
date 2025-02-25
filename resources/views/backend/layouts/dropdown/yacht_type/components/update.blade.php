@@ -53,9 +53,7 @@
                             toastr.success('Yacht Type Created successfully!');
                         } else {
                             $('#overlay').hide();
-                            if (response.errors && response.errors.name) {
-                                $('#update_name_error').text(response.errors.name[0]);
-                            }
+                            toastr.error('Something Went Wrong.!');
                         }
                     },
                     error: (Xhr, status, error) => {
