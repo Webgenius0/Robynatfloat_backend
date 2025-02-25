@@ -35,7 +35,6 @@ class SupplierController extends Controller
                 return $this->supplierService->index($request);
             }
 
-
             return view('backend.layouts.users.supplier.index');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\User\SupplierController::view', ['error' => $e->getMessage()]);
