@@ -86,8 +86,12 @@ class YachtTypeService
         }
     }
 
-
-    public function showModelToEdit(YachtType $yachtType)
+    /**
+     * of show Model To Edit
+     * @param \App\Models\YachtType $yachtType
+     * @return array{html: string}
+     */
+    public function showModelToEdit(YachtType $yachtType):array
     {
         try {
             return ['html' => view('backend.layouts.dropdown.yacht_type.components.update', compact('yachtType'))->render()];
@@ -97,9 +101,16 @@ class YachtTypeService
         }
     }
 
-    public function update(array $credentials, YachtType $yachtType)
+    /**
+     * update
+     * @param array $credentials
+     * @param \App\Models\YachtType $yachtType
+     * @return void
+     */
+    public function update(array $credentials, YachtType $yachtType):void
     {
         try {
+            $this->yachtTypeReopsitory->updateYachtType($credentials, $yachtType);
         } catch (Exception $e) {
             Log::error('App\Services\Web\Backend\V1\Dropdown\YachtTypeService::update', ['error' => $e->getMessage()]);
             throw $e;
