@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web\Backend\V1\Dropdown;
 use App\Http\Controllers\Controller;
 use App\Models\YachtType;
 use App\Services\Web\Backend\V1\Dropdown\YachtTypeService;
+use App\Traits\V1\ApiResponse;
 use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\JsonResponse;
@@ -14,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 
 class YachtTypeController extends Controller
 {
+    use ApiResponse;
     protected YachtTypeService $yachtTypeService;
 
     /**
@@ -62,7 +64,7 @@ class YachtTypeController extends Controller
     public function store(Request $request)
     {
         try {
-
+            return $this->success(201, 'Created Successfully');
         }catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::store', ['error' => $e->getMessage()]);
             return redirect()->back()->with('t-error', 'Something went wring..!');

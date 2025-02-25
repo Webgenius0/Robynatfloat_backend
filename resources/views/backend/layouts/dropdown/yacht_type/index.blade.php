@@ -21,6 +21,9 @@
 @endpush
 
 @section('main')
+    <div id="overlay"
+        style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0, 0, 0, 0.5); z-index:9999;">
+    </div>
     <div class="app-content-area">
         <div class="container-fluid">
             <div class="row">
@@ -43,7 +46,6 @@
                                     <div class="col-md-6 mb-3 ">
                                         <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
                                             data-bs-target="#addCustomerModal">+ Add Customer</a>
-
                                     </div>
 
                                     <div class=" col-lg-4 col-md-6">
@@ -83,32 +85,17 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="createYachtType">
                         <div>
                             <div class="mb-3">
-                                <label for="customerName" class="form-label">Customer name</label>
-                                <input type="text" class="form-control" placeholder="Enter name" id="customerName">
-                            </div>
-                            <div class="mb-3">
-                                <label for="customerEmail" class="form-label">Email</label>
-                                <input type="email" class="form-control" placeholder="Enter Email" id="customerEmail">
-                            </div>
-                            <div class="mb-3">
-                                <label for="customerPhone" class="form-label">Email</label>
-                                <input type="text" class="form-control" placeholder="Enter Phone" id="customerPhone">
-                            </div>
-                            <div class="mb-3">
-                                <label for="customerDate" class="form-label">Joining Date</label>
-                                <input type="text" class="form-control flatpickr" placeholder="Select date"
-                                    id="customerDate">
+                                <label for="name" class="form-label">Yacht Type Name</label>
+                                <input type="text" class="form-control" placeholder="Enter name" id="yacht_type_name">
                             </div>
                             <div class="text-end">
-                                <button type="button" class="btn btn-primary me-1">+ Add Customer</button>
+                                <button type="button" class="btn btn-primary me-1" id="saveBtn">Save</button>
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                             </div>
-
                         </div>
-
                     </form>
                 </div>
 
@@ -131,6 +118,9 @@
     </script>
     <script>
         $(document).ready(function() {
+            /**
+             *Indexing the table
+             * */
             try {
                 if (!$.fn.DataTable.isDataTable('#data-table')) {
                     var dTable = $('#data-table').DataTable({
@@ -174,6 +164,45 @@
                 toastr.error('something went wrong');
                 console.error(e);
             }
+
+
+            /**
+             * Create new yacht type
+             * */
+            $(`#saveBtn`).click(() => {
+                try {
+                    $('#overlay').show();
+                    const yachtTypeName = $('#yacht_type_name').val();
+
+                    $.ajax({
+                        url: `{{ route('admin.yacht.type.store') }}`,
+                        type: `POST`,
+                        data: {
+                            'name': yachtTypeName,
+                        },
+                        success: (response) => {
+                            if (response.code == 201) {
+                                dTable.draw();
+                                $('#yacht_type_name').val('');
+                                $('#addCustomerModal').modal('hide');
+                                $('#overlay').hide();
+                                toastr.success('Yacht Type Created successfully!');
+                            } else {
+                                $('#overlay').hide();
+                                toastr.error('Something Went Wrong.!');
+                            }
+                        },
+                        error: (Xhr, status, error) => {
+                            $('#overlay').hide();
+                            toastr.error('Something Went Wrong.!');
+                        }
+                    })
+                } catch (e) {
+                    $('#overlay').hide();
+                    toastr.error('Something Went Wrong.!');
+                    console.error(e);
+                }
+            });
         });
     </script>
 @endpush
