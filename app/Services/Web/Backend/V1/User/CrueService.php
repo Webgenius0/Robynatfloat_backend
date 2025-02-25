@@ -72,8 +72,6 @@ class CrueService
 
     }
 
-<<<<<<< HEAD
-=======
     public function crueUpdateStatus(User $user){
         try {
             $this->userRepository->changeStatus($user);
@@ -83,7 +81,5 @@ class CrueService
             throw $e;
         }
     }
-
->>>>>>> d8dd181 (user list for crue freelancer and supplier)
 }
 
