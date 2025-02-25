@@ -53,7 +53,6 @@
                                             <tr>
                                                 <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Status</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -164,12 +163,6 @@
                             name: 'email',
                             orderable: true,
                             searchable: true
-                        },
-                        {
-                            data: 'status',
-                            name: 'status',
-                            orderable: false,
-                            searchable: false,
                         },
                     ]
                 });
