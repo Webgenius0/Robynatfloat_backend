@@ -48,7 +48,7 @@
             data: formData,
             success: (response) => {
                 if (response.success) {
-                    alert('Yacht type updated successfully');
+                    toastr.success('Yacht Type Created successfully!');
                     // Close the modal after success
                     $('#exampleModal').modal('hide'); // Replace '#exampleModal' with your modal's ID
                 } else {

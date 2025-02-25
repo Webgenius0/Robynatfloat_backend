@@ -245,9 +245,14 @@
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
-                        $('#overlay').hide();
-                        $('#updateModel').html(response.data.html);
-                        $('#updateModel').modal('show');
+                        if (response.code == 200) {
+                            $('#overlay').hide();
+                            $('#updateModel').html(response.data.html);
+                            $('#updateModel').modal('show');
+                        } else {
+                            $('#overlay').hide();
+                            toastr.error('Something Went Wrong.!');
+                        }
                     },
                     error: (xhr, status, error) => {
                         $('#overlay').hide();
