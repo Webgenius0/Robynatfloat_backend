@@ -90,6 +90,7 @@
                             <div class="mb-3">
                                 <label for="name" class="form-label">Yacht Type Name</label>
                                 <input type="text" class="form-control" placeholder="Enter name" id="yacht_type_name">
+                                <p class="v-error-message" id="name_error"></p>
                             </div>
                             <div class="text-end">
                                 <button type="button" class="btn btn-primary me-1" id="saveBtn">Save</button>
@@ -174,6 +175,9 @@
                     $('#overlay').show();
                     const yachtTypeName = $('#yacht_type_name').val();
 
+                    // removing validation messages
+                    $('#name_error').text('');
+
                     $.ajax({
                         url: `{{ route('admin.yacht.type.store') }}`,
                         type: `POST`,
@@ -194,7 +198,14 @@
                         },
                         error: (Xhr, status, error) => {
                             $('#overlay').hide();
-                            toastr.error('Something Went Wrong.!');
+                            if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors && Xhr
+                                .responseJSON.errors['name'] && Xhr.responseJSON.errors['name'][
+                                    0
+                                ]) {
+                                $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
+                            } else {
+                                toastr.error('Something Went Wrong.!');
+                            }
                         }
                     })
                 } catch (e) {

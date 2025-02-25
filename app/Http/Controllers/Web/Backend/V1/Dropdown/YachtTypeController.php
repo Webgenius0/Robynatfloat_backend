@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\Backend\V1\Dropdown;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Web\Backend\V1\Dropdown\YachtType\CreateRequest;
 use App\Models\YachtType;
 use App\Services\Web\Backend\V1\Dropdown\YachtTypeService;
 use App\Traits\V1\ApiResponse;
@@ -46,22 +47,9 @@ class YachtTypeController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        try {
-
-        }catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\YachtTypeController::create', ['error' => $e->getMessage()]);
-            return redirect()->back()->with('t-error', 'Something went wring..!');
-        }
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CreateRequest $createRequest)
     {
         try {
             return $this->success(201, 'Created Successfully');
