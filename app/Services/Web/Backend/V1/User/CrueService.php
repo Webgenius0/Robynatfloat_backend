@@ -81,5 +81,6 @@ class CrueService
             throw $e;
         }
     }
+
 }
 
