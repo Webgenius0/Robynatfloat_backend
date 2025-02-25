@@ -16,7 +16,7 @@ class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
     public function listOfYachtType(): mixed
     {
         try {
-            return YachtType::select(['id', 'name', 'slug']);
+            return YachtType::select(['id', 'name', 'slug'])->latest();
         } catch (Exception $e) {
             Log::error('App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory::listOfYachtType', ['error' => $e->getMessage()]);
             throw $e;
