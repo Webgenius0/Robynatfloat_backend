@@ -39,8 +39,13 @@
                         <!-- card -->
                         <div class="card mb-4">
                             <div class="card-header  ">
-
                                 <div class="row justify-content-between">
+                                    <div class="col-md-6 mb-3 ">
+                                        <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
+                                            data-bs-target="#addCustomerModal">+ Add Customer</a>
+
+                                    </div>
+
                                     <div class=" col-lg-4 col-md-6">
                                         <input type="search" id="search-input" class="form-control "
                                             placeholder="Search for name, email">
