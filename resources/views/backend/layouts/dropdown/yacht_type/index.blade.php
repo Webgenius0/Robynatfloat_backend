@@ -117,19 +117,14 @@
     {{-- Datatable --}}
     <script src="{{ asset('assets/dev/js/datatables.min.js') }}"></script>
     <script>
-        var routeUrls = {
-            viewUrl: "#",
-            editUrl: "#"
-        };
-    </script>
-    <script>
+        let dTable;
         $(document).ready(function() {
             /**
              *Indexing the table
              * */
             try {
                 if (!$.fn.DataTable.isDataTable('#data-table')) {
-                    var dTable = $('#data-table').DataTable({
+                    dTable = $('#data-table').DataTable({
                         ordering: false,
                         lengthMenu: [
                             [10, 25, 50, 100, 200, 500, -1],

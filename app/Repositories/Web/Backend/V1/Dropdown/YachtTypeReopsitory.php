@@ -47,15 +47,17 @@ class YachtTypeReopsitory implements YachtTypeReopsitoryInterface
      * @param \App\Models\YachtType $yachtType
      * @return void
      */
-    public function updateYachtType(array $credential, YachtType $yachtType) {
+    public function updateYachtType(array $credential, YachtType $yachtType)
+    {
         try {
-            if ($credential['name'] != $yachtType->name) {
-                $yachtType->slug = Helper::generateUniqueSlug($credential['name'], 'yacht_types');
-            }
+            $oldName = $yachtType->name;
             $yachtType->name = $credential['name'];
 
-            $yachtType->save();
+            if ($oldName != $credential['name']) {
+                $yachtType->slug = Helper::generateUniqueSlug($credential['name'], 'yacht_types', 'slug');
+            }
 
+            $yachtType->save();
         } catch (Exception $e) {
             Log::error('App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory::updateYachtType', ['error' => $e->getMessage()]);
             throw $e;
