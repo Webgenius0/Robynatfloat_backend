@@ -141,11 +141,7 @@
                     <a class="rounded-circle" href="#!" role="button" id="dropdownUser" data-bs-toggle="dropdown"
                         aria-haspopup="true" aria-expanded="false">
                         <div class="avatar avatar-md avatar-indicators avatar-online">
-                            @if(isset($user))
-                            <img alt="avatar" src="{{ $user->avatar }}" class="rounded-circle">
-                        @else
-                            <img alt="avatar" src="{{ asset('default-avatar.png') }}" class="rounded-circle">
-                        @endif
+                            <img alt="avatar" src="{{$user->avatar}}" class="rounded-circle">
                         </div>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
