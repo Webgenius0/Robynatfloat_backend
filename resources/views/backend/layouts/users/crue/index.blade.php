@@ -181,7 +181,6 @@
         });
 
         function flexSwitchCheckChecked(id) {
-            console.log("Check");
             $.ajax({
                 url: "{{ route('admin.user.crue.crueUpdateStatus', 'id') }}".replace('id', id),
                 method: 'POST',
