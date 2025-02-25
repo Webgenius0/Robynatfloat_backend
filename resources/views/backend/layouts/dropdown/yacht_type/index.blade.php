@@ -166,7 +166,12 @@
                 console.error(e);
             }
 
-
+            $('#yacht_type_name').keypress(function(e) {
+                if (e.which === 13) { // Check if Enter key is pressed
+                    e.preventDefault();
+                    $('#saveBtn').click(); 
+                }
+            });
             /**
              * Create new yacht type
              * */
