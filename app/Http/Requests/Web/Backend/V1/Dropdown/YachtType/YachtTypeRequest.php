@@ -7,7 +7,7 @@ use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\ValidationException;
 
-class CreateRequest extends FormRequest
+class YachtTypeRequest extends FormRequest
 {
     use ApiResponse;
     /**
