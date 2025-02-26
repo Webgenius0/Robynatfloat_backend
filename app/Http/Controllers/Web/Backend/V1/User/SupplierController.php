@@ -25,7 +25,6 @@ class SupplierController extends Controller
         $this->supplierService = $supplierService;
     }
 
-
     /**
      * Display a listing of the resource.
      */
