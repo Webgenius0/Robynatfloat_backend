@@ -2,7 +2,9 @@
 
 namespace App\Services\Web\Backend\V1\User;
 
+use App\Models\User;
 use App\Repositories\Web\Backend\V1\User\SupplierRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\UserRepositoryInterface;
 use Exception;
 use Illuminate\Http\Client\Request;
 use Illuminate\Support\Facades\Log;
@@ -12,11 +14,13 @@ class SupplierService
 {
     //here is protected function
     protected SupplierRepositoryInterface $supplierRepository;
+    protected UserRepositoryInterface $userRepository;
 
     //here is constructor function
-    public function __construct(SupplierRepositoryInterface $supplierRepository)
+    public function __construct(SupplierRepositoryInterface $supplierRepository, UserRepositoryInterface $userRepository)
     {
         $this->supplierRepository = $supplierRepository;
+        $this->userRepository = $userRepository;
     }
     //here is function to get all suppliers
     public function index($request){
@@ -24,11 +28,12 @@ class SupplierService
         $suppliers= $this->supplierRepository->supplierList();
 
         //applying search operation
-        if($request->has('search') && $request->search){
+        if ($request->has('search') && $request->search) {
             $searchTerm = $request->search;
-            $suppliers->where(function($suppliers) use($searchTerm){
-                $suppliers->where('name', 'like', '%'. $searchTerm.'%')
-                    ->orWhere('email', 'like', '%'. $searchTerm.'%');
+            $suppliers->where(function ($suppliers) use ($searchTerm) {
+                $suppliers->where('first_name', 'like', '%'. $searchTerm . '%')
+                ->orWhere('last_name', 'like', '%'. $searchTerm . '%')
+                ->orWhere('email', 'like', '%'. $searchTerm . '%');
             });
         }
        //here is yajara datatable called
@@ -64,4 +69,15 @@ class SupplierService
 throw $e;
 }
 }
+
+//Status Update for SupplierService users
+public function updateStatus(User $user){
+    try {
+        $this->userRepository->changeStatus($user);
+    } catch (Exception $e) {
+        Log::error('App\Services\Web\Backend\V1\User\SupplierService::updateStatus', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+}
+
 }
