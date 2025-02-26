@@ -183,29 +183,29 @@
          /**
          * updating the status of the Freelancer user
          * */
-        //  function flexSwitchCheckChecked(handle) {
-        //     try {
-        //         $.ajax({
-        //         url: "{{ route('admin.user.freelancer.update.status', ':user') }}".replace(':user', handle),
-        //         method: 'POST',
-        //         data: {
-        //             _token: '{{ csrf_token() }}',
-        //         },
-        //         success: function(response) {
-        //             if (response.code == 200) {
-        //                 toastr.success('Status Updated successfully');
-        //             }else {
-        //                 toastr.error('Failed to update status');
-        //             }
-        //         },
-        //         error: function() {
-        //             // Handle AJAX request error
-        //             toastr.error('Something Went Wrong');
-        //         }
-        //     });
-        //     }catch(e) {
-        //         toastr.error('Something Went Wrong');
-        //     }
-        // }
+         function flexSwitchCheckChecked(handle) {
+            try {
+                $.ajax({
+                url: "{{ route('admin.user.supplier.update.status', ':user') }}".replace(':user', handle),
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    if (response.code == 200) {
+                        toastr.success('Status Updated successfully');
+                    }else {
+                        toastr.error('Failed to update status');
+                    }
+                },
+                error: function() {
+                    // Handle AJAX request error
+                    toastr.error('Something Went Wrong');
+                }
+            });
+            }catch(e) {
+                toastr.error('Something Went Wrong');
+            }
+        }
     </script>
 @endpush

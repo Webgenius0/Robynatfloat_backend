@@ -22,6 +22,8 @@ use App\Repositories\Web\Backend\V1\User\SupplierRepository;
 use App\Repositories\Web\Backend\V1\User\SupplierRepositoryInterface;
 use App\Repositories\Web\Backend\V1\User\UserRepository as UserUserRepository;
 use App\Repositories\Web\Backend\V1\User\UserRepositoryInterface as UserUserRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\YacthRepository;
+use App\Repositories\Web\Backend\V1\User\YacthRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -46,6 +48,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CrueRepositoryInterface::class, CrueRepository::class);
         $this->app->bind(FreelancerRepositoryInterface::class, FreelancerRepository::class);
         $this->app->bind(SupplierRepositoryInterface::class, SupplierRepository::class);
+        $this->app->bind(YacthRepositoryInterface::class, YacthRepository::class);
 
         //dropdown
         $this->app->bind(YachtTypeReopsitoryInterface::class, YachtTypeReopsitory::class);
