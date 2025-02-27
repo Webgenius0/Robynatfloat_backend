@@ -4,6 +4,22 @@
     Users-Admin
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/dev/css/datatables.min.css') }}">
+    <style>
+        .dt-info {
+            display: flex;
+            justify-content: center;
+        }
+
+        .paging_full_numbers {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+    </style>
+@endpush
+
 @section('main')
     <div class="app-content-area">
         <div class="container-fluid">

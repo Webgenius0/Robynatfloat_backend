@@ -305,6 +305,22 @@
                         </svg> Yacht-Types
                     </a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.country.type.*') ? 'active' : '' }}"
+                        href="{{ route('admin.country.type.index') }}">
+                        <svg fill="{{ request()->routeIs('admin.country.type.*') ? '#624bff' : '#9199a5' }}"
+                            height="18px" width="18px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
+                            style="margin-right: 5px" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title></title>
+                                <path d="M4 3v18h2v-6h14V3H4zm12 8H6V5h10v6z"></path>
+                            </g>
+                        </svg> Country-Types
+                    </a>
+                </li>
                 <!-- Nav item dropdown end ............... -->
 
             </ul>

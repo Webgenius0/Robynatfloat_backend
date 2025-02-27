@@ -27,7 +27,7 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <!-- Page header -->
                     <div class="mb-5">
-                        <h3 class="mb-0 ">Customers</h3>
+                        <h3 class="mb-0 ">Admin List </h3>
 
                     </div>
                 </div>
