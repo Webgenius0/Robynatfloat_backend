@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Backend\V1\Dropdown;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Backend\V1\Dropdown\Country\CountryRequest;
+use App\Models\Country;
 use App\Services\Web\Backend\V1\Dropdown\CountryService;
 use App\Traits\V1\ApiResponse;
 use Exception;
@@ -62,4 +63,54 @@ class CountryController extends Controller
             return $this->error(500, 'Server Error.');
         }
     }
+
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Country $country): JsonResponse
+    {
+        try {
+            $response = $this->countryService->showModelToEdit($country);
+            return $this->success(200, 'Successfull', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CountryController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+
+     /**
+     * update country
+     * @param \App\Http\Requests\Web\Backend\V1\Dropdown\Country\CountryRequest $updateRequest
+     * @param \App\Models\Country $country
+     * @return JsonResponse
+     */
+    public function update(CountryRequest $updateRequest, Country $country): JsonResponse
+    {
+        try {
+            $validatedData = $updateRequest->validated();
+            $this->countryService->update($validatedData, $country);
+            return $this->success(202, 'Updated Successfully');
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CountryController::update', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+ /**
+     *  destroy
+     * @param \App\Models\Country $country
+     * @return JsonResponse
+     */
+    public function destroy(Country $country): JsonResponse
+    {
+        try {
+            $country->delete();
+            return $this->success(202, 'Updated Successfully');
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CountryController::destroy', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
 }

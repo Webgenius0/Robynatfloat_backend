@@ -18,4 +18,6 @@ interface CountryRepositoryInterface
      * @return Country
      */
     public function createCountry(array $credential): Country;
+
+    public function updateCountry(array $credential, Country $country);
 }

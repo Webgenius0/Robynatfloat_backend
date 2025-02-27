@@ -50,7 +50,7 @@
 
                                     <div class=" col-lg-4 col-md-6">
                                         <input type="search" id="search-input" class="form-control "
-                                            placeholder="Search for name, email">
+                                            placeholder="Search for name">
                                     </div>
                                 </div>
                             </div>
@@ -236,7 +236,7 @@
             try {
                 $('#overlay').show();
                 $.ajax({
-                    url: `{{ route('admin.yacht.type.edit', '') }}/${slug}`,
+                    url: `{{ route('admin.country.edit', '') }}/${slug}`,
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
@@ -297,7 +297,7 @@
                     _method: 'DELETE'
                 };
                 $.ajax({
-                    url: `{{ route('admin.yacht.type.destroy', '') }}/${slug}`,
+                    url: `{{ route('admin.country.destroy', '') }}/${slug}`,
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
@@ -305,7 +305,7 @@
                         if (response.code == 202) {
                             dTable.draw();
                             $('#overlay').hide();
-                            toastr.success('Yacht Type Created successfully!');
+                            toastr.success('Country Deleted successfully!');
                         } else {
                             $('#overlay').hide();
                             toastr.error('Something Went Wrong.!');
