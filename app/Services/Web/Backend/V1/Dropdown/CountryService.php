@@ -89,5 +89,35 @@ class CountryService
         }
     }
 
+    /**
+     * of show Model To Edit
+     * @param \App\Models\Country $country
+     * @return array{html: string}
+     */
+    public function showModelToEdit(Country $country):array
+    {
+        try {
+            return ['html' => view('backend.layouts.dropdown.country.components.update', compact('country'))->render()];
+        } catch (Exception $e) {
+            Log::error('App\Services\Web\Backend\V1\Dropdown\countryService::showModelToEdit', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+     /**
+     * update
+     * @param array $credentials
+     * @param \App\Models\Country $country
+     * @return void
+     */
+    public function update(array $credentials, Country $country):void
+    {
+        try {
+            $this->countryRepository->updateCountry($credentials, $country);
+        } catch (Exception $e) {
+            Log::error('App\Services\Web\Backend\V1\Dropdown\countryService::update', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 
 }

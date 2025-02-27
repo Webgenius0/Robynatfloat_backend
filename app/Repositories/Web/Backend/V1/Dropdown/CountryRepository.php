@@ -39,4 +39,32 @@ class CountryRepository implements CountryRepositoryInterface
             throw $e;
         }
     }
+
+
+/**
+     * update  country
+     * @param array $credential
+     * @param \App\Models\Country $country
+     * @return void
+     */
+    public function updateCountry(array $credential, Country $country)
+    {
+        try {
+            $oldName = $country->name;
+            $country->name = $credential['name'];
+
+            if ($oldName != $credential['name']) {
+                $country->slug = Helper::generateUniqueSlug($credential['name'], 'countries', 'slug');
+            }
+
+            $country->save();
+        } catch (Exception $e) {
+            Log::error('App\Repositories\Web\Backend\V1\Dropdown\CountryRepository::updateCountry', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+
+
+
 }
