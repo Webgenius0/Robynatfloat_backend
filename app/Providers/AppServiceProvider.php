@@ -10,6 +10,8 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\Web\Backend\V1\Dropdown\CityRepository;
+use App\Repositories\Web\Backend\V1\Dropdown\CityRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\CountryRepository;
 use App\Repositories\Web\Backend\V1\Dropdown\CountryRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory;
@@ -55,6 +57,7 @@ class AppServiceProvider extends ServiceProvider
         //dropdown
         $this->app->bind(YachtTypeReopsitoryInterface::class, YachtTypeReopsitory::class);
         $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
     }
 
     /**F
