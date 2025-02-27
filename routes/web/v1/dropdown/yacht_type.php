@@ -14,10 +14,3 @@ Route::prefix('/yacht-type')->name('yacht.type.')->controller(YachtTypeControlle
     Route::delete('/destroy/{yachtType:slug}', 'destroy')->name('destroy');
 });
 
-Route::prefix('/country-type')->name('country.type.')->controller(YachtTypeController::class)->group(function () {
-    Route::get('/', 'index')->name('index');
-    Route::post('/store', 'store')->name('store');
-    Route::get('/edit/{yachtType:slug}', 'edit')->name('edit');
-    Route::put('/update/{yachtType:slug}', 'update')->name('update');
-    Route::delete('/destroy/{yachtType:slug}', 'destroy')->name('destroy');
-});

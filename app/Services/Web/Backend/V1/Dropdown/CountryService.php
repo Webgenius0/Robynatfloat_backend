@@ -2,27 +2,30 @@
 
 namespace App\Services\Web\Backend\V1\Dropdown;
 
-use App\Repositories\Web\Backend\V1\Dropdown\CountryTypeRepositoryInterface;
+use App\Models\Country;
+use App\Repositories\Web\Backend\V1\Dropdown\CountryRepositoryInterface;
+
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Yajra\DataTables\Facades\DataTables;
 
-class CountryTypeService
+class CountryService
 {
-    protected CountryTypeRepositoryInterface $countryTypeRepository;
+    protected CountryRepositoryInterface $countryRepository;
 
     /**
      * construct
-     * @param \App\Repositories\Web\Backend\V1\Dropdown\CountryTypeRepositoryInterface $countryTypeRepository
+     * @param \App\Repositories\Web\Backend\V1\Dropdown\CountryRepositoryInterface $countryRepository
      */
-    public function __construct(CountryTypeRepositoryInterface $countryTypeRepository)
+    public function __construct(CountryRepositoryInterface $countryRepository)
     {
-        $this->countryTypeRepository = $countryTypeRepository;
+     $this->countryRepository = $countryRepository;
+
     }
 
     /**
-     * yajra table for country types
+     * yajra table for country
      * @param mixed $request
      * @return JsonResponse
      */
@@ -30,17 +33,17 @@ class CountryTypeService
      public function index($request): JsonResponse
      {
          try {
-             $countryTypes = $this->countryTypeRepository->listOfCountryType();
+             $countrys = $this->countryRepository->listOfCountry();
              /**
               * applying search operation
               */
              if ($request->has('search') && $request->search) {
                  $searchTerm = $request->search;
-                 $countryTypes->where(function ($countryTypes) use ($searchTerm) {
-                     $countryTypes->where('name', 'like', '%' . $searchTerm . '%');
+                 $countrys->where(function ($countrys) use ($searchTerm) {
+                     $countrys->where('name', 'like', '%' . $searchTerm . '%');
                  });
              }
-             return DataTables::of($countryTypes)
+             return DataTables::of($countrys)
                  ->addColumn('name', function ($data) {
                      return '<td class="ps-1">
                                  <div class="d-flex align-items-center">
@@ -65,8 +68,26 @@ class CountryTypeService
                  ->rawColumns(['name', 'action'])
                  ->make(true);
          } catch (Exception $e) {
-             Log::error('App\Services\Web\Backend\V1\Dropdown\YachtTypeService::index', ['error' => $e->getMessage()]);
+             Log::error('App\Services\Web\Backend\V1\Dropdown\countryService::index', ['error' => $e->getMessage()]);
              throw $e;
          }
      }
+
+
+     /**
+     * storing Country
+     * @param array $credentials
+     * @return Country
+     */
+    public function store(array $credentials):Country
+    {
+        try {
+            return $this->countryRepository->createCountry($credentials);
+        } catch (Exception $e) {
+            Log::error('App\Services\Web\Backend\V1\Dropdown\countryService::store', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+
 }
