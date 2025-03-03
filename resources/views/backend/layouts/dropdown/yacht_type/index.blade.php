@@ -305,7 +305,7 @@
                         if (response.code == 202) {
                             dTable.draw();
                             $('#overlay').hide();
-                            toastr.success('Yacht Type Created successfully!');
+                            toastr.success('Yacht Type delete successfully!');
                         } else {
                             $('#overlay').hide();
                             toastr.error('Something Went Wrong.!');

@@ -92,7 +92,7 @@
                                 <label for="country_id" class="form-label">Country Name</label>
                                 <select class="form-control" id="country_name">
                                     <option value="">Select Country</option>
-                                    @foreach($countries as $country)
+                                    @foreach ($countries as $country)
                                         <option value="{{ $country->id }}">{{ $country->name }}</option>
                                     @endforeach
                                 </select>
@@ -101,7 +101,7 @@
                                 <label for="state_id" class="form-label">State Name</label>
                                 <select class="form-control" id="state_name">
                                     <option value="">Select State</option>
-                                    @foreach($states as $state)
+                                    @foreach ($states as $state)
                                         <option value="{{ $state->id }}">{{ $state->name }}</option>
                                     @endforeach
                                 </select>
@@ -112,7 +112,8 @@
                                 <p class="v-error-message" id="name_error"></p>
                             </div>
                             <div class="text-end">
-                                <button type="button" class="btn btn-primary me-1" id="saveBtn">Save</button>
+                                <button type="button" aria-hidden="true" class="btn btn-primary me-1"
+                                    id="saveBtn">Save</button>
                                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                             </div>
                         </div>
@@ -134,171 +135,174 @@
     <script>
         let dTable;
         $(document).ready(function() {
-    /**
-     * Initializing the DataTable with custom configurations
-     */
-    try {
-        if (!$.fn.DataTable.isDataTable('#data-table')) {
-            var dTable = $('#data-table').DataTable({
-                ordering: false,
-                lengthMenu: [
-                    [10, 25, 50, 100, 200, 500, -1],
-                    [10, 25, 50, 100, 200, 500, "All"]
-                ],
-                processing: true,
-                responsive: true,
-                serverSide: true,
-                searching: false,
-                language: {
-                    processing: ''
-                },
-                scroller: {
-                    loadingIndicator: true
-                },
-                pagingType: "full_numbers",
-                dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
-                ajax: {
-                    url: "{{ route('admin.city.index') }}",
-                    type: "GET",
-                    data: (d) => {
-                        d.search = $('#search-input').val(); // Send custom search input value
-                    }
-                },
-                columns: [{
-                        data: 'name',
-                        name: 'name',
-                        orderable: true,
-                        searchable: true
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-                ]
-            });
+            /**
+             * Initializing the DataTable with custom configurations
+             */
+            try {
+                if (!$.fn.DataTable.isDataTable('#data-table')) {
+                    var dTable = $('#data-table').DataTable({
+                        ordering: false,
+                        lengthMenu: [
+                            [10, 25, 50, 100, 200, 500, -1],
+                            [10, 25, 50, 100, 200, 500, "All"]
+                        ],
+                        processing: true,
+                        responsive: true,
+                        serverSide: true,
+                        searching: false,
+                        language: {
+                            processing: ''
+                        },
+                        scroller: {
+                            loadingIndicator: true
+                        },
+                        pagingType: "full_numbers",
+                        dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
+                        ajax: {
+                            url: "{{ route('admin.city.index') }}",
+                            type: "GET",
+                            data: (d) => {
+                                d.search = $('#search-input').val(); // Send custom search input value
+                            }
+                        },
+                        columns: [{
+                                data: 'name',
+                                name: 'name',
+                                orderable: true,
+                                searchable: true
+                            },
+                            {
+                                data: 'action',
+                                name: 'action',
+                                orderable: false,
+                                searchable: false
+                            },
+                        ]
+                    });
 
-            // Custom search functionality for the DataTable
-            $('#search-input').on('keyup', function() {
-                dTable.draw(); // Redraw the table with the updated search input value
-            });
-        }
-    } catch (e) {
-        toastr.error('Something went wrong while initializing DataTable');
-        console.error(e);
-    }
-
-    /**
-     * Handle Enter key press in city_name input field
-     */
-    $('#city_name').keypress(function(e) {
-        if (e.which === 13) { // Check if Enter key is pressed
-            e.preventDefault();
-            $('#saveBtn').click(); // Trigger the save button click event
-        }
-    });
-
-    /**
-     * Create new city functionality
-     */
-    $('#saveBtn').click(() => {
-        try {
-            $('#overlay').show(); // Show loading overlay
-
-            const cityName = $('#city_name').val();
-            const countryId = $('#country_name').val(); // Get the selected country ID
-            const stateId = $('#state_name').val(); // Get the selected state ID
-
-            // Remove any previous validation error messages
-            $('#name_error').text('');
-            $('#country_error').text('');
-            $('#state_error').text('');
-
-            // Validation for empty fields
-            let hasError = false;
-
-            if (!cityName) {
-                $('#name_error').text('City name is required.');
-                hasError = true;
-            }
-            if (!countryId) {
-                $('#country_error').text('Country field is required.');
-                hasError = true;
-            }
-            if (!stateId) {
-                $('#state_error').text('State field is required.');
-                hasError = true;
+                    // Custom search functionality for the DataTable
+                    $('#search-input').on('keyup', function() {
+                        dTable.draw(); // Redraw the table with the updated search input value
+                    });
+                }
+            } catch (e) {
+                toastr.error('Something went wrong while initializing DataTable');
+                console.error(e);
             }
 
-            // If there's a validation error, stop the AJAX request
-            if (hasError) {
-                $('#overlay').hide();
-                return;
-            }
-
-            // Make the AJAX request to create the new city
-            $.ajax({
-                url: `{{ route('admin.city.store') }}`,
-                type: `POST`,
-                data: {
-                    'name': cityName,
-                    'country_id': countryId,
-                    'state_id': stateId,
-                    _token: '{{ csrf_token() }}' // CSRF token for Laravel protection
-                },
-                success: (response) => {
-                    if (response.code == 201) {
-                        // Reload the DataTable and reset the form fields
-                        dTable.draw();
-                        $('#city_name').val(''); // Reset the input field
-                        $('#country_name').val(''); // Reset the country field
-                        $('#state_name').val(''); // Reset the state field
-                        $('#addCityModel').modal('hide'); // Close the modal
-                        $('#overlay').hide(); // Hide loading overlay
-                        toastr.success('City Created successfully!'); // Show success message
-
-                    } else {
-                        $('#overlay').hide();
-                        toastr.error('Something went wrong while creating the city.');
-                    }
-                },
-                error: (Xhr, status, error) => {
-                    $('#overlay').hide(); // Hide loading overlay in case of error
-
-                    if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
-                        // Display error messages from the server response
-                        if (Xhr.responseJSON.errors['name']) {
-                            $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
-                        }
-                        if (Xhr.responseJSON.errors['country_id']) {
-                            $('#country_error').text(Xhr.responseJSON.errors['country_id'][0]);
-                        }
-                        if (Xhr.responseJSON.errors['state_id']) {
-                            $('#state_error').text(Xhr.responseJSON.errors['state_id'][0]);
-                        }
-                    } else {
-                        toastr.error('Something went wrong while processing the request.');
-                    }
+            /**
+             * Handle Enter key press in city_name input field
+             */
+            $('#city_name').keypress(function(e) {
+                if (e.which === 13) { // Check if Enter key is pressed
+                    e.preventDefault();
+                    $('#saveBtn').click(); // Trigger the save button click event
                 }
             });
-        } catch (e) {
-            $('#overlay').hide();
-            toastr.error('An error occurred. Please try again.');
-            console.error(e);
-        }
-    });
 
-    /**
-     * Reset modal form when modal is closed
-     */
-    $('#addCityModel').on('hidden.bs.modal', function () {
-        $('#createYachtType')[0].reset(); // Reset the form fields when modal is hidden
-        $('#name_error').text(''); // Clear any error messages
-        $('#country_error').text('');
-        $('#state_error').text('');
-    });
-});
+            /**
+             * Create new city functionality
+             */
+            $('#saveBtn').click(() => {
+                try {
+                    $('#overlay').show(); // Show loading overlay
+
+                    const cityName = $('#city_name').val();
+                    const countryId = $('#country_name').val(); // Get the selected country ID
+                    const stateId = $('#state_name').val(); // Get the selected state ID
+
+                    // Remove any previous validation error messages
+                    $('#name_error').text('');
+                    $('#country_error').text('');
+                    $('#state_error').text('');
+
+                    // Validation for empty fields
+                    let hasError = false;
+
+                    if (!cityName) {
+                        $('#name_error').text('City name is required.');
+                        hasError = true;
+                    }
+                    if (!countryId) {
+                        $('#country_error').text('Country field is required.');
+                        hasError = true;
+                    }
+                    if (!stateId) {
+                        $('#state_error').text('State field is required.');
+                        hasError = true;
+                    }
+
+                    // If there's a validation error, stop the AJAX request
+                    if (hasError) {
+                        $('#overlay').hide();
+                        return;
+                    }
+
+                    // Make the AJAX request to create the new city
+                    $.ajax({
+                        url: `{{ route('admin.city.store') }}`,
+                        type: `POST`,
+                        data: {
+                            'name': cityName,
+                            'country_id': countryId,
+                            'state_id': stateId,
+                            _token: '{{ csrf_token() }}'
+                        },
+                        success: (response) => {
+                            if (response.code == 201) {
+                                dTable.draw();
+                                $('#city_name').val('');
+                                $('#country_name').val('');
+                                $('#state_name').val('');
+                                $('#addCitymodel').modal('hide');
+                                $('#overlay').hide(); // Hide loading overlay
+                                toastr.success(
+                                'City Created successfully!'); // Show success message
+
+                            } else {
+                                $('#overlay').hide();
+                                toastr.error('Something went wrong while creating the city.');
+                            }
+                        },
+                        error: (Xhr, status, error) => {
+                            $('#overlay').hide(); // Hide loading overlay in case of error
+
+                            if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
+                                // Display error messages from the server response
+                                if (Xhr.responseJSON.errors['name']) {
+                                    $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
+                                }
+                                if (Xhr.responseJSON.errors['country_id']) {
+                                    $('#country_error').text(Xhr.responseJSON.errors[
+                                        'country_id'][0]);
+                                }
+                                if (Xhr.responseJSON.errors['state_id']) {
+                                    $('#state_error').text(Xhr.responseJSON.errors['state_id'][
+                                        0]);
+                                }
+                            } else {
+                                toastr.error(
+                                    'Something went wrong while processing the request.');
+                            }
+                        }
+                    });
+                } catch (e) {
+                    $('#overlay').hide();
+                    toastr.error('An error occurred. Please try again.');
+                    console.error(e);
+                }
+            });
+
+            /**
+             * Reset modal form when modal is closed
+             */
+            $('#addCityModel').on('hidden.bs.modal', function() {
+                $('#createYachtType')[0].reset(); // Reset the form fields when modal is hidden
+                $('#name_error').text(''); // Clear any error messages
+                $('#country_error').text('');
+                $('#state_error').text('');
+            });
+        });
 
 
 
@@ -339,61 +343,61 @@
         /**
          * Delete Alert
          * */
-        // const deleteAlert = (slug) => {
-        //     try {
-        //         Swal.fire({
-        //             title: "Are you sure?",
-        //             text: "You won't be able to revert this!",
-        //             icon: "warning",
-        //             showCancelButton: true,
-        //             confirmButtonColor: "#624bff",
-        //             cancelButtonColor: "#929292",
-        //             confirmButtonText: "Yes",
-        //         }).then((result) => {
-        //             if (result.isConfirmed) {
-        //                 deleteContend(slug)
-        //             }
-        //         });
-        //     } catch (error) {
-        //         toastr.error('Something went wrong');
-        //         console.error(error);
-        //     }
-        // }
+        const deleteAlert = (slug) => {
+            try {
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#624bff",
+                    cancelButtonColor: "#929292",
+                    confirmButtonText: "Yes",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        deleteContend(slug)
+                    }
+                });
+            } catch (error) {
+                toastr.error('Something went wrong');
+                console.error(error);
+            }
+        }
 
         /**
          * delete function
          **/
-        // const deleteContend = (slug) => {
-        //     try {
-        //         $('#overlay').show();
-        //         const formData = {
-        //             _method: 'DELETE'
-        //         };
-        //         $.ajax({
-        //             url: `{{ route('admin.country.destroy', '') }}/${slug}`,
-        //             type: 'POST',
-        //             data: formData,
-        //             dataType: 'json',
-        //             success: (response) => {
-        //                 if (response.code == 202) {
-        //                     dTable.draw();
-        //                     $('#overlay').hide();
-        //                     toastr.success('Country Deleted successfully!');
-        //                 } else {
-        //                     $('#overlay').hide();
-        //                     toastr.error('Something Went Wrong.!');
-        //                 }
-        //             },
-        //             error: (xhr, status, error) => {
-        //                 $('#overlay').hide();
-        //                 toastr.error('Something Went Wrong.!');
-        //             }
-        //         });
-        //     } catch (e) {
-        //         $('#overlay').hide();
-        //         toastr.error('Something Went Wrong.!');
-        //     }
+        const deleteContend = (slug) => {
+            try {
+                $('#overlay').show();
+                const formData = {
+                    _method: 'DELETE'
+                };
+                $.ajax({
+                    url: `{{ route('admin.city.destroy', '') }}/${slug}`,
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    success: (response) => {
+                        if (response.code == 202) {
+                            dTable.draw();
+                            $('#overlay').hide();
+                            toastr.success('City Deleted successfully!');
+                        } else {
+                            $('#overlay').hide();
+                            toastr.error('Something Went Wrong.!');
+                        }
+                    },
+                    error: (xhr, status, error) => {
+                        $('#overlay').hide();
+                        toastr.error('Something Went Wrong.!');
+                    }
+                });
+            } catch (e) {
+                $('#overlay').hide();
+                toastr.error('Something Went Wrong.!');
+            }
 
-        // }
+        }
     </script>
 @endpush
