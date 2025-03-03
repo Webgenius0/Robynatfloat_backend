@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\Backend\V1\Dropdown;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Web\Backend\V1\Dropdown\Country\CityRequest;
+use App\Models\City;
 use App\Services\Web\Backend\V1\Dropdown\CityService;
 use App\Traits\V1\ApiResponse;
 use Exception;
@@ -74,4 +75,24 @@ class Citycontroller extends Controller
             return $this->error(500, 'Server Error.');
         }
     }
-}
+
+    /**
+     * Summary of delete
+     * @param int $slug
+     * @return JsonResponse
+     */
+
+     public function destroy(City $city): JsonResponse
+    {
+        try {
+            $city->delete();
+            return $this->success(202, 'Updated Successfully');
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CountryController::destroy', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+     }
+
+
+

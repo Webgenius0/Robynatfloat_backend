@@ -116,7 +116,7 @@
                                 <g id="trolley"></g>
                                 <g id="pick_axe"></g>
                             </g>
-                        </svg> Crue
+                        </svg> Crew
                     </a>
 
                     <div id="crue" class="collapse {{ request()->routeIs('admin.user.crue.*') ? 'show' : '' }}"
@@ -125,7 +125,7 @@
                             <li class="nav-item">
                                 <a class="nav-link has-arrow {{ request()->routeIs('admin.user.crue.index') ? 'active' : '' }}"
                                     href="{{ route('admin.user.crue.index') }}">
-                                    Crue List
+                                    Crew List
                                 </a>
                             </li>
                         </ul>
