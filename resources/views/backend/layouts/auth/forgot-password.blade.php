@@ -26,7 +26,7 @@ min-vh-100">
                         </p>
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('password.email') }}">
+                    <form method="POST" action="{{ route('password.request') }}">
                         @csrf
                         <!-- Email -->
                         <div class="mb-3">

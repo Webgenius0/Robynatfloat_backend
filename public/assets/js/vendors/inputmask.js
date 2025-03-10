@@ -1,1 +1,1 @@
-$("input").length&&Inputmask().mask(document.querySelectorAll("input"));
+$("input").length && Inputmask().mask(document.querySelectorAll("input"));

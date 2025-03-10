@@ -39,4 +39,14 @@ class YachtType extends Model
             'updated_at' => 'datetime',
         ];
     }
+
+    /**
+     * The "route key" for the model.
+     *
+     * @var string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

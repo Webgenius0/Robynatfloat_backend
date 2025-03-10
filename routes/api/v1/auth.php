@@ -7,7 +7,7 @@ use App\Http\Controllers\API\V1\Auth\PasswordController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::prefix('/v1/auth')->name('api.auth.')->group(function () {
+Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
     // Guest routes - Accessible by unauthenticated users only
     Route::middleware('guest:api')->group(function () {
         // Authentication-related routes

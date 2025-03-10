@@ -23,7 +23,7 @@ min-vh-100">
                         <p class="mb-6">This is a secure area of the application. Please confirm your password before continuing.</p>
                     </div>
                     <!-- Form -->
-                    <form method="POST" action="{{ route('password.confirm') }}">
+                    <form method="POST" action="{{ route('verification.notice') }}">
                         @csrf
                         <!-- Password -->
                         <div class="mb-3">

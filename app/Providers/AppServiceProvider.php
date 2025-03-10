@@ -10,6 +10,14 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory;
+use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitoryInterface;
+use App\Repositories\Web\Backend\V1\User\AdminRepository;
+use App\Repositories\Web\Backend\V1\User\AdminRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\CrueRepository;
+use App\Repositories\Web\Backend\V1\User\CrueRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\UserRepository as UserUserRepository;
+use App\Repositories\Web\Backend\V1\User\UserRepositoryInterface as UserUserRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,9 +31,21 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ForgetPasswordRepositoryInterface::class, ForgetPasswordRepository::class);
         $this->app->bind(OTPRepositoryInterface::class, OTPRepository::class);
         $this->app->bind(PasswordRepositoryInterface::class, PasswordRepository::class);
+
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
+
+
+        // backend
+        $this->app->bind(UserUserRepositoryInterface::class, UserUserRepository::class);
+        $this->app->bind(AdminRepositoryInterface::class, AdminRepository::class);
+        $this->app->bind(CrueRepositoryInterface::class, CrueRepository::class);
+
+        //dropdown
+        $this->app->bind(YachtTypeReopsitoryInterface::class, YachtTypeReopsitory::class);
     }
 
-    /**
+    /**F
      * Bootstrap any application services.
      */
     public function boot(): void

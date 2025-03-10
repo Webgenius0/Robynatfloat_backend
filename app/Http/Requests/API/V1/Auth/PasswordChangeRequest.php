@@ -67,15 +67,17 @@ class PasswordChangeRequest extends FormRequest
      *
      * @throws ValidationException The exception is thrown to halt further processing and return validation errors.
      */
-    protected function failedValidation(Validator $validator):never
+    protected function failedValidation(Validator $validator): never
     {
-        $emailErrors = $validator->errors()->get('email') ?? null;
-        $passwordErrors = $validator->errors()->get('password') ?? null;
+        $errors = $validator->errors()->getMessages();
+        $message = null;
+        $fields = ['email', 'password'];
 
-        if ($emailErrors) {
-            $message = $emailErrors[0];
-        } else if ($passwordErrors) {
-            $message = $passwordErrors[0];
+        foreach ($fields as $field) {
+            if (isset($errors[$field])) {
+                $message = $errors[$field][0];
+                break;
+            }
         }
 
         $response = $this->error(
