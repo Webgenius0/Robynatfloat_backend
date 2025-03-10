@@ -326,7 +326,7 @@
 
 
                 <li class="nav-item">
-                    <a class="nav-link has-arrow collapsed {{ request()->routeIs('admin.country.*') ? 'active' : '' }}"
+                    <a class="nav-link has-arrow collapsed {{ request()->routeIs('admin.country.*') || request()->routeIs('admin.state.*') || request()->routeIs('admin.city.*') ? 'active' : '' }}"
                         href="#!" data-bs-toggle="collapse" data-bs-target="#country" aria-expanded="false"
                         aria-controls="country">
                         <svg style="margin-right: 8px"
@@ -337,7 +337,7 @@
                         Location
                     </a>
 
-                    <div id="country" class="collapse {{ request()->routeIs('admin.country.*') || request()->routeIs('admin.state.index') || request()->routeIs('admin.city.index') ? 'show' : '' }}"
+                    <div id="country" class="collapse {{ request()->routeIs('admin.country.*') || request()->routeIs('admin.state.*') || request()->routeIs('admin.city.*') ? 'show' : '' }}"
                         data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
