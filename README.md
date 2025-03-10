@@ -78,4 +78,5 @@ To Install & Run This Project, Follow These Steps:
     php artisan queue:work
     ```
 You can now access the application at `http://localhost:8000`.
+
 # repo-pattern-jwt-laravel
