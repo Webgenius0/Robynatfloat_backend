@@ -65,5 +65,22 @@ class CityRepository implements CityRepositoryInterface
         }
     }
 
+    public function updateCity(array $credential, City $city){
+        try {
+            //update country state and city
+            $city->name = $credential['name'];
+            $city->country_id = $credential['country_id'];
+            $city->state_id = $credential['state_id'];
+            $city->slug = Helper::generateUniqueSlug($credential['name'], 'cities');
+            $city->update();
+            return $city;
+
+        } catch (Exception $e) {
+            Log::error('App\Repositories\Web\Backend\V1\Dropdown\CityRepository::updateCity', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+
 
 }

@@ -70,6 +70,41 @@ class CityController extends Controller {
     }
 
     /**
+     * Summary of edit
+     * @param City $city
+     * @return JsonResponse
+     */
+    public function edit(City $city): JsonResponse {
+       try {
+            $response = $this->cityService->showModelToEdit($city);
+            return $this->success(200, 'Successfull', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CityController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+    /**
+     * Summary of update
+     * @param CityRequest $updateRequest
+     * @param City $city
+     * @return JsonResponse
+     */
+    public function update(CityRequest $updateRequest, City $city): JsonResponse {
+        try {
+            $validatedData = $updateRequest->validated();
+
+            $response = $this->cityService->update($validatedData, $city);
+
+            return $this->success(200, 'Updated Successfully.', $response);
+
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CityController::update', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+    /**
      * Summary of delete
      * @param int $slug
      * @return JsonResponse

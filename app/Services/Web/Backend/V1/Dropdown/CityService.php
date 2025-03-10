@@ -110,4 +110,27 @@ class CityService
             throw $e;
         }
     }
+
+    public function showModelToEdit(City $city):array
+    {
+        try {
+            $states = $this->cityRepository->states();
+            $countries = $this->cityRepository->countrys();
+
+            return ['html' => view('backend.layouts.dropdown.city.components.update', compact('city', 'states', 'countries'))->render()];
+        } catch (Exception $e) {
+            Log::error('App\Services\Web\Backend\V1\Dropdown\cityService::showModelToEdit', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    public function update(array $credentials, City $city): City
+    {
+        try {
+            return $this->cityRepository->updateCity($credentials, $city);
+        } catch (Exception $e) {
+            Log::error('App\Services\Web\Backend\V1\Dropdown\CityService::update', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

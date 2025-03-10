@@ -21,4 +21,5 @@ interface CityRepositoryInterface
     public function createCity(array $credential): City;
     public function countrys();
     public function states();
+    public function updateCity(array $credential, City $city);
 }

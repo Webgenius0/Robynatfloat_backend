@@ -311,35 +311,35 @@
         /**
          *  show edit modal
          * */
-        // const editModal = (slug) => {
-        //     try {
-        //         $('#overlay').show();
-        //         $.ajax({
-        //             url: `{{ route('admin.country.edit', '') }}/${slug}`,
-        //             type: 'GET',
-        //             dataType: 'json',
-        //             success: (response) => {
-        //                 if (response.code == 200) {
-        //                     $('#overlay').hide();
-        //                     $('#updateModel').html(response.data.html);
-        //                     $('#updateModel').modal('show');
-        //                 } else {
-        //                     $('#overlay').hide();
-        //                     toastr.error('Something Went Wrong.!');
-        //                 }
-        //             },
-        //             error: (xhr, status, error) => {
-        //                 $('#overlay').hide();
-        //                 toastr.error('Something Went Wrong.!');
-        //                 console.error(error);
-        //             }
-        //         });
-        //     } catch (error) {
-        //         $('#overlay').hide();
-        //         toastr.error('Something went wrong');
-        //         console.error(error);
-        //     }
-        // }
+        const editModal = (slug) => {
+            try {
+                $('#overlay').show();
+                $.ajax({
+                    url: `{{ route('admin.city.edit', '') }}/${slug}`,
+                    type: 'GET',
+                    dataType: 'json',
+                    success: (response) => {
+                        if (response.code == 200) {
+                            $('#overlay').hide();
+                            $('#updateModel').html(response.data.html);
+                            $('#updateModel').modal('show');
+                        } else {
+                            $('#overlay').hide();
+                            toastr.error('Something Went Wrong.!');
+                        }
+                    },
+                    error: (xhr, status, error) => {
+                        $('#overlay').hide();
+                        toastr.error('Something Went Wrong.!');
+                        console.error(error);
+                    }
+                });
+            } catch (error) {
+                $('#overlay').hide();
+                toastr.error('Something went wrong');
+                console.error(error);
+            }
+        }
 
 
         /**
