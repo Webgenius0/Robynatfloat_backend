@@ -14,20 +14,16 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class Citycontroller extends Controller
-{ aita hobe na
-
+class CityController extends Controller {
     use ApiResponse;
     protected CityService $cityService;
 
     /**
      * construct
-     * @param \App\Services\Web\Backend\V1\Dropdown\cityService $cityService
+     * @param cityService $cityService
      */
 
-
-    public function __construct(CityService $cityService)
-    {
+    public function __construct(CityService $cityService) {
         $this->cityService = $cityService;
     }
     /**
@@ -35,8 +31,7 @@ class Citycontroller extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function index(Request $request): JsonResponse|RedirectResponse|View
-    {
+    public function index(Request $request): JsonResponse | RedirectResponse | View {
         try {
             if ($request->ajax()) {
                 return $this->cityService->index($request);
@@ -45,7 +40,7 @@ class Citycontroller extends Controller
             if (empty($countries)) {
                 return $this->error(404, 'No Countries Found.');
             }
-            $states= $this->cityService->states();
+            $states = $this->cityService->states();
             if (empty($states)) {
                 return $this->error(404, 'No States Found.');
             }
@@ -57,14 +52,12 @@ class Citycontroller extends Controller
         }
     }
 
-
     /**
      * Summary of store
      * @param CityRequest $cityRequest
      * @return JsonResponse
      */
-    public function store(CityRequest $cityRequest): JsonResponse
-    {
+    public function store(CityRequest $cityRequest): JsonResponse {
         try {
             $validatedData = $cityRequest->validated();
             // dd($validatedData);
@@ -82,8 +75,7 @@ class Citycontroller extends Controller
      * @return JsonResponse
      */
 
-     public function destroy(City $city): JsonResponse
-    {
+    public function destroy(City $city): JsonResponse {
         try {
             $city->delete();
             return $this->success(202, 'Updated Successfully');
@@ -92,7 +84,4 @@ class Citycontroller extends Controller
             return $this->error(500, 'Server Error.');
         }
     }
-     }
-
-
-
+}
