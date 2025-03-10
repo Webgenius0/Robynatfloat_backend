@@ -134,13 +134,14 @@
     <script src="{{ asset('assets/dev/js/datatables.min.js') }}"></script>
     <script>
         let dTable;
+
         $(document).ready(function() {
             /**
              * Initializing the DataTable with custom configurations
              */
             try {
                 if (!$.fn.DataTable.isDataTable('#data-table')) {
-                    var dTable = $('#data-table').DataTable({
+                    dTable = $('#data-table').DataTable({
                         ordering: false,
                         lengthMenu: [
                             [10, 25, 50, 100, 200, 500, -1],
@@ -190,118 +191,119 @@
                 console.error(e);
             }
 
-            /**
-             * Handle Enter key press in city_name input field
-             */
-            $('#city_name').keypress(function(e) {
-                if (e.which === 13) { // Check if Enter key is pressed
-                    e.preventDefault();
-                    $('#saveBtn').click(); // Trigger the save button click event
-                }
-            });
+        /**
+         * Handle Enter key press in city_name input field
+         */
+        $('#city_name').keypress(function(e) {
+            if (e.which === 13) { // Check if Enter key is pressed
+                e.preventDefault();
+                $('#saveBtn').click(); // Trigger the save button click event
+            }
+        });
 
-            /**
-             * Create new city functionality
-             */
-            $('#saveBtn').click(() => {
-                try {
-                    $('#overlay').show(); // Show loading overlay
+        /**
+         * Create new city functionality
+         */
+        $('#saveBtn').click(() => {
+            try {
+                $('#overlay').show(); // Show loading overlay
 
-                    const cityName = $('#city_name').val();
-                    const countryId = $('#country_name').val(); // Get the selected country ID
-                    const stateId = $('#state_name').val(); // Get the selected state ID
+                const cityName = $('#city_name').val();
+                const countryId = $('#country_name').val(); // Get the selected country ID
+                const stateId = $('#state_name').val(); // Get the selected state ID
 
-                    // Remove any previous validation error messages
-                    $('#name_error').text('');
-                    $('#country_error').text('');
-                    $('#state_error').text('');
-
-                    // Validation for empty fields
-                    let hasError = false;
-
-                    if (!cityName) {
-                        $('#name_error').text('City name is required.');
-                        hasError = true;
-                    }
-                    if (!countryId) {
-                        $('#country_error').text('Country field is required.');
-                        hasError = true;
-                    }
-                    if (!stateId) {
-                        $('#state_error').text('State field is required.');
-                        hasError = true;
-                    }
-
-                    // If there's a validation error, stop the AJAX request
-                    if (hasError) {
-                        $('#overlay').hide();
-                        return;
-                    }
-
-                    // Make the AJAX request to create the new city
-                    $.ajax({
-                        url: `{{ route('admin.city.store') }}`,
-                        type: `POST`,
-                        data: {
-                            'name': cityName,
-                            'country_id': countryId,
-                            'state_id': stateId,
-                            _token: '{{ csrf_token() }}'
-                        },
-                        success: (response) => {
-                            if (response.code == 201) {
-                                dTable.draw();
-                                $('#city_name').val('');
-                                $('#country_name').val('');
-                                $('#state_name').val('');
-                                $('#addCitymodel').modal('hide');
-                                $('#overlay').hide(); // Hide loading overlay
-                                toastr.success(
-                                'City Created successfully!'); // Show success message
-
-                            } else {
-                                $('#overlay').hide();
-                                toastr.error('Something went wrong while creating the city.');
-                            }
-                        },
-                        error: (Xhr, status, error) => {
-                            $('#overlay').hide(); // Hide loading overlay in case of error
-
-                            if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
-                                // Display error messages from the server response
-                                if (Xhr.responseJSON.errors['name']) {
-                                    $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
-                                }
-                                if (Xhr.responseJSON.errors['country_id']) {
-                                    $('#country_error').text(Xhr.responseJSON.errors[
-                                        'country_id'][0]);
-                                }
-                                if (Xhr.responseJSON.errors['state_id']) {
-                                    $('#state_error').text(Xhr.responseJSON.errors['state_id'][
-                                        0]);
-                                }
-                            } else {
-                                toastr.error(
-                                    'Something went wrong while processing the request.');
-                            }
-                        }
-                    });
-                } catch (e) {
-                    $('#overlay').hide();
-                    toastr.error('An error occurred. Please try again.');
-                    console.error(e);
-                }
-            });
-
-            /**
-             * Reset modal form when modal is closed
-             */
-            $('#addCityModel').on('hidden.bs.modal', function() {
-                $('#createYachtType')[0].reset(); // Reset the form fields when modal is hidden
-                $('#name_error').text(''); // Clear any error messages
+                // Remove any previous validation error messages
+                $('#name_error').text('');
                 $('#country_error').text('');
                 $('#state_error').text('');
-            });
+
+                // Validation for empty fields
+                let hasError = false;
+
+                if (!cityName) {
+                    $('#name_error').text('City name is required.');
+                    hasError = true;
+                }
+                if (!countryId) {
+                    $('#country_error').text('Country field is required.');
+                    hasError = true;
+                }
+                if (!stateId) {
+                    $('#state_error').text('State field is required.');
+                    hasError = true;
+                }
+
+                // If there's a validation error, stop the AJAX request
+                if (hasError) {
+                    $('#overlay').hide();
+                    return;
+                }
+
+                // Make the AJAX request to create the new city
+                $.ajax({
+                    url: `{{ route('admin.city.store') }}`,
+                    type: `POST`,
+                    data: {
+                        'name': cityName,
+                        'country_id': countryId,
+                        'state_id': stateId,
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: (response) => {
+                        if (response.code == 201) {
+                            dTable.draw();
+                            $('#city_name').val('');
+                            $('#country_name').val('');
+                            $('#state_name').val('');
+                            $('#addCitymodel').modal('hide');
+                            $('#overlay').hide(); // Hide loading overlay
+                            toastr.success(
+                                'City Created successfully!'); // Show success message
+
+                        } else {
+                            $('#overlay').hide();
+                            toastr.error('Something went wrong while creating the city.');
+                        }
+                    },
+                    error: (Xhr, status, error) => {
+                        $('#overlay').hide(); // Hide loading overlay in case of error
+
+                        if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
+                            // Display error messages from the server response
+                            if (Xhr.responseJSON.errors['name']) {
+                                $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
+                            }
+                            if (Xhr.responseJSON.errors['country_id']) {
+                                $('#country_error').text(Xhr.responseJSON.errors[
+                                    'country_id'][0]);
+                            }
+                            if (Xhr.responseJSON.errors['state_id']) {
+                                $('#state_error').text(Xhr.responseJSON.errors['state_id'][
+                                    0
+                                ]);
+                            }
+                        } else {
+                            toastr.error(
+                                'Something went wrong while processing the request.');
+                        }
+                    }
+                });
+            } catch (e) {
+                $('#overlay').hide();
+                toastr.error('An error occurred. Please try again.');
+                console.error(e);
+            }
+        });
+
+        /**
+         * Reset modal form when modal is closed
+         */
+        $('#addCityModel').on('hidden.bs.modal', function() {
+        $('#createYachtType')[0].reset(); // Reset the form fields when modal is hidden
+        $('#name_error').text(''); // Clear any error messages
+        $('#country_error').text('');
+        $('#state_error').text('');
+        });
         });
 
 
@@ -382,7 +384,7 @@
                         if (response.code == 202) {
                             dTable.draw();
                             $('#overlay').hide();
-                            toastr.success('City Deleted successfully!');
+                            toastr.success('city Deleted successfully!');
                         } else {
                             $('#overlay').hide();
                             toastr.error('Something Went Wrong.!');
