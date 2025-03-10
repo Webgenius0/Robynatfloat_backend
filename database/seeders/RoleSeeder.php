@@ -9,11 +9,11 @@ use Illuminate\Support\Facades\DB;
 class RoleSeeder extends Seeder {
     public function run(): void {
         $roles = [
-            'Admin',
-            'Yacht',
-            'Supplier',
-            'Crew',
-            'Freelancer',
+            'admin',
+            'yacht',
+            'supplier',
+            'crew',
+            'freelancer',
         ];
 
         foreach ($roles as $role) {

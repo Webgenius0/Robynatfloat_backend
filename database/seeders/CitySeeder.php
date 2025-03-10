@@ -6,38 +6,43 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class StateTableSeeder extends Seeder
+class CitySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        DB::table('states')->insert([
+        DB::table('cities')->insert([
+            [
+                'name' => 'Lagos',
+                'country_id' => 1,
+                'state_id' => 1,
+                'slug' => 'lagos',
+            ],
             [
                 'name' => 'Abuja',
-                'country_id' => 1,
+                'state_id' => 1,
                 'slug' => 'abuja',
+                'country_id' => 1,
             ],
             [
                 'name' => 'Abia',
-                'country_id' => 1,
+                'state_id' => 1,
                 'slug' => 'abia',
+                'country_id' => 1,
             ],
             [
                 'name' => 'Adamawa',
-                'country_id' => 1,
+                'state_id' => 1,
                 'slug' => 'adamawa',
-            ],
-            [
-                'name' => 'Akwa Ibom',
                 'country_id' => 1,
-                'slug' => 'akwa-ibom',
             ],
             [
                 'name' => 'Anambra',
-                'country_id' => 1,
+                'state_id' => 1,
                 'slug' => 'anambra',
+                'country_id' => 1,
             ],
         ]);
     }
