@@ -13,3 +13,4 @@ Route::prefix('/yacht-type')->name('yacht.type.')->controller(YachtTypeControlle
     Route::put('/update/{yachtType:slug}', 'update')->name('update');
     Route::delete('/destroy/{yachtType:slug}', 'destroy')->name('destroy');
 });
+

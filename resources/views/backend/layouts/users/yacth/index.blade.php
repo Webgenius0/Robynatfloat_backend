@@ -4,6 +4,22 @@
     Users-Admin
 @endsection
 
+@push('styles')
+    <link rel="stylesheet" href="{{ asset('assets/dev/css/datatables.min.css') }}">
+    <style>
+        .dt-info {
+            display: flex;
+            justify-content: center;
+        }
+
+        .paging_full_numbers {
+            display: flex;
+            justify-content: center;
+            padding-bottom: 10px;
+        }
+    </style>
+@endpush
+
 @section('main')
     <div class="app-content-area">
         <div class="container-fluid">
@@ -11,7 +27,7 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <!-- Page header -->
                     <div class="mb-5">
-                        <h3 class="mb-0 ">Customers</h3>
+                        <h3 class="mb-0 ">Yacht List </h3>
 
                     </div>
                 </div>
@@ -23,558 +39,28 @@
                         <!-- card -->
                         <div class="card mb-4">
                             <div class="card-header  ">
-
                                 <div class="row justify-content-between">
-                                    <div class="col-md-6 mb-3 ">
-
-                                        <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#addCustomerModal">+ Add Customer</a>
-
-                                    </div>
-                                    <div class="col-md-6 text-lg-end mb-3">
-                                        <a href="#!" class="btn btn-light me-1"><i data-feather="trash-2"
-                                                class="icon-xs"></i></a>
-                                        <a href="#!" class="btn btn-light me-1">Import</a>
-                                        <a href="#!" class="btn btn-light ">Export</a>
-                                    </div>
                                     <div class=" col-lg-4 col-md-6">
-                                        <input type="search" class="form-control "
-                                            placeholder="Search for customer, email, phone, status or something">
-
+                                        <input type="search" id="search-input" class="form-control "
+                                            placeholder="Search for name, email">
                                     </div>
-                                    <div class="col-lg-2 col-md-6  mt-3 mt-md-0">
-
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected>Status</option>
-                                            <option value="1">Active</option>
-                                            <option value="2">Blocked</option>
-
-                                        </select>
-                                    </div>
-
-
-
-
-
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive table-card">
-                                    <table class="table text-nowrap mb-0 table-centered table-hover">
+                                    <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
                                         <thead class="table-light">
                                             <tr>
-                                                <th class=" pe-0  ">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="checkAll">
-                                                        <label class="form-check-label" for="checkAll">
-
-                                                        </label>
-                                                    </div>
-                                                </th>
-                                                <th class="ps-1">Customer</th>
-                                                <th>Phone</th>
+                                                <th>Name</th>
                                                 <th>Email</th>
-                                                <th>Location</th>
-                                                <th>Create Date</th>
                                                 <th>Status</th>
-                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox2">
-                                                        <label class="form-check-label" for="contactCheckbox2">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-11.jpg"
-                                                                alt="Image" class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!" class="text-inherit">Harold
-                                                                    Gonzalez</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>937-330-1634 </td>
-                                                <td>harold1985@einrot.com</td>
-                                                <td>Florida, United States</td>
-                                                <td>03/24/2023</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editOne">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editOne" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashOne">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashOne" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox3">
-                                                        <label class="form-check-label" for="contactCheckbox3">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-2.jpg"
-                                                                alt="Image" class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Anthony Anderson</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>828-216-2190 </td>
-                                                <td>anthony54@cuvox.de</td>
-                                                <td>California, United States</td>
-                                                <td>04/09/2023</td>
-                                                <td><span class="badge badge-danger-soft text-danger">Blocked</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editTwo">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editTwo" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashTwo">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashTwo" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox4">
-                                                        <label class="form-check-label" for="contactCheckbox4">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-3.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Gary Faulkner</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>215-302-3376 </td>
-                                                <td>haryfaulkner45@cuvox.de</td>
-                                                <td>Willmering, Germany</td>
-                                                <td>03/24/2023</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editThree">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editThree" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashThree">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashThree" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox5">
-                                                        <label class="form-check-label" for="contactCheckbox5">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-4.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Steve Nelson</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>937-330-1634 </td>
-                                                <td>stevenelson@cuvox.de</td>
-                                                <td>Rotorua, New Zealand</td>
-                                                <td>05/06/2023</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editFour">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editFour" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashFour">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashFour" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox6">
-                                                        <label class="form-check-label" for="contactCheckbox6">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-5.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Kimberly Sullivan</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>(02) 75 150 655 </td>
-                                                <td>sprid1932@armyspy.com</td>
-                                                <td>Gundamulda, Australia</td>
-                                                <td>06/19/2023</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editFive">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editFive" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashFive">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashFive" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox7">
-                                                        <label class="form-check-label" for="contactCheckbox7">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-6.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Susan Pugh</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>937-330-1634 </td>
-                                                <td>tolde1984@einrot.com</td>
-                                                <td>Gradignan, France</td>
-                                                <td>06/30/2023</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editSix">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editSix" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashSix">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashSix" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox8">
-                                                        <label class="form-check-label" for="contactCheckbox8">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-7.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Elliott Potts</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>(+15) 73 483 758</td>
-                                                <td>fulta1976@rhyta.com</td>
-                                                <td>Regina, Canada</td>
-                                                <td>07/07/2023</td>
-                                                <td><span class="badge badge-danger-soft text-danger">Blocked</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editSeven">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editSeven" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashSeven">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashSeven" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox9">
-                                                        <label class="form-check-label" for="contactCheckbox9">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-8.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Richard Beaudry</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>937-330-1634</td>
-                                                <td>wourry57@cuvox.de</td>
-                                                <td>Toronto, Canada</td>
-                                                <td>07/15/2023</td>
-                                                <td><span class="badge badge-danger-soft text-danger">Blocked</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editEight">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editEight" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashEight">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashEight" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox10">
-                                                        <label class="form-check-label" for="contactCheckbox10">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-9.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Henry Saxton</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>078 6013 3854</td>
-                                                <td>wourry57@cuvox.de</td>
-                                                <td>Vancouver, Canada</td>
-                                                <td>08/02/2023</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editNine">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editNine" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashTen">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashTen" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class=" pe-0">
-                                                    <div class="form-check">
-                                                        <input class="form-check-input" type="checkbox" value=""
-                                                            id="contactCheckbox11">
-                                                        <label class="form-check-label" for="contactCheckbox11">
-
-                                                        </label>
-                                                    </div>
-                                                </td>
-                                                <td class="ps-1">
-                                                    <div class="d-flex align-items-center">
-                                                        <a href="#!"><img src="../assets/images/avatar/avatar-10.jpg"
-                                                                alt="Image"
-                                                                class="avatar avatar-sm rounded-circle"></a>
-                                                        <div class="ms-2">
-                                                            <h5 class="mb-0"><a href="#!"
-                                                                    class="text-inherit">Juanita Diener</a></h5>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                                <td>(216) 76 298 896</td>
-                                                <td>comed1931@einrot.com</td>
-                                                <td>Idaho, United States</td>
-                                                <td>08/23/2023</td>
-                                                <td><span class="badge badge-success-soft text-success">Active</span></td>
-                                                <td>
-
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="editTen">
-                                                        <i data-feather="edit" class="icon-xs"></i>
-                                                        <div id="editTen" class="d-none">
-                                                            <span>Edit</span>
-                                                        </div>
-                                                    </a>
-                                                    <a href="#!"
-                                                        class="btn btn-ghost btn-icon btn-sm rounded-circle texttooltip"
-                                                        data-template="trashEleven">
-                                                        <i data-feather="trash-2" class="icon-xs"></i>
-                                                        <div id="trashEleven" class="d-none">
-                                                            <span>Delete</span>
-                                                        </div>
-                                                    </a>
-
-                                                </td>
-                                            </tr>
-
-
-
-
-
-
-
-
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <div class="card-footer d-md-flex justify-content-between align-items-center">
-                                <span>Showing 1 to 8 of 12 entries</span>
-                                <nav class="mt-2 mt-md-0">
-                                    <ul class="pagination mb-0 ">
-                                        <li class="page-item "><a class="page-link" href="#!">Previous</a></li>
-                                        <li class="page-item active"><a class="page-link" href="#!">1</a></li>
-                                        <li class="page-item"><a class="page-link" href="#!">2</a></li>
-                                        <li class="page-item"><a class="page-link" href="#!">3</a></li>
-                                        <li class="page-item"><a class="page-link" href="#!">Next</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-
                         </div>
                     </div>
 
@@ -626,5 +112,99 @@
             </div>
         </div>
     </div>
-    {{-- modal end --}}
+
 @endsection
+
+@push('scripts')
+    {{-- Datatable --}}
+    <script src="{{ asset('assets/dev/js/datatables.min.js') }}"></script>
+    <script>
+        var routeUrls = {
+            viewUrl: "#",
+            editUrl: "#"
+        };
+    </script>
+    <script>
+        $(document).ready(function() {
+            if (!$.fn.DataTable.isDataTable('#data-table')) {
+                var dTable = $('#data-table').DataTable({
+                    ordering: false,
+                    lengthMenu: [
+                        [10, 25, 50, 100, 200, 500, -1],
+                        [10, 25, 50, 100, 200, 500, "All"]
+                    ],
+                    processing: true,
+                    responsive: true,
+                    serverSide: true,
+                    searching: false,
+                    language: {
+                        processing: ''
+                    },
+                    scroller: {
+                        loadingIndicator: true
+                    },
+                    pagingType: "full_numbers",
+                    dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
+                    ajax: {
+                        url: "{{ route('admin.user.yacth.index') }}",
+                        type: "GET",
+                        data: (d) => {
+                            d.search = $('#search-input').val();
+                        }
+                    },
+                    columns: [{
+                            data: 'name',
+                            name: 'name',
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: 'email',
+                            name: 'email',
+                            orderable: true,
+                            searchable: true
+                        },
+                        {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            searchable: false,
+                        },
+                    ]
+                });
+                // Custom search functionality
+                $('#search-input').on('keyup', function() {
+                    dTable.draw(); // Redraw the table with the custom search value
+                });
+            }
+        });
+
+         /**
+         * updating the status of the Freelancer user
+         * */
+         function flexSwitchCheckChecked(handle) {
+            try {
+                $.ajax({
+                url: "{{ route('admin.user.yacth.update.status', ':user') }}".replace(':user', handle),
+                method: 'POST',
+                data: {
+                    _token: '{{ csrf_token() }}',
+                },
+                success: function(response) {
+                    if (response.code == 200) {
+                        toastr.success('Status Updated successfully');
+                    }else {
+                        toastr.error('Failed to update status');
+                    }
+                },
+                error: function() {
+                    // Handle AJAX request error
+                    toastr.error('Something Went Wrong');
+                }
+            });
+            }catch(e) {
+                toastr.error('Something Went Wrong');
+            }
+        }
+    </script>
+@endpush

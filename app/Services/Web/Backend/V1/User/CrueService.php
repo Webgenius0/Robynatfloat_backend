@@ -2,6 +2,8 @@
 
 namespace App\Services\Web\Backend\V1\User;
 
+use App\Models\User;
+use App\Repositories\Web\Backend\V1\User\UserRepositoryInterface;
 use App\Repositories\Web\Backend\V1\User\CrueRepositoryInterface;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -12,10 +14,12 @@ class CrueService
 {
     //here is protected function
     protected CrueRepositoryInterface $crueRepository;
+    protected UserRepositoryInterface $userRepository;
 
-    public function __construct(CrueRepositoryInterface $crueRepository)
+    public function __construct(CrueRepositoryInterface $crueRepository, UserRepositoryInterface $userRepository)
     {
         $this->crueRepository = $crueRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function index($request): JsonResponse
@@ -55,7 +59,7 @@ class CrueService
                     return '<td>
 
                                 <div class="form-check form-switch">
-                                    <input class="form-check-input" type="checkbox" onclick="flexSwitchCheckChecked('.($data->id).')" '.($data->status == 1 ? 'checked' : '').'>
+                                    <input class="form-check-input" type="checkbox" onclick="flexSwitchCheckChecked(\''.($data->handle).'\')" '.($data->status == 1 ? 'checked' : '').'>
                                 </div>
                             </td>';
                 })
@@ -66,6 +70,16 @@ class CrueService
             throw $e;
         }
 
+    }
+
+    public function crueUpdateStatus(User $user){
+        try {
+            $this->userRepository->changeStatus($user);
+            return response()->json(['success'=>'Status updated successfully']);
+        } catch (Exception $e) {
+            Log::error('App\Services\Web\Backend\V1\User\CrueService::crueUpdateStatus', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 
 }

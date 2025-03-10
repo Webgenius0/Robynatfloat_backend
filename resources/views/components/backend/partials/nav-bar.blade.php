@@ -116,7 +116,7 @@
                                 <g id="trolley"></g>
                                 <g id="pick_axe"></g>
                             </g>
-                        </svg> Crue
+                        </svg> Crew
                     </a>
 
                     <div id="crue" class="collapse {{ request()->routeIs('admin.user.crue.*') ? 'show' : '' }}"
@@ -125,7 +125,7 @@
                             <li class="nav-item">
                                 <a class="nav-link has-arrow {{ request()->routeIs('admin.user.crue.index') ? 'active' : '' }}"
                                     href="{{ route('admin.user.crue.index') }}">
-                                    Crue List
+                                    Crew List
                                 </a>
                             </li>
                         </ul>
@@ -305,6 +305,62 @@
                         </svg> Yacht-Types
                     </a>
                 </li>
+
+                {{-- <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.country.*') ? 'active' : '' }}"
+                        href="{{ route('admin.country.index') }}">
+                        <svg fill="{{ request()->routeIs('admin.country.type.*') ? '#624bff' : '#9199a5' }}"
+                            height="18px" width="18px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
+                            style="margin-right: 5px" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title></title>
+                                <path d="M4 3v18h2v-6h14V3H4zm12 8H6V5h10v6z"></path>
+                            </g>
+                        </svg> Country-List
+                    </a>
+                </li> --}}
+
+
+
+
+                <li class="nav-item">
+                    <a class="nav-link has-arrow collapsed {{ request()->routeIs('admin.country.*') ? 'active' : '' }}"
+                        href="#!" data-bs-toggle="collapse" data-bs-target="#country" aria-expanded="false"
+                        aria-controls="country">
+                        <svg style="margin-right: 8px"
+                            fill="{{ request()->routeIs('admin.country.*') ? '#624bff' : '#9199a5' }}"
+                            height="18px" width="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 4.25 3.9 8.91 6.21 11.43a1.5 1.5 0 0 0 2.58 0C15.1 17.91 19 13.25 19 9c0-3.87-3.13-7-7-7zm0 10a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/>
+                        </svg>
+                        Location
+                    </a>
+
+                    <div id="country" class="collapse {{ request()->routeIs('admin.country.*') || request()->routeIs('admin.state.index') || request()->routeIs('admin.city.index') ? 'show' : '' }}"
+                        data-bs-parent="#sideNavbar">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link has-arrow {{ request()->routeIs('admin.city.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.city.index') }}">
+                                    City
+                                </a>
+                                <a class="nav-link has-arrow {{ request()->routeIs('admin.country.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.country.index') }}">
+                                    Country
+                                </a>
+                                <a class="nav-link has-arrow {{ request()->routeIs('admin.state.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.state.index') }}">
+                                    State
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+
+
+
+
                 <!-- Nav item dropdown end ............... -->
 
             </ul>

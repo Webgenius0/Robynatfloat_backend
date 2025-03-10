@@ -22,5 +22,6 @@ Route::prefix('/admin')->group(function () {
 
         // dropdown
         require __DIR__ . '/dropdown/yacht_type.php';
+        require __DIR__ . '/dropdown/location.php';
     });
 });

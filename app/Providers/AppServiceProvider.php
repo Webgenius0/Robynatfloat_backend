@@ -10,14 +10,24 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\Web\Backend\V1\Dropdown\CityRepository;
+use App\Repositories\Web\Backend\V1\Dropdown\CityRepositoryInterface;
+use App\Repositories\Web\Backend\V1\Dropdown\CountryRepository;
+use App\Repositories\Web\Backend\V1\Dropdown\CountryRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory;
 use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitoryInterface;
 use App\Repositories\Web\Backend\V1\User\AdminRepository;
 use App\Repositories\Web\Backend\V1\User\AdminRepositoryInterface;
 use App\Repositories\Web\Backend\V1\User\CrueRepository;
 use App\Repositories\Web\Backend\V1\User\CrueRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\FreelancerRepository;
+use App\Repositories\Web\Backend\V1\User\FreelancerRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\SupplierRepository;
+use App\Repositories\Web\Backend\V1\User\SupplierRepositoryInterface;
 use App\Repositories\Web\Backend\V1\User\UserRepository as UserUserRepository;
 use App\Repositories\Web\Backend\V1\User\UserRepositoryInterface as UserUserRepositoryInterface;
+use App\Repositories\Web\Backend\V1\User\YacthRepository;
+use App\Repositories\Web\Backend\V1\User\YacthRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -40,9 +50,14 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(UserUserRepositoryInterface::class, UserUserRepository::class);
         $this->app->bind(AdminRepositoryInterface::class, AdminRepository::class);
         $this->app->bind(CrueRepositoryInterface::class, CrueRepository::class);
+        $this->app->bind(FreelancerRepositoryInterface::class, FreelancerRepository::class);
+        $this->app->bind(SupplierRepositoryInterface::class, SupplierRepository::class);
+        $this->app->bind(YacthRepositoryInterface::class, YacthRepository::class);
 
         //dropdown
         $this->app->bind(YachtTypeReopsitoryInterface::class, YachtTypeReopsitory::class);
+        $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
+        $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
     }
 
     /**F

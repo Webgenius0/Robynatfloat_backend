@@ -27,7 +27,7 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <!-- Page header -->
                     <div class="mb-5">
-                        <h3 class="mb-0 ">Customers</h3>
+                        <h3 class="mb-0 ">Crue List </h3>
 
                     </div>
                 </div>
@@ -180,25 +180,32 @@
             }
         });
 
-        function flexSwitchCheckChecked(id) {
-            $.ajax({
-                url: "{{ route('admin.user.crue.crueUpdateStatus', 'id') }}".replace('id', id),
+         /**
+         * updating the status of the crue user
+         * */
+         function flexSwitchCheckChecked(handle) {
+            try {
+                $.ajax({
+                url: "{{ route('admin.user.crue.update.status', ':user') }}".replace(':user', handle),
                 method: 'POST',
                 data: {
                     _token: '{{ csrf_token() }}',
                 },
                 success: function(response) {
-                    if (response.success) {
-                        console.log('Status updated successfully');
-                    } else {
-                        console.log('Error updating status');
+                    if (response.code == 200) {
+                        toastr.success('Status Updated successfully');
+                    }else {
+                        toastr.error('Failed to update status');
                     }
                 },
                 error: function() {
                     // Handle AJAX request error
-                    console.log('An error occurred');
+                    toastr.error('Something Went Wrong');
                 }
             });
+            }catch(e) {
+                toastr.error('Something Went Wrong');
+            }
         }
     </script>
 @endpush

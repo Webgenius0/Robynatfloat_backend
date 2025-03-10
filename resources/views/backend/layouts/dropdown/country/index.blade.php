@@ -30,7 +30,7 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <!-- Page header -->
                     <div class="mb-5">
-                        <h3 class="mb-0 ">Yacht Types</h3>
+                        <h3 class="mb-0 ">Country List</h3>
 
                     </div>
                 </div>
@@ -45,12 +45,12 @@
                                 <div class="row justify-content-between">
                                     <div class="col-md-6 mb-3 ">
                                         <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#addCustomerModal">+ Add Customer</a>
+                                            data-bs-target="#addCountryModel">+ Add Country</a>
                                     </div>
 
                                     <div class=" col-lg-4 col-md-6">
                                         <input type="search" id="search-input" class="form-control "
-                                            placeholder="Search for name, email">
+                                            placeholder="Search for name">
                                     </div>
                                 </div>
                             </div>
@@ -78,19 +78,19 @@
 
 
     {{-- create modal start --}}
-    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+    <div class="modal fade" id="addCountryModel" tabindex="-1" aria-labelledby="addCountryModelLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="addCustomerModalLabel">Add Yacht Type</h4>
+                    <h4 class="modal-title" id="addCountryModelLabel">Add Country</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="createYachtType">
                         <div>
                             <div class="mb-3">
-                                <label for="name" class="form-label">Yacht Type Name</label>
-                                <input type="text" class="form-control" placeholder="Enter name" id="yacht_type_name">
+                                <label for="name" class="form-label">Country Name</label>
+                                <input type="text" class="form-control" placeholder="Enter name" id="country_name">
                                 <p class="v-error-message" id="name_error"></p>
                             </div>
                             <div class="text-end">
@@ -143,7 +143,7 @@
                         pagingType: "full_numbers",
                         dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                         ajax: {
-                            url: "{{ route('admin.yacht.type.index') }}",
+                            url: "{{ route('admin.country.index') }}",
                             type: "GET",
                             data: (d) => {
                                 d.search = $('#search-input').val();
@@ -173,36 +173,36 @@
                 console.error(e);
             }
 
-            $('#yacht_type_name').keypress(function(e) {
+            $('#country_name').keypress(function(e) {
                 if (e.which === 13) { // Check if Enter key is pressed
                     e.preventDefault();
                     $('#saveBtn').click();
                 }
             });
             /**
-             * Create new yacht type
+             * Create new country
              * */
             $(`#saveBtn`).click(() => {
                 try {
                     $('#overlay').show();
-                    const yachtTypeName = $('#yacht_type_name').val();
+                    const countryName = $('#country_name').val();
 
                     // removing validation messages
                     $('#name_error').text('');
 
                     $.ajax({
-                        url: `{{ route('admin.yacht.type.store') }}`,
+                        url: `{{ route('admin.country.store') }}`,
                         type: `POST`,
                         data: {
-                            'name': yachtTypeName,
+                            'name': countryName,
                         },
                         success: (response) => {
                             if (response.code == 201) {
                                 dTable.draw();
-                                $('#yacht_type_name').val('');
-                                $('#addCustomerModal').modal('hide');
+                                $('#country_name').val('');
+                                $('#addCountryModel').modal('hide');
                                 $('#overlay').hide();
-                                toastr.success('Yacht Type Created successfully!');
+                                toastr.success('Country Created successfully!');
                             } else {
                                 $('#overlay').hide();
                                 toastr.error('Something Went Wrong.!');
@@ -236,7 +236,7 @@
             try {
                 $('#overlay').show();
                 $.ajax({
-                    url: `{{ route('admin.yacht.type.edit', '') }}/${slug}`,
+                    url: `{{ route('admin.country.edit', '') }}/${slug}`,
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
@@ -297,7 +297,7 @@
                     _method: 'DELETE'
                 };
                 $.ajax({
-                    url: `{{ route('admin.yacht.type.destroy', '') }}/${slug}`,
+                    url: `{{ route('admin.country.destroy', '') }}/${slug}`,
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
@@ -305,7 +305,7 @@
                         if (response.code == 202) {
                             dTable.draw();
                             $('#overlay').hide();
-                            toastr.success('Yacht Type delete successfully!');
+                            toastr.success('Country Deleted successfully!');
                         } else {
                             $('#overlay').hide();
                             toastr.error('Something Went Wrong.!');
