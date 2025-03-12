@@ -113,7 +113,7 @@ class CityController extends Controller {
     public function destroy(City $city): JsonResponse {
         try {
             $city->delete();
-            return $this->success(202, 'Updated Successfully');
+            return $this->success(202, 'Delete Successfully');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CountryController::destroy', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error.');

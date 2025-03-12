@@ -14,6 +14,8 @@ use App\Repositories\Web\Backend\V1\Dropdown\CityRepository;
 use App\Repositories\Web\Backend\V1\Dropdown\CityRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\CountryRepository;
 use App\Repositories\Web\Backend\V1\Dropdown\CountryRepositoryInterface;
+use App\Repositories\Web\Backend\V1\Dropdown\StateRepository;
+use App\Repositories\Web\Backend\V1\Dropdown\StateRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory;
 use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitoryInterface;
 use App\Repositories\Web\Backend\V1\User\AdminRepository;
@@ -58,6 +60,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(YachtTypeReopsitoryInterface::class, YachtTypeReopsitory::class);
         $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
+        $this->app->bind(StateRepositoryInterface::class, StateRepository::class);
     }
 
     /**F

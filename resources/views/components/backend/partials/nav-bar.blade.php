@@ -341,10 +341,7 @@
                         data-bs-parent="#sideNavbar">
                         <ul class="nav flex-column">
                             <li class="nav-item">
-                                <a class="nav-link has-arrow {{ request()->routeIs('admin.city.index') ? 'active' : '' }}"
-                                    href="{{ route('admin.city.index') }}">
-                                    City
-                                </a>
+
                                 <a class="nav-link has-arrow {{ request()->routeIs('admin.country.index') ? 'active' : '' }}"
                                     href="{{ route('admin.country.index') }}">
                                     Country
@@ -352,6 +349,10 @@
                                 <a class="nav-link has-arrow {{ request()->routeIs('admin.state.index') ? 'active' : '' }}"
                                     href="{{ route('admin.state.index') }}">
                                     State
+                                </a>
+                                <a class="nav-link has-arrow {{ request()->routeIs('admin.city.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.city.index') }}">
+                                    City
                                 </a>
                             </li>
                         </ul>
