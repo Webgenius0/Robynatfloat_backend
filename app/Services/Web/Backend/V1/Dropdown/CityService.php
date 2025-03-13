@@ -39,11 +39,21 @@ class CityService
              */
             if ($request->has('search') && $request->search) {
                 $searchTerm = $request->search;
-                $citys->where(function ($citys) use ($searchTerm) {
-                    $citys->where('name', 'like', '%' . $searchTerm . '%');
+                $citys->where(function ($query) use ($searchTerm) {
+                    $query->where('name', 'like', '%' . $searchTerm . '%')
+                        ->orWhereHas('country', function ($q) use ($searchTerm) {
+                            $q->where('name', 'like', '%' . $searchTerm . '%');
+                        })
+                        ->orWhereHas('state', function ($q) use ($searchTerm) {
+                            $q->where('name', 'like', '%' . $searchTerm . '%');
+                        });
                 });
             }
+            $citys= $citys->with('country','state')->get();
+
             return DataTables::of($citys)
+            ->addColumn('country_name', fn($data) => $data->country->name ?? 'N/A')
+            ->addColumn('state_name', fn($data) => $data->state->name ?? 'N/A')
                 ->addColumn('name', function ($data) {
                     return '<td class="ps-1">
                                  <div class="d-flex align-items-center">

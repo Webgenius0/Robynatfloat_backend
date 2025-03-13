@@ -58,6 +58,7 @@ class CityController extends Controller {
      * @return JsonResponse
      */
     public function store(CityRequest $cityRequest): JsonResponse {
+        // dd($cityRequest);
         try {
             $validatedData = $cityRequest->validated();
             // dd($validatedData);

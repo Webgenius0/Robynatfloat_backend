@@ -24,7 +24,7 @@ class CityRequest extends FormRequest
         return [
             'name' => 'required|string',
             'country_id' => 'required|string',
-            'state_id' => 'required|string',
+            'state_id' => 'nullable|string',
         ];
     }
 
@@ -42,8 +42,6 @@ class CityRequest extends FormRequest
             'name.string' => 'Please provide a valid string.',
             'country_id.required' => 'Country field is required.',
             'country_id.string' => 'Please provide a valid country ID.',
-            'state_id.required' => 'State field is required.',
-           'state_id.string' => 'Please provide a valid state ID.',
         ];
     }
 }

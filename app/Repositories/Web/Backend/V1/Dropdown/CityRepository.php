@@ -15,7 +15,7 @@ class CityRepository implements CityRepositoryInterface
   public function listOfCity():mixed
   {
      try {
-      return City::select('id','name','slug')->latest();
+      return City::with('country', 'state')->latest();
   } catch (Exception $e) {
       Log::error('App\Repositories\Web\Backend\V1\Dropdown\CityRepository::listOfCity', ['error' => $e->getMessage()]);
       throw $e;
@@ -31,10 +31,13 @@ class CityRepository implements CityRepositoryInterface
     public function createCity(array $credential): City
     {
         try {
+            // Ensure state_id is either valid or null
+            $stateId = isset($credential['state_id']) && !empty($credential['state_id']) ? $credential['state_id'] : null;
+
             return City::create([
                 'name' => $credential['name'],
                 'country_id' => $credential['country_id'],
-                'state_id' => $credential['state_id'],
+                'state_id' => $stateId, // Either a valid state_id or null
                 'slug' => Helper::generateUniqueSlug($credential['name'], 'cities'),
             ]);
         } catch (Exception $e) {

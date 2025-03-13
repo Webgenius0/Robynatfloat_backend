@@ -59,7 +59,9 @@
                                     <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>Name</th>
+                                                <th>Country Name</th>
+                                                <th>State Name</th>
+                                                <th>City Name</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -166,7 +168,20 @@
                                 d.search = $('#search-input').val(); // Send custom search input value
                             }
                         },
-                        columns: [{
+                        columns: [
+                            {
+                                data: 'country_name',
+                                name: 'country_name',
+                                orderable: true,
+                                searchable: true
+                            },
+                            {
+                                data:'state_name',
+                                name:'state_name',
+                                orderable: true,
+                                searchable: true
+                            },
+                            {
                                 data: 'name',
                                 name: 'name',
                                 orderable: true,
@@ -210,12 +225,11 @@
 
                 const cityName = $('#city_name').val();
                 const countryId = $('#country_name').val(); // Get the selected country ID
-                const stateId = $('#state_name').val(); // Get the selected state ID
+                const stateId = $('#state_name').val()||null; // Get the selected state ID
 
                 // Remove any previous validation error messages
                 $('#name_error').text('');
                 $('#country_error').text('');
-                $('#state_error').text('');
 
                 // Validation for empty fields
                 let hasError = false;
@@ -228,10 +242,10 @@
                     $('#country_error').text('Country field is required.');
                     hasError = true;
                 }
-                if (!stateId) {
-                    $('#state_error').text('State field is required.');
-                    hasError = true;
-                }
+                // if (!stateId) {
+                //     $('#state_error').text('State field is required.');
+                //     hasError = true;
+                // }
 
                 // If there's a validation error, stop the AJAX request
                 if (hasError) {
