@@ -65,7 +65,7 @@
 
                 const cityName = $('#edit_city_name').val();
                 const countryId = $('#edit_country_id').val();  // Get selected country ID
-                const stateId = $('#edit_state_id').val();  // Get selected state ID
+                const stateId = $('#edit_state_id').val()||null;  // Get selected state ID
 
                 // Clear any previous error messages
                 $('#edit_name_error').text('');
@@ -81,10 +81,6 @@
                 }
                 if (!countryId) {
                     $('#edit_country_error').text('Country field is required.');
-                    hasError = true;
-                }
-                if (!stateId) {
-                    $('#edit_state_error').text('State field is required.');
                     hasError = true;
                 }
 
@@ -109,7 +105,7 @@
                     type: 'POST',
                     data: formData,
                     success: (response) => {
-                       
+
                         if (response.code== 200) {
                             dTable.draw();  // Redraw the data table
                             $('#updateModel').modal('hide');

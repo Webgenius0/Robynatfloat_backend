@@ -22,7 +22,7 @@ class Blog extends Model
      * @var list<string>
      */
     protected $hidden = [
-        'deleted_at',
+
         'created_at',
         'updated_at',
     ];

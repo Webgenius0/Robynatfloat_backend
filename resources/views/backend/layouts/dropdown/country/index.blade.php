@@ -234,7 +234,7 @@
          * */
         const editModal = (slug) => {
             try {
-                $('#overlay').show();
+                // $('#overlay').show();
                 $.ajax({
                     url: `{{ route('admin.country.edit', '') }}/${slug}`,
                     type: 'GET',

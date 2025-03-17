@@ -10,6 +10,8 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\Web\Backend\V1\Blog\BlogRepository;
+use App\Repositories\Web\Backend\V1\Blog\BlogRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\CityRepository;
 use App\Repositories\Web\Backend\V1\Dropdown\CityRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\CountryRepository;
@@ -61,6 +63,10 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(CountryRepositoryInterface::class, CountryRepository::class);
         $this->app->bind(CityRepositoryInterface::class, CityRepository::class);
         $this->app->bind(StateRepositoryInterface::class, StateRepository::class);
+
+        //Blog
+        $this->app->bind(BlogRepositoryInterface::class, BlogRepository::class);
+
     }
 
     /**F

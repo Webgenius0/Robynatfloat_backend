@@ -327,12 +327,12 @@
          * */
         const editModal = (slug) => {
             try {
-                $('#overlay').show();
                 $.ajax({
                     url: `{{ route('admin.city.edit', '') }}/${slug}`,
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
+                        console.log(response);
                         if (response.code == 200) {
                             $('#overlay').hide();
                             $('#updateModel').html(response.data.html);

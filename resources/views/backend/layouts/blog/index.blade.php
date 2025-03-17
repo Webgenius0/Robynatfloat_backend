@@ -1,7 +1,7 @@
 @extends('backend.app')
 
 @section('title')
-    State List - Admin
+    Blog - Admin
 @endsection
 
 @push('styles')
@@ -17,6 +17,29 @@
             justify-content: center;
             padding-bottom: 10px;
         }
+
+        .blog-post {
+            margin-bottom: 30px;
+        }
+
+        .blog-post img {
+            width: 100%;
+            height: auto;
+        }
+
+        .blog-post .post-title {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .blog-post .post-meta {
+            color: gray;
+            font-size: 14px;
+        }
+
+        .blog-post .post-content {
+            margin-top: 10px;
+        }
     </style>
 @endpush
 
@@ -30,7 +53,7 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <!-- Page header -->
                     <div class="mb-5">
-                        <h3 class="mb-0 ">State List</h3>
+                        <h3 class="mb-0 ">Blog Posts</h3>
                     </div>
                 </div>
             </div>
@@ -42,14 +65,14 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="row justify-content-between">
-                                    <div class="col-md-6 mb-3">
+                                    <div class="col-md-6 mb-3 ">
                                         <a href="#!" class="btn btn-primary me-2" data-bs-toggle="modal"
-                                            data-bs-target="#addCustomerModal">+ Add State</a>
+                                            data-bs-target="#addBlogModel">+ Add Blog Post</a>
                                     </div>
 
                                     <div class="col-lg-4 col-md-6">
-                                        <input type="search" id="search-input" class="form-control"
-                                            placeholder="Search for state name">
+                                        <input type="search" id="search-input" class="form-control "
+                                            placeholder="Search for title or content">
                                     </div>
                                 </div>
                             </div>
@@ -58,69 +81,84 @@
                                     <table class="table text-nowrap mb-0 table-centered table-hover" id="data-table">
                                         <thead class="table-light">
                                             <tr>
-                                                <th>Country Name</th>
-                                                <th>State Name</th>
+                                                <th>Title</th>
+                                                <th>Content</th>
+                                                <th>Image</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <!-- Dynamic blog posts will appear here -->
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
     </div>
 
-    {{-- Create Modal --}}
-    <div class="modal fade" id="addCustomerModal" tabindex="-1" aria-labelledby="addCustomerModalLabel" aria-hidden="true">
+    {{-- Create Blog Modal Start --}}
+    <div class="modal fade" id="addBlogModel" tabindex="-1" aria-labelledby="addBlogModelLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="addCustomerModalLabel">Add State</h4>
+                    <h4 class="modal-title" id="addBlogModelLabel">Add Blog Post</h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="createStateForm">
-                        @csrf
+                    <form id="createBlogPost">
                         <div class="mb-3">
-                            <label for="country_id" class="form-label">Country Name</label>
-                            <select class="form-control" id="country_id" name="country_id">
-                                <option value="">Select Country</option>
-                                @foreach ($countries as $country)
-                                    <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                @endforeach
-                            </select>
-                            <p class="v-error-message text-danger" id="country_error"></p>
+                            <label for="title" class="form-label">Blog Title</label>
+                            <input type="text" class="form-control" placeholder="Enter title" id="blog_title">
+                            <p class="v-error-message" id="title_error"></p>
                         </div>
                         <div class="mb-3">
-                            <label for="name" class="form-label">State Name</label>
-                            <input type="text" class="form-control" placeholder="Enter name" id="state_name"
-                                name="name">
-                            <p class="v-error-message text-danger" id="name_error"></p>
+                            <label for="content" class="form-label">Content</label>
+                            <textarea class="form-control" id="blog_content" placeholder="Write your content" rows="5"></textarea>
+                            <p class="v-error-message" id="content_error"></p>
+                        </div>
+                        <!-- Image Upload Section -->
+                        <div class="mb-3">
+                            <label for="blog_image" class="form-label">Blog Image</label>
+                            <input type="file" class="form-control" id="blog_image" accept="image/*">
+                            <p class="v-error-message" id="image_error"></p>
+                        </div>
+                        <!-- Image Preview Section -->
+                        <div id="image_preview" class="mb-3" style="display: none;">
+                            <img id="image_preview_img" src="#" alt="Preview" class="img-fluid"
+                                style="max-width: 100%; height: auto;">
                         </div>
                         <div class="text-end">
-                            <button type="button" class="btn btn-primary me-1" id="saveBtn">Save</button>
+                            <button type="button" class="btn btn-primary me-1" id="saveBlogBtn">Save</button>
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     </div>
+    {{-- Create Blog Modal End --}}
 
-    {{-- Update Modal --}}
-    <div class="modal fade" id="updateModel" tabindex="-1" aria-labelledby="updateLabel" aria-hidden="true"></div>
+    {{-- Edit Blog Modal Start --}}
+    <div class="modal fade" id="updateBlogModel" tabindex="-1" aria-labelledby="updateBlogLabel" aria-hidden="true"></div>
+    {{-- Edit Blog Modal End --}}
 @endsection
 
+
 @push('scripts')
+    {{-- Datatable --}}
     <script src="{{ asset('assets/dev/js/datatables.min.js') }}"></script>
     <script>
         let dTable;
         $(document).ready(function() {
+            /**
+             * Initialize DataTable for blog posts
+             */
             try {
                 if (!$.fn.DataTable.isDataTable('#data-table')) {
                     dTable = $('#data-table').DataTable({
@@ -142,161 +180,151 @@
                         pagingType: "full_numbers",
                         dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'f>>tipr",
                         ajax: {
-                            url: "{{ route('admin.state.index') }}",
+                            url: "{{ route('admin.blog.index') }}",
                             type: "GET",
                             data: (d) => {
                                 d.search = $('#search-input').val();
                             }
                         },
+
                         columns: [{
-                                data: 'country_name',
-                                name: 'country_name',
+                                data: 'title',
+                                name: 'title',
                                 orderable: true,
                                 searchable: true
                             },
                             {
-                                data: 'name',
-                                name: 'name',
+                                data: 'content',
+                                name: 'content',
                                 orderable: true,
                                 searchable: true
+                            },
+                            {
+                                data: 'image',
+                                name: 'image',
+                                orderable: true,
+                                searchable: false
                             },
                             {
                                 data: 'action',
                                 name: 'action',
                                 orderable: false,
                                 searchable: false
-                            }
+                            },
                         ]
                     });
-
                     // Custom search functionality
                     $('#search-input').on('keyup', function() {
                         dTable.draw(); // Redraw the table with the custom search value
                     });
                 }
-            } catch (error) {
-                console.error("DataTables Error: ", error);
+            } catch (e) {
+                toastr.error('Something went wrong');
+                console.error(e);
             }
-            $('#state_name').keypress(function(e) {
-                if (e.which === 13) { // Check if Enter key is pressed
-                    e.preventDefault();
-                    $('#saveBtn').click();
-                }
-            });
-            $('#country_id').keypress(function(e) {
-                if (e.which === 13) { // Check if Enter key is pressed
-                    e.preventDefault();
-                    $('#saveBtn').click();
-                }
-            });
 
-
-            // Save State
-            $('#saveBtn').click(() => {
+            /**
+             * Create new blog post
+             */
+            $('#saveBlogBtn').click(() => {
                 try {
                     $('#overlay').show();
-                    const stateName = $('#state_name').val();
-                    const countryId = $('#country_id').val();
+                    const title = $('#blog_title').val();
+                    const content = $('#blog_content').val();
+                    const images = $('#blog_image')[0].files;
 
-                    // Clear validation messages
-                    $('#name_error').text('');
-                    $('#country_error').text('');
+                    // Remove validation messages
+                    $('#title_error').text('');
+                    $('#content_error').text('');
+                    $('#image_error').text('');
 
-                    // Validate form fields
-                    let hasError = false;
-
-                    if (!stateName) {
-                        $('#name_error').text('State name is required.');
-                        hasError = true;
+                    let formData = new FormData();
+                    formData.append('title', title);
+                    formData.append('content', content);
+                    for (let i = 0; i < images.length; i++) {
+                        formData.append('blog_images[]', images[i]);
                     }
-                    if (!countryId) {
-                        $('#country_error').text('Country field is required.');
-                        hasError = true;
-                    }
+                    formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
-                    if (hasError) {
-                        $('#overlay').hide();
-                        return;
-                    }
-
-                    // AJAX request to save state
                     $.ajax({
-                        url: `{{ route('admin.state.store') }}`,
-                        type: `POST`,
-                        data: {
-                            name: stateName,
-                            country_id: countryId,
-                            _token: '{{ csrf_token() }}'
-                        },
+                        url: `{{ route('admin.blog.store') }}`,
+                        type: 'POST',
+                        data: formData,
+                        processData: false,
+                        contentType: false,
                         success: (response) => {
-                            if (response.code == 201) {
-                                dTable.draw();
-                                $('#state_name').val('');
-                                $('#country_id').val('');
-                                $('#addCustomerModal').modal('hide');
-                                $('#overlay').hide();
-                                toastr.success('State created successfully!');
-                            } else {
-                                $('#overlay').hide();
-                                toastr.error('Something went wrong!');
-                            }
-                        },
-                        error: (Xhr, status, error) => {
                             $('#overlay').hide();
-                            if (Xhr && Xhr.responseJSON && Xhr.responseJSON.errors) {
-                                if (Xhr.responseJSON.errors['name']) {
-                                    $('#name_error').text(Xhr.responseJSON.errors['name'][0]);
+                            toastr.success('Blog Created successfully!');
+                            $('#blog_title').val('');
+                            $('#blog_content').val('');
+                            $('#blog_image').val('');
+                            $('#addBlogModel').modal('hide');
+                            dTable.draw();
+                        },
+                        error: (Xhr) => {
+                            $('#overlay').hide();
+                            if (Xhr.responseJSON && Xhr.responseJSON.errors) {
+                                if (Xhr.responseJSON.errors.title) {
+                                    $('#title_error').text(Xhr.responseJSON.errors.title[0]);
                                 }
-                                if (Xhr.responseJSON.errors['country_id']) {
-                                    $('#country_error').text(Xhr.responseJSON.errors[
-                                        'country_id'][0]);
+                                if (Xhr.responseJSON.errors.content) {
+                                    $('#content_error').text(Xhr.responseJSON.errors.content[
+                                    0]);
+                                }
+                                if (Xhr.responseJSON.errors.blog_images) {
+                                    $('#image_error').text(Xhr.responseJSON.errors.blog_images[
+                                        0]);
                                 }
                             } else {
-                                toastr.error('Something went wrong!');
+                                toastr.error('Something Went Wrong!');
                             }
                         }
                     });
                 } catch (e) {
                     $('#overlay').hide();
-                    toastr.error('Something went wrong!');
+                    toastr.error('Something Went Wrong!');
                     console.error(e);
                 }
             });
+
         });
 
-        // Edit State Modal
+        /**
+         * Show edit modal for a blog post
+         */
         const editModal = (slug) => {
             try {
-                // $('#overlay').show();
                 $.ajax({
-                    url: `{{ route('admin.state.edit', '') }}/${slug}`,
+                    url: `{{ route('admin.blog.edit', '') }}/${slug}`,
                     type: 'GET',
                     dataType: 'json',
                     success: (response) => {
                         if (response.code == 200) {
                             $('#overlay').hide();
-                            $('#updateModel').html(response.data.html);
-                            $('#updateModel').modal('show');
+                            $('#updateBlogModel').html(response.data.html);
+                            $('#updateBlogModel').modal('show');
                         } else {
                             $('#overlay').hide();
-                            toastr.error('Something went wrong!');
+                            toastr.error('Something Went Wrong!');
                         }
                     },
                     error: (xhr, status, error) => {
                         $('#overlay').hide();
-                        toastr.error('Something went wrong!');
-                        console.error("AJAX Error: ", error);
+                        toastr.error('Something Went Wrong!');
+                        console.error(error);
                     }
                 });
             } catch (error) {
                 $('#overlay').hide();
-                toastr.error('Something went wrong!');
-                console.error("JavaScript Error: ", error);
+                toastr.error('Something went wrong');
+                console.error(error);
             }
-        };
+        }
 
-        // Delete State
-        const deleteAlert = (slug) => {
+/**
+         * Delete Alert
+         * */
+         const deleteAlert = (slug) => {
             try {
                 Swal.fire({
                     title: "Are you sure?",
@@ -308,24 +336,30 @@
                     confirmButtonText: "Yes",
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        deleteContend(slug);
+                        deleteContend(slug)
                     }
                 });
             } catch (error) {
-                toastr.error('Something went wrong!');
+                toastr.error('Something went wrong');
                 console.error(error);
             }
-        };
+        }
 
-        const deleteContend = (slug) => {
+
+
+
+
+         /**
+         * delete function
+         **/
+         const deleteContend = (slug) => {
             try {
                 $('#overlay').show();
                 const formData = {
-                    _method: 'DELETE',
-                    _token: '{{ csrf_token() }}'
+                    _method: 'DELETE'
                 };
                 $.ajax({
-                    url: `{{ route('admin.state.destroy', '') }}/${slug}`,
+                    url: `{{ route('admin.blog.destroy', '') }}/${slug}`,
                     type: 'POST',
                     data: formData,
                     dataType: 'json',
@@ -333,22 +367,22 @@
                         if (response.code == 202) {
                             dTable.draw();
                             $('#overlay').hide();
-                            toastr.success('State deleted successfully!');
+                            toastr.success('Blog delete successfully!');
                         } else {
                             $('#overlay').hide();
-                            toastr.error('Something went wrong!');
+                            toastr.error('Something Went Wrong.!');
                         }
                     },
                     error: (xhr, status, error) => {
                         $('#overlay').hide();
-                        toastr.error('Something went wrong!');
+                        toastr.error('Something Went Wrong.!');
                     }
                 });
             } catch (e) {
                 $('#overlay').hide();
-                toastr.error('Something went wrong!');
-                console.error(e);
+                toastr.error('Something Went Wrong.!');
             }
-        };
+
+        }
     </script>
 @endpush

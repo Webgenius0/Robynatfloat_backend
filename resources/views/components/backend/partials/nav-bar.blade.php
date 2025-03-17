@@ -306,21 +306,7 @@
                     </a>
                 </li>
 
-                {{-- <li class="nav-item">
-                    <a class="nav-link {{ request()->routeIs('admin.country.*') ? 'active' : '' }}"
-                        href="{{ route('admin.country.index') }}">
-                        <svg fill="{{ request()->routeIs('admin.country.type.*') ? '#624bff' : '#9199a5' }}"
-                            height="18px" width="18px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
-                            style="margin-right: 5px" xmlns="http://www.w3.org/2000/svg">
-                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                            <g id="SVGRepo_iconCarrier">
-                                <title></title>
-                                <path d="M4 3v18h2v-6h14V3H4zm12 8H6V5h10v6z"></path>
-                            </g>
-                        </svg> Country-List
-                    </a>
-                </li> --}}
+
 
 
 
@@ -358,6 +344,22 @@
                         </ul>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}"
+                        href="{{ route('admin.blog.index') }}">
+                        <svg fill="{{ request()->routeIs('admin.blog.index.*') ? '#624bff' : '#9199a5' }}"
+                            height="18px" width="18px" viewBox="0 0 24 24" data-name="Layer 1" id="Layer_1"
+                            style="margin-right: 5px" xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <title>Blogs Icon</title>
+                                <path d="M3,2H21A1,1,0,0,1,22,3V21a1,1,0,0,1-1,1H3a1,1,0,0,1-1-1V3A1,1,0,0,1,3,2ZM3,4V20H21V4H3ZM5,6H19V8H5ZM5,10H19V12H5ZM5,14H19V16H5Z"></path>
+                            </g>
+                        </svg> Blogs List
+                    </a>
+                </li>
+
 
 
 

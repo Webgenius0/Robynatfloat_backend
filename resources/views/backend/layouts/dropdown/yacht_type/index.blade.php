@@ -234,7 +234,7 @@
          * */
         const editModal = (slug) => {
             try {
-                $('#overlay').show();
+                // $('#overlay').show();
                 $.ajax({
                     url: `{{ route('admin.yacht.type.edit', '') }}/${slug}`,
                     type: 'GET',
