@@ -36,5 +36,7 @@ Route::prefix('/admin')->group(function () {
         require __DIR__ . '/dropdown/location.php';
         // blog routes
         require __DIR__. '/blog/blog.php';
+        //settings
+        require __DIR__. '/setting/setting.php';
     });
 });

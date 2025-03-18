@@ -54,14 +54,21 @@ class BlogService
                            </td>';
                 })
                 ->addColumn('image', function ($data) {
-                    $imageUrl = optional($data->images()->latest()->first())->url ?? 'default-image.png'; // Handle missing images
+                    $images = $data->images()->latest()->take(2)->get(); // Get the latest 2 images
 
-                    return '<td class="ps-1">
-                           <div class="d-flex align-items-center">
-                               <img src="' . asset($imageUrl) . '" alt="Blog Image" width="100">
-                           </div>
-                       </td>';
+                    $imageHtml = '<td class="ps-1">
+                                   <div class="d-flex align-items-center">';
+
+                    foreach ($images as $image) {
+                        $imageUrl = asset($image->url ?? 'default-image.png');
+                        $imageHtml .= '<img src="' . $imageUrl . '" alt="Blog Image" width="100" class="me-2">';
+                    }
+
+                    $imageHtml .= '</div></td>';
+
+                    return $imageHtml;
                 })
+
 
                 ->addColumn('action', function ($data) {
                     return '<td class="ps-1">

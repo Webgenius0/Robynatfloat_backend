@@ -1,35 +1,57 @@
 <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
         <div class="modal-header">
-            <h4 class="modal-title" id="updateLabel">Edit Blog</h4>
+            <h4 class="modal-title" id="updateBlogLabel">Edit Blog Post</h4>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <form id="updateBlogModel" enctype="multipart/form-data">
+            <form id="updateBlogPost">
                 @csrf
-                @method('PUT')
+                @method('PUT') <!-- Use PUT method for updates -->
+
                 <div class="mb-3">
-                    <label for="update_blog_title" class="form-label">Blog Title</label>
-                    <input type="text" value="{{ $blog->title }}" class="form-control" placeholder="Enter title" id="update_blog_title" name="title">
-                    <p class="v-error-message text-danger" id="update_name_error"></p>
+                    <label for="edit_blog_title" class="form-label">Blog Title</label>
+                    <input type="text" class="form-control" placeholder="Enter title" id="edit_blog_title" value="{{ $blog->title }}">
+                    <p class="v-error-message" id="edit_title_error"></p>
                 </div>
+
                 <div class="mb-3">
-                    <label for="update_blog_content" class="form-label">Blog Content</label>
-                    <textarea class="form-control" placeholder="Enter content" id="update_blog_content" name="content">{{ $blog->content }}</textarea>
-                    <p class="v-error-message text-danger" id="update_content_error"></p>
+                    <label for="edit_blog_content" class="form-label">Content</label>
+                    <textarea class="form-control" id="edit_blog_content" placeholder="Write your content" rows="5">{{ $blog->content }}</textarea>
+                    <p class="v-error-message" id="edit_content_error"></p>
                 </div>
+
+                <!-- Image Upload Section -->
                 <div class="mb-3">
-                    <label for="update_blog_image" class="form-label">Blog Image</label>
-                    <input type="file" class="form-control" id="update_blog_image" name="blog_images[]" accept="image/*" onchange="previewImage(event)">
+                    <label for="edit_blog_image" class="form-label">Blog Image</label>
                     @php
                         // Get the latest image URL if available
                         $latestImageUrl = $blog->images->last()->url ?? 'default-image.png';
                     @endphp
-                    <img id="edit_image_preview" src="{{ asset($latestImageUrl) }}" alt="Preview" class="img-fluid mt-2" style="max-width: 100px; height: auto;">
-                    <p class="v-error-message text-danger" id="update_image_error"></p>
+                    <input type="file" class="form-control dropify" id="edit_blog_image" accept="image/*" data-max-file-size="2M" data-default-file="{{ asset($latestImageUrl)}}">
+                    <p class="v-error-message" id="edit_image_error"></p>
                 </div>
+
+                <!-- Image Preview Section -->
+                <div id="edit_image_preview" class="mb-3">
+                    <img src="{{ asset($latestImageUrl)}}" alt="Current Image" class="img-fluid" style="max-width: 100%; height: auto;">
+                </div>
+
+                {{-- <div class="mb-3">
+                    <label for="update_blog_image" class="form-label">Blog Image</label>
+                    @php
+                        // Get the latest image URL if available
+                        $latestImageUrl = $blog->images->last()->url ?? 'default-image.png';
+                    @endphp
+                    <input type="file" class="form-control dropify"
+                           id="update_blog_image" name="blog_images[]"
+                           accept="image/*" data-default-file="{{ asset($latestImageUrl) }}"
+                           data-max-file-size="2M">
+                    <p class="v-error-message text-danger" id="update_image_error"></p>
+                </div> --}}
+
                 <div class="text-end">
-                    <button type="submit" class="btn btn-primary me-1" id="updateBtn">Save</button>
+                    <button type="button" class="btn btn-primary me-1" id="updateBlogBtn">Update</button>
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
                 </div>
             </form>
@@ -38,102 +60,67 @@
 </div>
 
 <script>
-    $(document).ready(() => {
-        // Function to preview the selected image
-        const previewImage = (event) => {
-            const reader = new FileReader();
-            reader.onload = () => {
-                const output = document.getElementById('edit_image_preview');
-                output.src = reader.result;
-            };
-            reader.readAsDataURL(event.target.files[0]);
-        };
-
-        // Handle form submission
-        $('#updateBlogModel').on('submit', (e) => {
-            e.preventDefault(); // Prevent default form submission
-
-            $('#overlay').show(); // Show loading overlay
-
-            // Clear previous error messages
-            $('.v-error-message').text('');
-
-            // Validate form fields
-            let hasError = false;
-            const blogTitle = $('#update_blog_title').val();
-            const blogContent = $('#update_blog_content').val();
-
-            if (!blogTitle) {
-                $('#update_name_error').text('Title is required.');
-                hasError = true;
+    $(document).ready(function() {
+        // Initialize Dropify for the edit modal
+        $('#edit_blog_image').dropify({
+            messages: {
+                default: 'Drag and drop a file here or click',
+                replace: 'Drag and drop or click to replace',
+                remove: 'Remove',
+                error: 'Ooops, something wrong happened.'
             }
-            if (!blogContent) {
-                $('#update_content_error').text('Content is required.');
-                hasError = true;
+        });
+
+        // Update Blog Post
+        $('#updateBlogBtn').click(() => {
+            $('#overlay').show();
+            const title = $('#edit_blog_title').val();
+            const content = $('#edit_blog_content').val();
+            const images = $('#edit_blog_image')[0].files;
+
+            // Clear validation messages
+            $('#edit_title_error').text('');
+            $('#edit_content_error').text('');
+            $('#edit_image_error').text('');
+
+            let formData = new FormData();
+            formData.append('title', title);
+            formData.append('content', content);
+            for (let i = 0; i < images.length; i++) {
+                formData.append('blog_images[]', images[i]);
             }
+            formData.append('_method', 'PUT'); // Use PUT method for updates
+            formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 
-            if (hasError) {
-                $('#overlay').hide(); // Hide loading overlay if there's an error
-                return;
-            }
-
-            // Create FormData object for AJAX submission
-            const formData = new FormData();
-            formData.append('title', blogTitle);
-            formData.append('content', blogContent);
-            formData.append('_method', 'PUT');
-            formData.append('_token', '{{ csrf_token() }}');
-
-            // Append image file if selected
-            const blogImage = $('#update_blog_image')[0].files[0];
-            if (blogImage) {
-                formData.append('blog_images[]', blogImage);
-            }
-
-            // Make AJAX request
             $.ajax({
-                url: '{{ route('admin.blog.update', $blog->slug) }}',
+                url: `{{ route('admin.blog.update', $blog->slug) }}`,
                 type: 'POST',
                 data: formData,
                 processData: false,
                 contentType: false,
                 success: (response) => {
-                    if (response.code === 200) {
-                        dTable.draw(); // Redraw the data table
-                        $('#updateBlogModel').modal('hide');
-                        $('#overlay').hide(); // Hide loading overlay
-                        toastr.success('Blog updated successfully!');
-                    } else {
-                        $('#overlay').hide();
-                        toastr.error('Something went wrong while updating the blog.');
-                    }
+                    $('#overlay').hide();
+                    toastr.success('Blog Updated successfully!');
+                    $('#updateBlogModel').modal('hide');
+                    dTable.draw(); // Refresh the DataTable
                 },
                 error: (Xhr) => {
-                    $('#overlay').hide(); // Hide loading overlay in case of error
-
+                    $('#overlay').hide();
                     if (Xhr.responseJSON && Xhr.responseJSON.errors) {
-                        // Display validation errors from server response
-                        const errors = Xhr.responseJSON.errors;
-                        if (errors.title) {
-                            $('#update_name_error').text(errors.title[0]);
+                        if (Xhr.responseJSON.errors.title) {
+                            $('#edit_title_error').text(Xhr.responseJSON.errors.title[0]);
                         }
-                        if (errors.content) {
-                            $('#update_content_error').text(errors.content[0]);
+                        if (Xhr.responseJSON.errors.content) {
+                            $('#edit_content_error').text(Xhr.responseJSON.errors.content[0]);
                         }
-                        if (errors['blog_images[]']) {
-                            $('#update_image_error').text(errors['blog_images[]'][0]);
+                        if (Xhr.responseJSON.errors.blog_images) {
+                            $('#edit_image_error').text(Xhr.responseJSON.errors.blog_images[0]);
                         }
                     } else {
-                        toastr.error('Something went wrong while processing the request.');
+                        toastr.error('Something Went Wrong!');
                     }
                 }
             });
-
-            // catch (error) {
-            //     $('#updateBlogModel').modal('hide');
-            //     console.error(error);
-            //     toastr.error('Something Went Wrong.!');
-            //     }
         });
     });
-    </script>
+</script>

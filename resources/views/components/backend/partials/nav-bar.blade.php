@@ -344,6 +344,7 @@
                         </ul>
                     </div>
                 </li>
+                <!-- Nav item dropdown end ............... -->
                 <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('admin.blog.*') ? 'active' : '' }}"
                         href="{{ route('admin.blog.index') }}">
@@ -360,11 +361,48 @@
                     </a>
                 </li>
 
+                <!-- Nav item settings start ............... -->
+
+                <li class="nav-item">
+                    <a class="nav-link has-arrow collapsed {{ request()->routeIs('admin.setting.mail*') || request()->routeIs('admin.state.*') || request()->routeIs('admin.city.*') ? 'active' : '' }}"
+                        href="#!" data-bs-toggle="collapse" data-bs-target="#setting" aria-expanded="false"
+                        aria-controls="setting">
+
+                        <svg style="margin-right: 8px"
+                        fill="{{ request()->routeIs('admin.setting.mail*') ? '#624bff' : '#9199a5' }}"
+                        height="18px" width="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.14,12.94l1.43-1.43l-2.83-2.83l-1.43,1.43A5.95,5.95,0,0,0,13,8.08V5h-2V8.08A5.95,5.95,0,0,0,9.69,10.1l-1.43-1.43L5.43,11.5l1.43,1.43A5.95,5.95,0,0,0,8.08,13H5v2H8.08a5.95,5.95,0,0,0,1.6,2.31l-1.43,1.43l2.83,2.83l1.43-1.43a5.95,5.95,0,0,0,2.31,1.6V19h2v2.08a5.95,5.95,0,0,0,2.31-1.6l1.43,1.43l2.83-2.83-1.43-1.43A5.95,5.95,0,0,0,19.14,15H22v-2H19.14A5.95,5.95,0,0,0,19.14,12.94ZM12,15.5A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
+                    </svg>
+                        Settings
+                    </a>
+
+                    <div id="setting" class="collapse {{ request()->routeIs('admin.setting.mail*') || request()->routeIs('admin.state.*') || request()->routeIs('admin.city.*') ? 'show' : '' }}"
+                        data-bs-parent="#sideNavbar">
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+
+                                <a class="nav-link has-arrow {{ request()->routeIs('admin.setting.mail.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.setting.mail.index') }}">
+                                    Mail Settings
+                                </a>
+                                {{-- <a class="nav-link has-arrow {{ request()->routeIs('admin.state.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.state.index') }}">
+                                    State
+                                </a>
+                                <a class="nav-link has-arrow {{ request()->routeIs('admin.city.index') ? 'active' : '' }}"
+                                    href="{{ route('admin.city.index') }}">
+                                    City
+                                </a> --}}
+                            </li>
+                        </ul>
+                    </div>
+                </li>
 
 
 
 
-                <!-- Nav item dropdown end ............... -->
+
+
 
             </ul>
 

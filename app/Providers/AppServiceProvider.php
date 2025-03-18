@@ -20,6 +20,8 @@ use App\Repositories\Web\Backend\V1\Dropdown\StateRepository;
 use App\Repositories\Web\Backend\V1\Dropdown\StateRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitory;
 use App\Repositories\Web\Backend\V1\Dropdown\YachtTypeReopsitoryInterface;
+use App\Repositories\Web\Backend\V1\Setting\MailSettingRepository;
+use App\Repositories\Web\Backend\V1\Setting\MailSettingRepositoryInterface;
 use App\Repositories\Web\Backend\V1\User\AdminRepository;
 use App\Repositories\Web\Backend\V1\User\AdminRepositoryInterface;
 use App\Repositories\Web\Backend\V1\User\CrueRepository;
@@ -66,6 +68,9 @@ class AppServiceProvider extends ServiceProvider
 
         //Blog
         $this->app->bind(BlogRepositoryInterface::class, BlogRepository::class);
+
+        //settings
+        $this->app->bind(MailSettingRepositoryInterface::class, MailSettingRepository::class);
 
     }
 
