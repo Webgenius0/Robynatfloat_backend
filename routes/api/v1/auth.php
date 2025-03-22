@@ -16,6 +16,11 @@ Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
             Route::post('/register', 'register')->name('register');
         });
 
+        //profile Update routes
+        // Route::controller(AuthController::class)->group(function () {
+        //     Route::post('/profile-update', 'profileUpdate')->name('profile.update');
+        // });
+
         // Password-related routes
         Route::controller(PasswordController::class)->group(function () {
             Route::post('/chage-password', 'changePassword')->name('change.password');
@@ -47,4 +52,13 @@ Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
             Route::post('/otp-match', 'otpMatch')->name('otp.match');
         });
     });
+
+    //profile Update routes
+    Route::middleware('auth:api')->group(function () {
+        // Profile Update - Only accessible to logged-in users
+        Route::controller(AuthController::class)->group(function () {
+            Route::post('/profile-update', 'profileUpdate')->name('profile.update');
+        });
+    });
+
 });

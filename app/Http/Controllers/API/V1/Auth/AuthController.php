@@ -6,9 +6,12 @@ use App\Services\API\V1\Auth\AuthService;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\Auth\LoginRequest;
 use App\Http\Requests\API\V1\Auth\RegisterRequest;
+use App\Http\Requests\API\V1\Auth\UpdateProfileRequest;
+use App\Models\User;
 use App\Traits\V1\ApiResponse;
 use Exception;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -54,9 +57,7 @@ class AuthController extends Controller
     {
         try {
             $validatedData = $request->validated();
-
             $response = $this->authService->register($validatedData);
-
             return $this->success(200, 'Registration Successfully', $response);
         } catch (Exception $e) {
             Log::error('AuthService::register', ['error' => $e->getMessage()]);
@@ -78,9 +79,10 @@ class AuthController extends Controller
      */
     public function login(LoginRequest $request): JsonResponse
     {
+        // dd($request);
         try {
             $validatedData = $request->validated();
-
+// dd($validatedData);
             $response = $this->authService->login($validatedData);
 
             return $this->success(200, 'Login Successfully', $response);
@@ -130,6 +132,23 @@ class AuthController extends Controller
             return $this->success(200, 'Token Updated', ['token' => $token]);
         } catch (Exception $e) {
             Log::error('AuthService::refresh', ['error' => $e->getMessage()]);
+            return $this->error(500, 'server Error', $e->getMessage());
+        }
+    }
+    public function profileUpdate(User $user ,UpdateProfileRequest $request): JsonResponse
+    {
+        try {
+            $validatedData = $request->validated();
+           $user =Auth::user();
+// dd($user);
+        if (!$user) {
+            return $this->error(401, 'Unauthorized');
+        }
+
+            $this->authService->profileUpdate( $validatedData, $user);
+            return $this->success(200, 'Profile updated', ['profile' => $user]);
+        } catch (Exception $e) {
+            Log::error('AuthService::profileUpdate', ['error' => $e->getMessage()]);
             return $this->error(500, 'server Error', $e->getMessage());
         }
     }

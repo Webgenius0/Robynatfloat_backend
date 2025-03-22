@@ -24,4 +24,14 @@ interface UserRepositoryInterface
      * @return User|null The user object if found, null otherwise.
      */
     public function login(array $credentials):User|null;
+
+    /**
+     *update user
+     *
+     * @return void
+     *
+     *
+     */
+    public function updateUser(array $credentials, User $user): void;
+
 }

@@ -31,7 +31,7 @@
                 <div class="col-lg-12 col-md-12 col-12">
                     <!-- Page header -->
                     <div class="mb-5">
-                        <h3 class="mb-0 ">State List</h3>
+                        <h3 class="mb-0 ">Mail Setting</h3>
                     </div>
                 </div>
             </div>

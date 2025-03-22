@@ -21,6 +21,8 @@ class ServiceSeeder extends Seeder
                 'price' => 100,
                 'discount' => 10,
                 'about' => 'about-1',
+                'product_name' => 'product-1',
+                'quantity' => 5,
             ],
             [
                 'user_id' => 2,
@@ -29,6 +31,8 @@ class ServiceSeeder extends Seeder
                 'discount' => 20,
                 'price' => 200,
                 'about' => 'about-2',
+                'product_name' => 'product-2',
+                'quantity' => 10,
             ],
             [
                 'user_id' => 3,
@@ -37,6 +41,8 @@ class ServiceSeeder extends Seeder
                 'discount' => 30,
                 'price' => 300,
                 'about' => 'about-3',
+                'product_name' => 'product-3',
+                'quantity' => 15,
             ],
             [
                 'user_id' => 4,
@@ -45,6 +51,8 @@ class ServiceSeeder extends Seeder
                 'discount' => 40,
                 'price' => 400,
                 'about' => 'about-4',
+                'product_name' => 'product-4',
+                'quantity' => 20,
             ],
             [
                 'user_id' => 5,
@@ -53,6 +61,8 @@ class ServiceSeeder extends Seeder
                 'discount' => 50,
                 'price' => 500,
                 'about' => 'about-5',
+                'product_name' => 'product-5',
+                'quantity' => 25,
             ],
         ]);
 

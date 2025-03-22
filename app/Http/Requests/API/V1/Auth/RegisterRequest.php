@@ -32,6 +32,7 @@ class RegisterRequest extends FormRequest
             'last_name'  => "required|string",
             'email'      => "required|email|unique:users",
             'password'   => "required|confirmed",
+            'role_id' => "required|exists:roles,id",
         ];
     }
 
@@ -55,6 +56,8 @@ class RegisterRequest extends FormRequest
 
             'password.required'  => 'Password is required.',
             'password.confirmed' => 'Passwords do not match.',
+            'role_id.required' => 'Role ID is required.',
+            'role_id.exists' => 'Invalid role ID provided.',
         ];
     }
 

@@ -10,6 +10,8 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\API\V1\Service\ServiceRepository;
+use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Blog\BlogRepository;
 use App\Repositories\Web\Backend\V1\Blog\BlogRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\CityRepository;
@@ -71,6 +73,10 @@ class AppServiceProvider extends ServiceProvider
 
         //settings
         $this->app->bind(MailSettingRepositoryInterface::class, MailSettingRepository::class);
+
+        //Api Service Provider
+        $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
+
 
     }
 

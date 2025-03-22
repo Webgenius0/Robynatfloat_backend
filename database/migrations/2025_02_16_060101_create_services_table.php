@@ -17,8 +17,11 @@ return new class extends Migration
             $table->string('sku')->unique();
             $table->string('slug')->unique();
             $table->float('price');
+            $table->string('product_name');
+            $table->float('quantity');
             $table->float('discount')->default(0);
-            $table->longText('about');
+            $table->longText('about')->nullable();
+
             $table->softDeletes();
             $table->timestamps();
         });

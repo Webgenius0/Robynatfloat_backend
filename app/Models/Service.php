@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 
 class Service extends Model
 {
@@ -38,6 +39,7 @@ class Service extends Model
         return [
             'price' => 'float',
             'discount' => 'float',
+            'quantity' => 'float',
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
         ];
@@ -63,5 +65,15 @@ class Service extends Model
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class);
+    }
+
+    /**
+     * Define a polymorphic one-to-many relationship with the Image model
+     * Indicates that this model can have multiple associated images.
+     * @return MorphMany<Image, Blog>
+     */
+    public function images(): MorphMany
+    {
+        return $this->morphMany(Image::class, 'imageable');
     }
 }

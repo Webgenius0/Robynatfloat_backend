@@ -2,11 +2,13 @@
 
 namespace App\Services\API\V1\Auth;
 
+use App\Models\User;
 use App\Repositories\API\V1\Auth\OTPRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use League\OAuth1\Client\Credentials\Credentials;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 
@@ -53,9 +55,9 @@ class AuthService
                 throw new Exception('Token generation failed.', 500);
             }
             DB::commit();
-            $user->load(['profile' => function ($query) {
-                $query->select('id', 'user_id', 'gender', 'phone', 'address', 'date_of_birth', 'bio');
-            }]);
+            // $user->load(['profile' => function ($query) {
+            //     $query->select('id', 'user_id', 'first_name', 'last_name', 'role_id', 'handle',);
+            // }]);
             return ['token' => $token, 'user' => $user, 'verify' => false];
         } catch (Exception $e) {
             DB::rollBack();
@@ -92,9 +94,9 @@ class AuthService
                 $verify = true;
             }
 
-            $user->load(['profile' => function ($query) {
-                $query->select('id', 'user_id', 'gender', 'phone', 'address', 'date_of_birth', 'bio');
-            }]);
+            // $user->load(['profile' => function ($query) {
+            //     $query->select('id', 'user_id', 'gender', 'phone', 'address', 'date_of_birth', 'bio');
+            // }]);
 
             return ['token' => $token, 'user' => $user, 'verify' => $verify];
         } catch (Exception $e) {
@@ -120,6 +122,18 @@ class AuthService
             JWTAuth::invalidate($token);
         } catch (Exception $e) {
             Log::error('AuthService::logout', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    /**
+     *  Update profile information
+     */
+    public function profileUpdate(array $credentials, User $user): void{
+        try {
+            $this->userRepository->updateUser($credentials, $user);
+        } catch (Exception $e) {
+            Log::error('AuthService::updateProfile', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

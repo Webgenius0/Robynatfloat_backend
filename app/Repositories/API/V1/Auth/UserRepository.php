@@ -28,6 +28,7 @@ class UserRepository implements UserRepositoryInterface
     public function createUser(array $credentials, $role = 'user'):User
     {
         try {
+
             // creating user
             $user = User::create([
                 'first_name' => $credentials['first_name'],
@@ -35,7 +36,7 @@ class UserRepository implements UserRepositoryInterface
                 'handle' => Helper::generateUniqueSlug($credentials['first_name'], 'users', 'handle'),
                 'email' => $credentials['email'],
                 'password' => Hash::make($credentials['password']),
-                'role' => $role,
+                'role_id' => $credentials['role_id'],
             ]);
             // creating user profile
             $user->profile()->create([]);
@@ -67,5 +68,33 @@ class UserRepository implements UserRepositoryInterface
             Log::error('UserRepository::login', ['error' => $e->getMessage()]);
             throw $e;
         }
+    }
+
+    /**
+     * Updates a user's password.
+     *
+     * This method takes a user's email and a new password, and updates their password in the database.
+     *
+     * @param string $email The user's email address.
+     * @param string $newPassword The new password for the user.
+     *
+     * @return bool True if the password update is successful, false otherwise.
+     *
+     * @throws Exception If there is an error during the update query.
+     */
+    public function updateUser(array $credentials, User $user):void
+    {
+        try {
+            $user->update([
+                'username' => $credentials['username'],
+                'phone_number' => $credentials['phone_number'],
+                'email'=> $credentials['email'],
+                'location' => $credentials['location'],
+            ]);
+        } catch (Exception $e) {
+            Log::error('UserRepository::updateUser', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+
     }
 }
