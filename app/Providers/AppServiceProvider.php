@@ -12,6 +12,8 @@ use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
 use App\Repositories\API\V1\Service\ServiceRepository;
 use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
+use App\Repositories\Api\V1\Yacht\YachtJobRepository;
+use App\Repositories\Api\V1\Yacht\YachtJobRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Blog\BlogRepository;
 use App\Repositories\Web\Backend\V1\Blog\BlogRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\CityRepository;
@@ -38,13 +40,11 @@ use App\Repositories\Web\Backend\V1\User\YacthRepository;
 use App\Repositories\Web\Backend\V1\User\YacthRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
-class AppServiceProvider extends ServiceProvider
-{
+class AppServiceProvider extends ServiceProvider {
     /**
      * Register any application services.
      */
-    public function register(): void
-    {
+    public function register(): void {
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(ForgetPasswordRepositoryInterface::class, ForgetPasswordRepository::class);
         $this->app->bind(OTPRepositoryInterface::class, OTPRepository::class);
@@ -52,7 +52,6 @@ class AppServiceProvider extends ServiceProvider
 
         $loader = \Illuminate\Foundation\AliasLoader::getInstance();
         $loader->alias('Debugbar', \Barryvdh\Debugbar\Facades\Debugbar::class);
-
 
         // backend
         $this->app->bind(UserUserRepositoryInterface::class, UserUserRepository::class);
@@ -77,14 +76,13 @@ class AppServiceProvider extends ServiceProvider
         //Api Service Provider
         $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
 
-
+        $this->app->bind(YachtJobRepositoryInterface::class, YachtJobRepository::class);
     }
 
     /**F
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
+    public function boot(): void {
         //
     }
 }
