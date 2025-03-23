@@ -6,8 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Profile extends Model
-{
+class Profile extends Model {
     use SoftDeletes;
     /**
      * The attributes that are mass assignable.
@@ -32,8 +31,7 @@ class Profile extends Model
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -45,10 +43,9 @@ class Profile extends Model
      *
      * This method defines that the current model belongs to a single User.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
-    public function user(): BelongsTo
-    {
+    public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 }

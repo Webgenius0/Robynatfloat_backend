@@ -4,13 +4,11 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
-    public function up(): void
-    {
+    public function up(): void {
         Schema::create('profiles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
@@ -21,11 +19,11 @@ return new class extends Migration
             $table->longText('bio')->comment('profile about')->nullable();
 
             $table->string('cv_url')->nullable();
-            $table->string('facebookl')->nullable();
-            $table->string('instragram')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('instagram')->nullable();
             $table->string('youtube')->nullable();
             $table->string('linkedin')->nullable();
- 
+
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,8 +32,7 @@ return new class extends Migration
     /**
      * Reverse the migrations.
      */
-    public function down(): void
-    {
+    public function down(): void {
         Schema::dropIfExists('profiles');
     }
 };

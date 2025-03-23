@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class Language extends Model
-{
+class Language extends Model {
     /**
      * The attributes that are mass assignable.
      *
@@ -29,8 +29,7 @@ class Language extends Model
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'created_at' => 'datetime',
             'updated_at' => 'datetime',
@@ -38,15 +37,10 @@ class Language extends Model
     }
 
     /**
-     *******************
-     */
-
-     /**
      * Belongs to many users
      * @return BelongsToMany<User, Certificate>
      */
-    public function users():BelongsToMany
-    {
+    public function users(): BelongsToMany {
         return $this->belongsToMany(User::class);
     }
 }
