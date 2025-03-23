@@ -13,6 +13,7 @@ class YachtJob extends Model {
 
     protected $fillable = [
         'user_id',
+        'slug',
         'job_title',
         'job_category',
         'location',
@@ -30,6 +31,7 @@ class YachtJob extends Model {
     protected $casts = [
         'id'                   => 'integer',
         'user_id'              => 'integer',
+        'slug'                 => 'string',
         'job_title'            => 'string',
         'job_category'         => 'string',
         'location'             => 'string',
@@ -49,5 +51,9 @@ class YachtJob extends Model {
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
+    }
+
+    public function getRouteKeyName(): string {
+        return 'slug';
     }
 }

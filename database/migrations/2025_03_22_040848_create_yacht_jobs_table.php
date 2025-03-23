@@ -17,6 +17,8 @@ return new class extends Migration {
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
+            $table->string('slug')->unique();
+
             $table->string('job_title');
             $table->string('job_category');
             $table->string('location');

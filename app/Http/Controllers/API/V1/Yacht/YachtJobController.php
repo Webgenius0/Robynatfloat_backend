@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Yacht;
+namespace App\Http\Controllers\Api\V1\Yacht;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\Yacht\StoreYachtJobRequest;
 use App\Http\Requests\API\V1\Yacht\UpdateYachtJobRequest;
 use App\Http\Resources\API\V1\Yacht\YachtJobResource;
+use App\Models\YachtJob;
 use App\Services\API\V1\Yacht\YachtJobService;
 use Exception;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
 class YachtJobController extends Controller {
@@ -30,6 +30,9 @@ class YachtJobController extends Controller {
         try {
             $data            = $request->validated();
             $data['user_id'] = $request->user()->id;
+
+            // Generate a unique slug using the job_title
+            $data['slug'] = Helper::generateUniqueSlug($data['job_title'], 'yacht_jobs');
 
             $yachtJob = $this->yachtJobService->storeYachtJob($data);
 
@@ -56,17 +59,13 @@ class YachtJobController extends Controller {
     }
 
     /**
-     * Show a specific yacht job.
+     * Show a specific yacht job using model binding (lookup by slug).
      *
-     * @param int $id
+     * @param YachtJob $job
      * @return JsonResponse
      */
-    public function show(int $id): JsonResponse {
+    public function show(YachtJob $job): JsonResponse {
         try {
-            $job = $this->yachtJobService->getJobById($id);
-            if (!$job) {
-                return Helper::error(404, 'Yacht job not found.');
-            }
             return Helper::success(200, 'Yacht job retrieved successfully', new YachtJobResource($job));
         } catch (Exception $e) {
             Log::error('YachtJobController::show', ['error' => $e->getMessage()]);
@@ -75,23 +74,24 @@ class YachtJobController extends Controller {
     }
 
     /**
-     * Update an existing yacht job.
+     * Update an existing yacht job using model binding (lookup by slug).
      *
      * @param UpdateYachtJobRequest $request
-     * @param int $id
+     * @param YachtJob $job
      * @return JsonResponse
      */
-    public function update(UpdateYachtJobRequest $request, int $id): JsonResponse {
+    public function update(UpdateYachtJobRequest $request, YachtJob $job): JsonResponse {
         try {
             $data = $request->validated();
             // Optionally, enforce the authenticated user's ID if needed.
             $data['user_id'] = $request->user()->id;
 
-            $job = $this->yachtJobService->updateYachtJob($id, $data);
-            if (!$job) {
+            // Use the service to update the job.
+            $updatedJob = $this->yachtJobService->updateYachtJob($job->id, $data);
+            if (!$updatedJob) {
                 return Helper::error(404, 'Yacht job not found.');
             }
-            return Helper::success(200, 'Yacht job updated successfully', new YachtJobResource($job));
+            return Helper::success(200, 'Yacht job updated successfully', new YachtJobResource($updatedJob));
         } catch (Exception $e) {
             Log::error('YachtJobController::update', ['error' => $e->getMessage()]);
             return Helper::error(500, 'Server error.');

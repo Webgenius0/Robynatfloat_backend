@@ -2,8 +2,17 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
-
+use App\Models\Cart;
+use App\Models\Certificate;
+use App\Models\Experience;
+use App\Models\Language;
+use App\Models\Location;
+use App\Models\OTP;
+use App\Models\Product;
+use App\Models\Profile;
+use App\Models\Role;
+use App\Models\Skill;
+use App\Models\YachtJob;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -15,9 +24,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class User extends Authenticatable implements JWTSubject, MustVerifyEmail
-{
-    /** @use HasFactory<\Database\Factories\UserFactory> */
+class User extends Authenticatable implements JWTSubject, MustVerifyEmail {
     use HasFactory, Notifiable, SoftDeletes;
 
     /**
@@ -46,25 +53,21 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      *
      * @return array<string, string>
      */
-    protected function casts(): array
-    {
+    protected function casts(): array {
         return [
             'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-            'created_at' => 'datetime',
-            'updated_at' => 'datetime',
+            'password'          => 'hashed',
+            'created_at'        => 'datetime',
+            'updated_at'        => 'datetime',
         ];
     }
-
-    // Rest omitted for brevity
 
     /**
      * Get the identifier that will be stored in the subject claim of the JWT.
      *
      * @return mixed
      */
-    public function getJWTIdentifier()
-    {
+    public function getJWTIdentifier() {
         return $this->getKey();
     }
 
@@ -73,11 +76,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      *
      * @return array
      */
-    public function getJWTCustomClaims()
-    {
+    public function getJWTCustomClaims() {
         return [];
     }
-
 
     /**
      * Get the avatar attribute.
@@ -86,8 +87,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      *
      * @return string The processed URL. It may be modified or default to a fallback image.
      */
-    public function getAvatarAttribute($url): string
-    {
+    public function getAvatarAttribute($url): string {
         if ($url) {
             if (strpos($url, 'http://') === 0 || strpos($url, 'https://') === 0) {
                 return $url;
@@ -99,13 +99,11 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
         }
     }
 
-
     /**
      * route key name change
      * @return string
      */
-    public function getRouteKeyName():string
-    {
+    public function getRouteKeyName(): string {
         return 'handle';
     }
 
@@ -120,10 +118,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * has one associated Profile. The foreign key for this relationship is
      * expected to be present in the Profile model's table (typically `user_id`).
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     * @return HasOne
      */
-    public function profile(): HasOne
-    {
+    public function profile(): HasOne {
         return $this->hasOne(Profile::class);
     }
 
@@ -135,10 +132,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * for this relationship is expected to be present in the Otp model's table
      * (typically `user_id` or a relevant identifier).
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
-    public function otps(): HasMany
-    {
+    public function otps(): HasMany {
         return $this->hasMany(OTP::class);
     }
 
@@ -146,8 +142,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * every user assign to a Role
      * @return BelongsTo<Role, User>
      */
-    public function role(): BelongsTo
-    {
+    public function role(): BelongsTo {
         return $this->belongsTo(Role::class);
     }
 
@@ -155,8 +150,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * This model may have multiple products
      * @return HasMany<Product, User>
      */
-    public function products(): HasMany
-    {
+    public function products(): HasMany {
         return $this->hasMany(Product::class);
     }
 
@@ -164,8 +158,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * This model may have multiple products
      * @return HasMany<Product, User>
      */
-    public function services(): HasMany
-    {
+    public function services(): HasMany {
         return $this->hasMany(Product::class);
     }
 
@@ -173,8 +166,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * This model may have multiple carts
      * @return HasMany<Cart, Product>
      */
-    public function carts(): HasMany
-    {
+    public function carts(): HasMany {
         return $this->hasMany(Cart::class);
     }
 
@@ -182,8 +174,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * This model may have multiple carts
      * @return HasMany<Experience, User>
      */
-    public function experience(): HasMany
-    {
+    public function experience(): HasMany {
         return $this->hasMany(Experience::class);
     }
 
@@ -191,8 +182,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * Model may have many locations
      * @return HasMany<Location, City>
      */
-    public function locations(): HasMany
-    {
+    public function locations(): HasMany {
         return $this->hasMany(Location::class);
     }
 
@@ -200,8 +190,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * belongs to many certificates
      * @return BelongsToMany<Certificate, User>
      */
-    public function certificates(): BelongsToMany
-    {
+    public function certificates(): BelongsToMany {
         return $this->belongsToMany(Certificate::class);
     }
 
@@ -209,8 +198,7 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * belongs to many skills
      * @return BelongsToMany<Certificate, User>
      */
-    public function skills(): BelongsToMany
-    {
+    public function skills(): BelongsToMany {
         return $this->belongsToMany(Skill::class);
     }
 
@@ -218,8 +206,15 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail
      * belongs to many languages
      * @return BelongsToMany<Language, User>
      */
-    public function languages(): BelongsToMany
-    {
+    public function languages(): BelongsToMany {
         return $this->belongsToMany(Language::class);
+    }
+
+    /**
+     * This model may have multiple yacht jobs
+     * @return HasMany<YachtJob, User>
+     */
+    public function yachtJobs(): HasMany {
+        return $this->hasMany(YachtJob::class);
     }
 }
