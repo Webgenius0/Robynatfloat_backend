@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Services\Api\V1\Yacht;
+namespace App\Services\API\V1\Yacht;
 
 use App\Models\YachtJob;
-use App\Repositories\Api\V1\Yacht\YachtJobRepositoryInterface;
+use App\Repositories\API\V1\Yacht\YachtJobRepositoryInterface;
 use Exception;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
 class YachtJobService {
@@ -33,7 +34,7 @@ class YachtJobService {
     /**
      * Retrieve all yacht jobs.
      *
-     * @return \Illuminate\Support\Collection
+     * @return Collection
      */
     public function getAllJobs() {
         return $this->yachtJobRepository->getAllJobs();

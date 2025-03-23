@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\V1\Yacht\YachtJobController;
+use App\Http\Controllers\API\V1\Yacht\YachtJobController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {

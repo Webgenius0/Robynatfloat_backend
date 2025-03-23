@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Api\V1\Yacht;
+namespace App\Repositories\API\V1\Yacht;
 
 use App\Models\YachtJob;
 use Exception;

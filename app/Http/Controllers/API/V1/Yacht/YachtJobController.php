@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Yacht;
+namespace App\Http\Controllers\API\V1\Yacht;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Yacht\StoreYachtJobRequest;
-use App\Http\Requests\Api\V1\Yacht\UpdateYachtJobRequest;
-use App\Http\Resources\Api\V1\Yacht\YachtJobResource;
-use App\Services\Api\V1\Yacht\YachtJobService;
+use App\Http\Requests\API\V1\Yacht\StoreYachtJobRequest;
+use App\Http\Requests\API\V1\Yacht\UpdateYachtJobRequest;
+use App\Http\Resources\API\V1\Yacht\YachtJobResource;
+use App\Services\API\V1\Yacht\YachtJobService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
