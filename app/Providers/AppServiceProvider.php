@@ -10,6 +10,8 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\API\V1\Freelancer\ProfileRepository;
+use App\Repositories\API\V1\Freelancer\ProfileRepositoryInterface;
 use App\Repositories\API\V1\Service\ServiceRepository;
 use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtJobRepository;
@@ -77,9 +79,10 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
 
         $this->app->bind(YachtJobRepositoryInterface::class, YachtJobRepository::class);
+        $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
     }
 
-    /**F
+    /**
      * Bootstrap any application services.
      */
     public function boot(): void {

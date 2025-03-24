@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api\V1\Yacht;
+namespace App\Http\Controllers\API\V1\Yacht;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;

@@ -7,6 +7,6 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->group(function () {
     Route::controller(FreelancerProfileController::class)->prefix('v1/freelancer')->group(function () {
         Route::get('/profile', 'profile');
-        Route::patch('/profile', 'updateProfile');
+        Route::post('/profile', 'updateProfile');
     });
 });
