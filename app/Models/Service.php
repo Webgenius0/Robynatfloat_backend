@@ -18,6 +18,10 @@ class Service extends Model
      * @var list<string>
      */
     protected $guarded = [];
+    protected $fillable = [
+        'user_id', 'product_name', 'price', 'quantity', 'discount', 'about', 'slug', 'sku',
+    ];
+
 
     /**
      * The attributes that should be hidden for serialization.

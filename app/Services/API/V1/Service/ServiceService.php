@@ -25,4 +25,40 @@ class ServiceService
         }
 
     }
+
+    public function serviceIndex(){
+        try {
+            return $this->serviceRepository->serviceIndex();
+        } catch (Exception $e) {
+            Log::error('App\Services\API\V1\Service\ServiceService::serviceIndex', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    public function serviceUpdate(array $credentials, Service $service, $slug): Service
+    {
+        try {
+            return $this->serviceRepository->serviceUpdate($credentials, $service, $slug);
+        } catch (Exception $e) {
+            Log::error('App\Services\API\V1\Service\ServiceService::serviceUpdate', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+    public function serviceDelete($slug){
+        try {
+            return $this->serviceRepository->serviceDelete($slug);
+        } catch (Exception $e) {
+            Log::error('App\Services\API\V1\Service\ServiceService::serviceDestroy', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    public function serviceShow($slug){
+        try {
+            return $this->serviceRepository->serviceShow($slug);
+        } catch (Exception $e) {
+            Log::error('App\Services\API\V1\Service\ServiceService::serviceShow', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

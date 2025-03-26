@@ -24,12 +24,66 @@ class ServiceController extends Controller
         try{
             $validatedData = $serviceRequest->validated();
             // dd($validatedData);
-            $this->serviceService->serviceStore($validatedData);
-            return $this->success(201, 'Created Successfully.');
+           $storeService= $this->serviceService->serviceStore($validatedData);
+            return $this->success(201, 'Created Successfully.', $storeService);
         } catch (Exception $e) {
-            Log::error('App\Http\Controllers\Web\Backend\V1\Blog\BlogController::store', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::store', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error.');
         }
 
     }
+
+    public function serviceIndex():JsonResponse{
+        try {
+            $response = $this->serviceService->serviceIndex();
+            return $this->success(200, 'Successfull', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+    public function serviceUpdate(ServiceRequest $serviceRequest, Service $service, $slug): JsonResponse
+{
+    try {
+        // Validate and process the update
+        $validatedData = $serviceRequest->validated();
+        $updatedService = $this->serviceService->serviceUpdate($validatedData, $service, $slug);
+
+        // Return success response
+        return response()->json([
+            'message' => 'Updated successfully.',
+            'data' => $updatedService,
+        ], 200);
+
+    } catch (\Exception $e) {
+        // Log the error and return a 404 error if the service is not found
+        Log::error('Error updating service: ' . $e->getMessage());
+
+        return response()->json([
+            'error' => 'Service not found or update failed.',
+            'message' => $e->getMessage(),
+        ], 404);
+    }
+}
+
+    public function serviceShow($slug): JsonResponse{
+        try {
+            $response = $this->serviceService->serviceShow($slug);
+            return $this->success(200, 'show Successfull', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+    public function serviceDelete($slug): JsonResponse{
+        try {
+            $response = $this->serviceService->serviceDelete($slug);
+            return $this->success(200, ' Deleted Successfull', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
 }
