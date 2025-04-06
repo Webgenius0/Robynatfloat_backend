@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Web\Backend\V1\Dropdown\Citycontroller;
+use App\Http\Controllers\Web\Backend\V1\Dropdown\CityController;
 use App\Http\Controllers\Web\Backend\V1\Dropdown\CountryController;
 use App\Http\Controllers\Web\Backend\V1\Dropdown\StateController;
 use Illuminate\Support\Facades\Route;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Route;
  * route  for City
  */
 
- Route::prefix('/city')->name('city.')->controller(Citycontroller::class)->group(function () {
+ Route::prefix('/city')->name('city.')->controller(CityController::class)->group(function () {
     Route::get('/', 'index')->name('index');
     Route::post('/store', 'store')->name('store');
     Route::get('/edit/{city:slug}', 'edit')->name('edit');
