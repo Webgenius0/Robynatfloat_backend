@@ -1,9 +1,12 @@
 <?php
+
+use App\Http\Controllers\ResetController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
+Route::get('/reset', [ResetController::class, 'RunMigrations'])->name('reset');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', function () {
