@@ -1,6 +1,4 @@
 <?php
-
-use App\Http\Controllers\Web\Backend\V1\Blog\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -13,15 +11,6 @@ Route::prefix('/admin')->group(function () {
     })->middleware(['auth', 'web.verified'])->name('dashboard');
 
     require __DIR__ . '/auth/auth.php';
-//blog  routes
-// Route::controller('/blog', BlogController::class)->group(function () {
-//     Route::get('/', 'index')->name('blog.index');
-//     Route::get('/create', 'create')->name('blog.create');
-//     Route::post('/store', 'store')->name('blog.store');
-//     Route::get('/edit/{blog:slug}', 'edit')->name('blog.edit');
-//     Route::put('/update/{blog:slug}', 'update')->name('blog.update');
-//     Route::delete('/destroy/{blog:slug}', 'destroy')->name('blog.destroy');
-// });
 
     Route::name('admin.')->group(function () {
         // user routes
