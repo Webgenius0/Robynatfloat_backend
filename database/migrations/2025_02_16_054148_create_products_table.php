@@ -16,10 +16,11 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('sku')->unique();
             $table->string('slug')->unique();
+            $table->string('product_name');
             $table->integer('quantity');
             $table->float('price');
             $table->float('discount')->default(0);
-            $table->longText('about');
+            $table->longText('about')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

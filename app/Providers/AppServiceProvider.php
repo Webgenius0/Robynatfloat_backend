@@ -14,6 +14,8 @@ use App\Repositories\API\V1\Freelancer\ProfileRepository;
 use App\Repositories\API\V1\Freelancer\ProfileRepositoryInterface;
 use App\Repositories\API\V1\Service\ServiceRepository;
 use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
+use App\Repositories\API\V1\Supplier\ProductSupplierRepository;
+use App\Repositories\API\V1\Supplier\ProductSupplierRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtJobRepository;
 use App\Repositories\API\V1\Yacht\YachtJobRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Blog\BlogRepository;
@@ -80,6 +82,8 @@ class AppServiceProvider extends ServiceProvider {
 
         $this->app->bind(YachtJobRepositoryInterface::class, YachtJobRepository::class);
         $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
+        //Supplier
+        $this->app->bind(ProductSupplierRepositoryInterface::class, ProductSupplierRepository::class);
     }
 
     /**
