@@ -31,7 +31,7 @@ class YachtJobController extends Controller {
             $data            = $request->validated();
             $data['user_id'] = $request->user()->id;
 
-            // Generate a unique slug using the job_title
+            // Generate a unique slug using the job_title.
             $data['slug'] = Helper::generateUniqueSlug($data['job_title'], 'yacht_jobs');
 
             $yachtJob = $this->yachtJobService->storeYachtJob($data);

@@ -5,6 +5,7 @@ namespace App\Http\Resources\API\V1\Yacht;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
+
 class YachtJobResource extends JsonResource {
     /**
      * Transform the resource into an array.

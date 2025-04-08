@@ -14,12 +14,14 @@ interface YachtJobRepositoryInterface {
      */
     public function storeYachtJob(array $credentials): YachtJob;
 
+
     /**
      * Retrieve all yacht jobs.
      *
      * @return Collection
      */
     public function getAllJobs(): Collection;
+
 
     /**
      * Retrieve a yacht job by its ID.
@@ -28,6 +30,7 @@ interface YachtJobRepositoryInterface {
      * @return YachtJob|null
      */
     public function getJobById(int $id): ?YachtJob;
+
 
     /**
      * Update a yacht job record.

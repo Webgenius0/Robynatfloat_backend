@@ -28,6 +28,7 @@ class YachtJob extends Model {
         'status',
     ];
 
+
     protected $casts = [
         'id'                   => 'integer',
         'user_id'              => 'integer',
@@ -48,6 +49,7 @@ class YachtJob extends Model {
         'updated_at'           => 'datetime',
         'deleted_at'           => 'datetime',
     ];
+
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);

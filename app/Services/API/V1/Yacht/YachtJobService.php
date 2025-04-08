@@ -31,6 +31,7 @@ class YachtJobService {
         }
     }
 
+
     /**
      * Retrieve all yacht jobs.
      *
@@ -39,6 +40,7 @@ class YachtJobService {
     public function getAllJobs() {
         return $this->yachtJobRepository->getAllJobs();
     }
+
 
     /**
      * Retrieve a yacht job by ID.
@@ -49,6 +51,7 @@ class YachtJobService {
     public function getJobById(int $id): ?YachtJob {
         return $this->yachtJobRepository->getJobById($id);
     }
+
 
     /**
      * Update a yacht job.

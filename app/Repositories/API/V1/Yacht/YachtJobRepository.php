@@ -24,6 +24,7 @@ class YachtJobRepository implements YachtJobRepositoryInterface {
         }
     }
 
+
     /**
      * Retrieve all yacht jobs.
      *
@@ -32,6 +33,7 @@ class YachtJobRepository implements YachtJobRepositoryInterface {
     public function getAllJobs(): Collection {
         return YachtJob::all();
     }
+
 
     /**
      * Retrieve a yacht job by its ID.
@@ -42,6 +44,7 @@ class YachtJobRepository implements YachtJobRepositoryInterface {
     public function getJobById(int $id): ?YachtJob {
         return YachtJob::where('id', $id)->first();
     }
+
 
     /**
      * Update a yacht job record.
