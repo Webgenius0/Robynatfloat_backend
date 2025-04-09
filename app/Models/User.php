@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Cart;
 use App\Models\Certificate;
 use App\Models\Experience;
+use App\Models\JobApplication;
 use App\Models\Language;
 use App\Models\Location;
 use App\Models\OTP;
@@ -216,5 +217,13 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail {
      */
     public function yachtJobs(): HasMany {
         return $this->hasMany(YachtJob::class);
+    }
+
+    /**
+     * This model may have multiple yacht jobs
+     * @return HasMany<YachtJob, User>
+     */
+    public function jobApplications(): HasMany {
+        return $this->hasMany(JobApplication::class);
     }
 }

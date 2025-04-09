@@ -2,10 +2,12 @@
 
 namespace App\Models;
 
+use App\Models\JobApplication;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class YachtJob extends Model {
@@ -28,7 +30,6 @@ class YachtJob extends Model {
         'status',
     ];
 
-
     protected $casts = [
         'id'                   => 'integer',
         'user_id'              => 'integer',
@@ -50,12 +51,15 @@ class YachtJob extends Model {
         'deleted_at'           => 'datetime',
     ];
 
-
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
 
     public function getRouteKeyName(): string {
         return 'slug';
+    }
+
+    public function jobApplications(): HasMany {
+        return $this->hasMany(JobApplication::class);
     }
 }

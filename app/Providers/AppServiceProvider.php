@@ -10,6 +10,8 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\API\V1\Freelancer\JobApplicationRepository;
+use App\Repositories\API\V1\Freelancer\JobApplicationRepositoryInterface;
 use App\Repositories\API\V1\Freelancer\ProfileRepository;
 use App\Repositories\API\V1\Freelancer\ProfileRepositoryInterface;
 use App\Repositories\API\V1\Service\ServiceRepository;
@@ -84,6 +86,9 @@ class AppServiceProvider extends ServiceProvider {
         $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
         //Supplier
         $this->app->bind(ProductSupplierRepositoryInterface::class, ProductSupplierRepository::class);
+
+        // Job Application Freelancer
+        $this->app->bind(JobApplicationRepositoryInterface::class, JobApplicationRepository::class);
     }
 
     /**

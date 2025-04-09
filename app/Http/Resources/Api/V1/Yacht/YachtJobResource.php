@@ -17,6 +17,7 @@ class YachtJobResource extends JsonResource {
             'id'                   => $this->id,
             'user_id'              => $this->user_id,
             'job_title'            => $this->job_title,
+            'slug'                 => $this->slug,
             'job_category'         => $this->job_category,
             'location'             => $this->location,
             'employment_type'      => $this->employment_type,
