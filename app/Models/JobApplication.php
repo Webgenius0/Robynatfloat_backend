@@ -22,6 +22,7 @@ class JobApplication extends Model {
         'cv',
         'status',
     ];
+
     protected $casts = [
         'id'           => 'integer',
         'yacht_job_id' => 'integer',
@@ -54,7 +55,7 @@ class JobApplication extends Model {
     }
 
     public function job(): BelongsTo {
-        return $this->belongsTo(YachtJob::class);
+        return $this->belongsTo(YachtJob::class, 'yacht_job_id');
     }
 
     public function user(): BelongsTo {

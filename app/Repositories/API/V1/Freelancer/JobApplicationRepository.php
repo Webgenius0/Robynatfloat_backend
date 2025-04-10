@@ -15,4 +15,19 @@ class JobApplicationRepository implements JobApplicationRepositoryInterface {
             throw $e;
         }
     }
+
+    /**
+     * Return all applications for a given user, including the related job.
+     */
+    public function listMyAppliedJobs(int $userId) {
+        try {
+            return JobApplication::where('user_id', $userId)
+                ->with('job')
+                ->latest()
+                ->get();
+        } catch (Exception $e) {
+            Log::error('JobApplicationRepository::listMyAppliedJobs', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

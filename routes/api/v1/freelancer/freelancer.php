@@ -16,5 +16,6 @@ Route::middleware('auth:api')->group(function () {
 Route::middleware('auth:api')->group(function () {
     Route::controller(FreelancerJobApplicationController::class)->prefix('v1/freelancer')->group(function () {
         Route::post('/job/{job}/apply', 'store');
+        Route::get('/jobs/applied', 'listMyAppliedJobs');
     });
 });

@@ -6,4 +6,5 @@ use App\Models\JobApplication;
 
 interface JobApplicationRepositoryInterface {
     public function store(array $data): JobApplication;
+    public function listMyAppliedJobs(int $userId);
 }
