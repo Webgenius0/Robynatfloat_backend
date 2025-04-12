@@ -5,7 +5,6 @@ namespace App\Http\Resources\API\V1\Yacht;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-
 class YachtJobResource extends JsonResource {
     /**
      * Transform the resource into an array.
@@ -28,6 +27,7 @@ class YachtJobResource extends JsonResource {
             'rate_amount_from'     => $this->rate_amount_from,
             'rate_amount_to'       => $this->rate_amount_to,
             'job_description'      => $this->job_description,
+            'skills'               => $this->whenLoaded('skills', fn() => $this->skills->pluck('name')),
         ];
     }
 }

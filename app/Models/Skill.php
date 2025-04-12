@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\YachtJob;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -42,5 +43,9 @@ class Skill extends Model {
      */
     public function users(): BelongsToMany {
         return $this->belongsToMany(User::class);
+    }
+
+    public function yachtJobs(): BelongsToMany {
+        return $this->belongsToMany(YachtJob::class, 'job_skills');
     }
 }

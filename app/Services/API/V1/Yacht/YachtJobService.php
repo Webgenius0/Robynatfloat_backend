@@ -2,11 +2,14 @@
 
 namespace App\Services\API\V1\Yacht;
 
+use App\Models\Skill;
 use App\Models\YachtJob;
 use App\Repositories\API\V1\Yacht\YachtJobRepositoryInterface;
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class YachtJobService {
     protected YachtJobRepositoryInterface $yachtJobRepository;
@@ -23,14 +26,36 @@ class YachtJobService {
      * @throws Exception
      */
     public function storeYachtJob(array $credentials): YachtJob {
+        DB::beginTransaction();
+
         try {
-            return $this->yachtJobRepository->storeYachtJob($credentials);
+            $skills = $credentials['skills'] ?? [];
+            unset($credentials['skills']);
+
+            $job = $this->yachtJobRepository->storeYachtJob($credentials);
+
+            if (!empty($skills)) {
+                $skillIds = $this->getOrCreateSkillIds($skills);
+                $job->skills()->sync($skillIds);
+            }
+
+            DB::commit();
+            return $job;
         } catch (Exception $e) {
+            DB::rollBack();
             Log::error('YachtJobService::storeYachtJob', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
-
+    /**
+     * Helper method to find or create skills and return their IDs.
+     */
+    protected function getOrCreateSkillIds(array $skillNames): array {
+        return collect($skillNames)->map(function ($name) {
+            $slug = Str::slug($name);
+            return Skill::firstOrCreate(['slug' => $slug], ['name' => $name])->id;
+        })->toArray();
+    }
 
     /**
      * Retrieve all yacht jobs.
@@ -41,7 +66,6 @@ class YachtJobService {
         return $this->yachtJobRepository->getAllJobs();
     }
 
-
     /**
      * Retrieve a yacht job by ID.
      *
@@ -51,7 +75,6 @@ class YachtJobService {
     public function getJobById(int $id): ?YachtJob {
         return $this->yachtJobRepository->getJobById($id);
     }
-
 
     /**
      * Update a yacht job.

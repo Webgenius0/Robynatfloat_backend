@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use App\Models\JobApplication;
 use App\Models\User;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Skill;
+use App\Models\JobApplication;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class YachtJob extends Model {
     use HasFactory, SoftDeletes;
@@ -61,5 +63,9 @@ class YachtJob extends Model {
 
     public function jobApplications(): HasMany {
         return $this->hasMany(JobApplication::class);
+    }
+
+    public function skills(): BelongsToMany {
+        return $this->belongsToMany(Skill::class, 'job_skills');
     }
 }

@@ -34,6 +34,8 @@ class UpdateYachtJobRequest extends FormRequest {
             'rate_amount_to'       => 'sometimes|required|numeric',
             'job_description'      => 'sometimes|required|string',
             'status'               => 'sometimes|in:active,inactive',
+            'skills'               => 'sometimes|array',
+            'skills.*'             => 'string|max:255',
         ];
     }
 }

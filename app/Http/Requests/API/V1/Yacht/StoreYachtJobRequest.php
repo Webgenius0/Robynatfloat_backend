@@ -34,6 +34,9 @@ class StoreYachtJobRequest extends FormRequest {
             'rate_amount_to'       => 'required|numeric',
             'job_description'      => 'required|string',
             'status'               => 'sometimes|in:active,inactive',
+
+            'skills'               => 'sometimes|array',
+            'skills.*'             => 'string|max:100',
         ];
     }
 }

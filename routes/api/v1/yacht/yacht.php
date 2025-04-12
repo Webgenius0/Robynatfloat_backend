@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\Yacht\SkillController;
 use App\Http\Controllers\API\V1\Yacht\YachtJobController;
 use Illuminate\Support\Facades\Route;
 
@@ -10,5 +11,9 @@ Route::middleware('auth:api')->group(function () {
         Route::post('/job', 'store');
         Route::get('/job/{job}', 'show');
         Route::patch('/job/{job}', 'update');
+    });
+
+    Route::controller(SkillController::class)->prefix('v1/yacht')->group(function () {
+        Route::get('/skills', 'index');
     });
 });

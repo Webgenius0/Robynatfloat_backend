@@ -7,11 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\Yacht\StoreYachtJobRequest;
 use App\Http\Requests\API\V1\Yacht\UpdateYachtJobRequest;
 use App\Http\Resources\API\V1\Yacht\YachtJobResource;
+use App\Models\Skill;
 use App\Models\YachtJob;
 use App\Services\API\V1\Yacht\YachtJobService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class YachtJobController extends Controller {
     protected YachtJobService $yachtJobService;
@@ -30,11 +32,11 @@ class YachtJobController extends Controller {
         try {
             $data            = $request->validated();
             $data['user_id'] = $request->user()->id;
-
-            // Generate a unique slug using the job_title.
-            $data['slug'] = Helper::generateUniqueSlug($data['job_title'], 'yacht_jobs');
+            $data['slug']    = Helper::generateUniqueSlug($data['job_title'], 'yacht_jobs');
 
             $yachtJob = $this->yachtJobService->storeYachtJob($data);
+
+            $yachtJob->load('skills');
 
             return Helper::success(201, 'Yacht job created successfully', new YachtJobResource($yachtJob));
         } catch (Exception $e) {
@@ -82,15 +84,29 @@ class YachtJobController extends Controller {
      */
     public function update(UpdateYachtJobRequest $request, YachtJob $job): JsonResponse {
         try {
-            $data = $request->validated();
-            // Optionally, enforce the authenticated user's ID if needed.
+            $data            = $request->validated();
             $data['user_id'] = $request->user()->id;
 
-            // Use the service to update the job.
             $updatedJob = $this->yachtJobService->updateYachtJob($job->id, $data);
             if (!$updatedJob) {
                 return Helper::error(404, 'Yacht job not found.');
             }
+
+            if (!empty($data['skills'])) {
+                $skillIds = collect($data['skills'])->map(function (string $skillName) {
+                    $name = trim($skillName);
+                    $slug = Str::slug($name);
+                    return Skill::firstOrCreate(
+                        ['slug' => $slug],
+                        ['name' => $name]
+                    )->id;
+                })->all();
+
+                $updatedJob->skills()->sync($skillIds);
+            }
+
+            $updatedJob->load('skills');
+
             return Helper::success(200, 'Yacht job updated successfully', new YachtJobResource($updatedJob));
         } catch (Exception $e) {
             Log::error('YachtJobController::update', ['error' => $e->getMessage()]);
