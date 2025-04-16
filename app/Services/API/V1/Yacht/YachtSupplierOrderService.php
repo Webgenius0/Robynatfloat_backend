@@ -22,4 +22,22 @@ class YachtSupplierOrderService
             throw $e;
         }
     }
+    public function getOrders(array $data)
+    {
+        try {
+            return $this->yachtSupplierOrderRepository->getOrders($data);
+        } catch (\Exception $e) {
+            Log::error('YachtSupplierOrderService::getOrders', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+    public function getOrderById(int $id)
+    {
+        try {
+            return $this->yachtSupplierOrderRepository->getOrderById($id);
+        } catch (\Exception $e) {
+            Log::error('YachtSupplierOrderService::getOrderById', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

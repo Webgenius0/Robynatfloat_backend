@@ -25,4 +25,24 @@ class YachtSupplierOrderController extends Controller
             return response()->json(['error' => 'Failed to create order'], 500);
         }
     }
+    public function getOrders(Request $request)
+    {
+        try {
+            $orders = $this->yachtSupplierOrderService->getOrders($request->all());
+
+            return response()->json(['orders' => $orders], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to retrieve orders'], 500);
+        }
+    }
+    public function getOrderById($id)
+    {
+        try {
+            $order = $this->yachtSupplierOrderService->getOrderById($id);
+
+            return response()->json(['order' => $order], 200);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to retrieve order'], 500);
+        }
+    }
 }

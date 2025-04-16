@@ -30,4 +30,22 @@ class YachtSupplierOrderRepository implements YachtSupplierOrderRepositoryInterf
             throw $e;
         }
     }
+    public function getOrders(array $data)
+    {
+        try {
+            return Order::all();
+        } catch (\Exception $e) {
+            Log::error('YachtSupplierOrderRepository::getOrders', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+    public function getOrderById(int $id)
+    {
+        try {
+            return Order::findOrFail($id);
+        } catch (\Exception $e) {
+            Log::error('YachtSupplierOrderRepository::getOrderById', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

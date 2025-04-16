@@ -20,6 +20,10 @@ use App\Repositories\API\V1\Supplier\ProductSupplierRepository;
 use App\Repositories\API\V1\Supplier\ProductSupplierRepositoryInterface;
 use App\Repositories\API\V1\Supplier\SupplierRepository as SupplierSupplierRepository;
 use App\Repositories\API\V1\Supplier\SupplierRepositoryInterface as SupplierSupplierRepositoryInterface;
+use App\Repositories\API\V1\Yacht\YachtCrewRepository;
+use App\Repositories\API\V1\Yacht\YachtCrewRepositoryInterface;
+use App\Repositories\API\V1\Yacht\YachtFreelancerRepository;
+use App\Repositories\API\V1\Yacht\YachtFreelancerRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtJobRepository;
 use App\Repositories\API\V1\Yacht\YachtJobRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtSupplierOrderRepository;
@@ -90,6 +94,8 @@ class AppServiceProvider extends ServiceProvider {
 $this->app->bind(YachtJobRepositoryInterface::class, YachtJobRepository::class);
 $this->app->bind(YachtSupplierRepositoryInterface::class, YachtSupplierRepository::class);
 $this->app->bind(YachtSupplierOrderRepositoryInterface::class, YachtSupplierOrderRepository::class);
+$this->app->bind(YachtCrewRepositoryInterface::class, YachtCrewRepository::class);
+$this->app->bind(YachtFreelancerRepositoryInterface::class, YachtFreelancerRepository::class);
 
 //Supplier Api
 

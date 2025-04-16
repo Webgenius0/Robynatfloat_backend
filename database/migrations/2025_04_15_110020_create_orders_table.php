@@ -19,6 +19,7 @@ return new class extends Migration
             $table->float('shipping')->default(0);
             $table->float('tax')->default(0);
             $table->float('total')->default(0);
+            $table->enum('status', ['pending', 'completed', 'canceled'])->default('pending');
             $table->timestamps();
             $table->softDeletes();
         });

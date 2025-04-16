@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\V1\Yacht\SkillController;
+use App\Http\Controllers\API\V1\Yacht\YachtCrewController;
+use App\Http\Controllers\API\V1\Yacht\YachtFreelancerController;
 use App\Http\Controllers\API\V1\Yacht\YachtJobController;
 use App\Http\Controllers\API\V1\Yacht\YachtSupplierController;
 use App\Http\Controllers\API\V1\Yacht\YachtSupplierOrderController;
@@ -25,9 +27,21 @@ Route::middleware('auth:api')->group(function () {
         Route::get('/single-supplier/{id}', 'getSupplierBySlug');
     });
     Route::controller(YachtSupplierOrderController::class)->prefix('v1/yacht')->group(function () {
-        Route::get('/order', 'index');
+        Route::get('/order', 'getOrders');
         Route::post('/order', 'storeOrder');
-        Route::get('/order/{order}', 'show');
+        Route::get('/order/{id}', 'getOrderById');
         Route::patch('/order/{order}', 'update');
     });
+    Route::controller(YachtCrewController::class)->prefix('v1/yacht')->group(function () {
+        Route::get('/crew', 'getAllCrew');
+        Route::get('/crew/{id}', 'getCrewById');
+        // Route::get('/crew/{crew}', 'show');
+        // Route::patch('/crew/{crew}', 'update');
+    });
+
+    Route::controller(YachtFreelancerController::class)->prefix('v1/yacht')->group(function () {
+        Route::get('/freelancer', 'getAllFreelancer');
+        Route::get('/freelancer/{id}', 'getFreelancerById');
+    });
+
 });
