@@ -1,9 +1,9 @@
 <?php
-namespace App\Repositories\API\V1\Service;
+namespace App\Repositories\API\V1\Supplier;
 
 use App\Helpers\Helper;
 use App\Models\Service;
-use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
+use App\Repositories\API\V1\Supplier\ServiceRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Log;
 

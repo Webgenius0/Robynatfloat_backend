@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\API\V1\Service;
+namespace App\Http\Controllers\API\V1\Supplier;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\API\V1\Service\ServiceRequest;
+use App\Http\Requests\API\V1\Supplier\ServiceRequest;
 use App\Models\Service;
-use App\Services\API\V1\Service\ServiceService;
+use App\Services\API\V1\Supplier\ServiceService;
 use Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;

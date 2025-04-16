@@ -157,10 +157,10 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail {
 
     /**
      * This model may have multiple products
-     * @return HasMany<Product, User>
+     * @return HasMany<Service, User>
      */
     public function services(): HasMany {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Service::class);
     }
 
     /**

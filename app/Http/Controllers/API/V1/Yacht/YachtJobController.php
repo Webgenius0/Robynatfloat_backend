@@ -113,4 +113,6 @@ class YachtJobController extends Controller {
             return Helper::error(500, 'Server error.');
         }
     }
+
+    
 }

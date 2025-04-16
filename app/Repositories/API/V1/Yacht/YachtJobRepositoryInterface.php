@@ -40,4 +40,8 @@ interface YachtJobRepositoryInterface {
      * @return YachtJob|null
      */
     public function updateYachtJob(int $id, array $data): ?YachtJob;
+
+
+    
+    public function getAllSupplier();
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\API\V1\Service;
+namespace App\Repositories\API\V1\Supplier;
 
 use App\Models\Service;
 

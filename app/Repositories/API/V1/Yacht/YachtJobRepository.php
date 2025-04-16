@@ -2,6 +2,7 @@
 
 namespace App\Repositories\API\V1\Yacht;
 
+use App\Models\User;
 use App\Models\YachtJob;
 use Exception;
 use Illuminate\Support\Collection;
@@ -61,4 +62,22 @@ class YachtJobRepository implements YachtJobRepositoryInterface {
         }
         return $job;
     }
+
+    public function getAllSupplier()
+{
+    // dd('getAllSupplier');
+    // Your logic to get all suppliers
+  try{
+     $suppliers = User::with('profile','services','products')->where('role_id', 3)->get();
+    return $suppliers;
+  }
+  catch (\Exception $e) {
+    // Handle the exception
+    Log::error('App\Repositories\API\V1\Supplier\SupplierRepository:getAllSupplier', ['error' => $e->getMessage()]);
+    throw $e;
+
+  }
 }
+}
+
+

@@ -14,12 +14,18 @@ use App\Repositories\API\V1\Freelancer\JobApplicationRepository;
 use App\Repositories\API\V1\Freelancer\JobApplicationRepositoryInterface;
 use App\Repositories\API\V1\Freelancer\ProfileRepository;
 use App\Repositories\API\V1\Freelancer\ProfileRepositoryInterface;
-use App\Repositories\API\V1\Service\ServiceRepository;
-use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
+use App\Repositories\API\V1\Supplier\ServiceRepository;
+use App\Repositories\API\V1\Supplier\ServiceRepositoryInterface;
 use App\Repositories\API\V1\Supplier\ProductSupplierRepository;
 use App\Repositories\API\V1\Supplier\ProductSupplierRepositoryInterface;
+use App\Repositories\API\V1\Supplier\SupplierRepository as SupplierSupplierRepository;
+use App\Repositories\API\V1\Supplier\SupplierRepositoryInterface as SupplierSupplierRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtJobRepository;
 use App\Repositories\API\V1\Yacht\YachtJobRepositoryInterface;
+use App\Repositories\API\V1\Yacht\YachtSupplierOrderRepository;
+use App\Repositories\API\V1\Yacht\YachtSupplierOrderRepositoryInterface;
+use App\Repositories\API\V1\Yacht\YachtSupplierRepository;
+use App\Repositories\API\V1\Yacht\YachtSupplierRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Blog\BlogRepository;
 use App\Repositories\Web\Backend\V1\Blog\BlogRepositoryInterface;
 use App\Repositories\Web\Backend\V1\Dropdown\CityRepository;
@@ -79,16 +85,26 @@ class AppServiceProvider extends ServiceProvider {
         //settings
         $this->app->bind(MailSettingRepositoryInterface::class, MailSettingRepository::class);
 
-        //Api Service Provider
-        $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
+        //Api
+//Yacht Api
+$this->app->bind(YachtJobRepositoryInterface::class, YachtJobRepository::class);
+$this->app->bind(YachtSupplierRepositoryInterface::class, YachtSupplierRepository::class);
+$this->app->bind(YachtSupplierOrderRepositoryInterface::class, YachtSupplierOrderRepository::class);
 
-        $this->app->bind(YachtJobRepositoryInterface::class, YachtJobRepository::class);
-        $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
-        //Supplier
-        $this->app->bind(ProductSupplierRepositoryInterface::class, ProductSupplierRepository::class);
+//Supplier Api
 
-        // Job Application Freelancer
-        $this->app->bind(JobApplicationRepositoryInterface::class, JobApplicationRepository::class);
+$this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
+$this->app->bind(ProductSupplierRepositoryInterface::class, ProductSupplierRepository::class);
+//Crew Api
+
+
+
+//Freelancer Api
+$this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
+// Job Application Freelancer
+$this->app->bind(JobApplicationRepositoryInterface::class, JobApplicationRepository::class);
+
+
     }
 
     /**
