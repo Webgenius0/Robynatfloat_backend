@@ -39,5 +39,29 @@ class YachtSupplierService
             throw $e;
         }
     }
+public function getSupplierProducts()
+{
+    // dd('getAllSupplier');
+    try {
+        $supplier = $this->yachtSupplierRepository->getSupplierProducts();
+        return $supplier;
+    } catch (\Exception $e) {
+        // Handle the exception
+        Log::error('App\Services\API\V1\Yacht\YachtSupplierService:getSupplierProducts', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+}
+
+public function getSupplierProductBySlug($slug){
+    // dd('getAllSupplier');
+    try {
+        $supplier = $this->yachtSupplierRepository->getSupplierProductBySlug($slug);
+        return $supplier;
+    } catch (\Exception $e) {
+        // Handle the exception
+        Log::error('App\Services\API\V1\Yacht\YachtSupplierService:getSupplierProductBySlug', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+}
     // Your service logic goes here
 }

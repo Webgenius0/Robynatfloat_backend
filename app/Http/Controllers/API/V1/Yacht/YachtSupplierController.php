@@ -41,5 +41,38 @@ class YachtSupplierController extends Controller
             throw $e;
         }
     }
+    public function getSupplierProducts()
+    {
+        // dd('getAllSupplier');
+        try {
+            $supplier = $this->yachtSupplierService->getSupplierProducts();
+            if (!$supplier) {
+                return response()->json(['message' => 'Supplier not found'], 404);
+            }
+           return response()->json($supplier, 200,['message' => 'Supplier List Fetched Successfully']);
+        } catch (\Exception $e) {
+            // Handle the exception
+            Log::error('App\Http\Controllers\API\V1\Yacht\YachtSupplierController:getAllSupplier', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    // public function getSupplierProducts($Slug)
+
+    public function getSupplierProductBySlug($slug)
+    {
+        // dd('getAllSupplier');
+        try {
+            $supplier = $this->yachtSupplierService->getSupplierProductBySlug($slug);
+            if (!$supplier) {
+                return response()->json(['message' => 'Supplier not found'], 404);
+            }
+           return response()->json($supplier, 200,['message' => 'Supplier List Fetched Successfully']);
+        } catch (\Exception $e) {
+            // Handle the exception
+            Log::error('App\Http\Controllers\API\V1\Yacht\YachtSupplierController:getAllSupplier', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 
 }

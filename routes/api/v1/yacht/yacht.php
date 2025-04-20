@@ -23,8 +23,10 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::controller(YachtSupplierController::class)->prefix('v1/yacht')->group(function () {
-        Route::get('/all-supplier', 'getAllSupplier');
+        Route::get('/supplier', 'getAllSupplier');
         Route::get('/single-supplier/{id}', 'getSupplierBySlug');
+        Route::get('/supplier/products', 'getSupplierProducts');
+        Route::get('/supplier/products/{slug}', 'getSupplierProductBySlug');
     });
     Route::controller(YachtSupplierOrderController::class)->prefix('v1/yacht')->group(function () {
         Route::get('/order', 'getOrders');

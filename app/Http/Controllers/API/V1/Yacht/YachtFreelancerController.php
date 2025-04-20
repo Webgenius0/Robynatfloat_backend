@@ -17,7 +17,8 @@ class YachtFreelancerController extends Controller
   public function getAllFreelancer()
   {
     try {
-      return $this->yachtFreelancerService->getAllFreelancer();
+      $freelancers= $this->yachtFreelancerService->getAllFreelancer();
+      return $this->success(200, 'All Freelancer list', $freelancers);
     } catch (\Exception $e) {
       Log::error('YachtFreelancerController::getAllFreelancer', ['error' => $e->getMessage()]);
       throw $e;
@@ -26,7 +27,8 @@ class YachtFreelancerController extends Controller
     public function getFreelancerById(int $id)
     {
         try {
-        return $this->yachtFreelancerService->getFreelancerById($id);
+        $freelancer= $this->yachtFreelancerService->getFreelancerById($id);
+        return $this->success(200, 'Single Freelancer list', $freelancer);
         } catch (\Exception $e) {
         Log::error('YachtFreelancerController::getFreelancerById', ['error' => $e->getMessage()]);
         throw $e;

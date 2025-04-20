@@ -20,7 +20,7 @@ class YachtCrewController extends Controller
            if ($crews->isEmpty()) {
                return response()->json(['message' => 'No crew members found.'], 404);
            }
-           return response()->json($crews, 200);
+           return $this->success(200, 'All Crew list', $crews);
        } catch (\Exception $e) {
            // Handle the exception
            return response()->json(['error' => 'An error occurred while fetching crew data.'], 500);
@@ -33,7 +33,7 @@ class YachtCrewController extends Controller
               if (!$crew) {
                 return response()->json(['message' => 'Crew member not found.'], 404);
               }
-              return response()->json($crew, 200);
+              return $this->success(200, 'Single Crew list', $crew);
          } catch (\Exception $e) {
               // Handle the exception
               return response()->json(['error' => 'An error occurred while fetching crew data.'], 500);
