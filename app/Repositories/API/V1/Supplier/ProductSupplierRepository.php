@@ -14,12 +14,9 @@ class ProductSupplierRepository implements ProductSupplierRepositoryInterface
     public function getAllSupplierProduct()
     {
         try{
-            $supplierProducts = Product::with('images')->get();
-            return response()->json([
-                'status' => true,
-                'message' => 'Supplier products retrieved successfully',
-                'data' => $supplierProducts
-            ], 200);
+            $userId = auth()->id();
+            $supplierProducts = Product::with('images')->where('user_id',$userId)->get();
+            return $supplierProducts;
         } catch (\Exception $e) {
             Log::error('App\Repositories\API\V1\Supplier\ProductSupplierRepository:getAllSupplierProduct', ['error' => $e->getMessage()]);
         }

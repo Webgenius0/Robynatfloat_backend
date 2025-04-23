@@ -15,6 +15,7 @@ class Order extends Model
         'shipping',
         'tax',
         'total',
+        'status',
     ];
     protected $casts = [
         'subtotal' => 'float',

@@ -31,14 +31,16 @@ class YachtSupplierOrderRepository implements YachtSupplierOrderRepositoryInterf
         }
     }
     public function getOrders(array $data)
-    {
-        try {
-            return Order::all();
-        } catch (\Exception $e) {
-            Log::error('YachtSupplierOrderRepository::getOrders', ['error' => $e->getMessage()]);
-            throw $e;
-        }
+{
+    try {
+        $userId = auth()->id(); 
+
+        return Order::where('user_id', $userId)->get(); // Fetch only user's orders
+    } catch (\Exception $e) {
+        Log::error('YachtSupplierOrderRepository::getOrders', ['error' => $e->getMessage()]);
+        throw $e;
     }
+}
     public function getOrderById(int $id)
     {
         try {

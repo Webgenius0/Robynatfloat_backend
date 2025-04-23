@@ -29,6 +29,9 @@ class YachtSupplierOrderController extends Controller
     {
         try {
             $orders = $this->yachtSupplierOrderService->getOrders($request->all());
+            if ($orders->isEmpty()) {
+                return response()->json(['message' => 'No orders found'], 404);
+            }
 
             return response()->json(['orders' => $orders], 200);
         } catch (\Exception $e) {

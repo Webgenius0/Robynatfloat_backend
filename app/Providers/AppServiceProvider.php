@@ -18,6 +18,10 @@ use App\Repositories\API\V1\Supplier\ServiceRepository;
 use App\Repositories\API\V1\Supplier\ServiceRepositoryInterface;
 use App\Repositories\API\V1\Supplier\ProductSupplierRepository;
 use App\Repositories\API\V1\Supplier\ProductSupplierRepositoryInterface;
+use App\Repositories\API\V1\Supplier\SupplierManageOrderRepository;
+use App\Repositories\API\V1\Supplier\SupplierManageOrderRepositoryInterface;
+use App\Repositories\API\V1\Supplier\SupplierManageProductRepository;
+use App\Repositories\API\V1\Supplier\SupplierManageProductRepositoryInterface;
 use App\Repositories\API\V1\Supplier\SupplierRepository as SupplierSupplierRepository;
 use App\Repositories\API\V1\Supplier\SupplierRepositoryInterface as SupplierSupplierRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtCrewRepository;
@@ -101,6 +105,8 @@ $this->app->bind(YachtFreelancerRepositoryInterface::class, YachtFreelancerRepos
 
 $this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
 $this->app->bind(ProductSupplierRepositoryInterface::class, ProductSupplierRepository::class);
+$this->app->bind(SupplierManageProductRepositoryInterface::class, SupplierManageProductRepository::class);
+$this->app->bind(SupplierManageOrderRepositoryInterface::class, SupplierManageOrderRepository::class);
 //Crew Api
 
 

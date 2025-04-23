@@ -20,6 +20,13 @@ class ProductSupplierController extends Controller
     {
        try {
           $productSupplier= $this->productSupplierService->getAllSupplierProduct();
+          if(empty($productSupplier)) {
+            return response()->json([
+                'status' => false,
+                'message' => 'No supplier products found',
+                'data' => []
+            ], 404);
+          }
               return response()->json([
                 'status' => true,
                 'message' => 'Supplier products retrieved successfully',
@@ -66,7 +73,7 @@ class ProductSupplierController extends Controller
         try {
 
             $credentials = $productSupplierRequest->validated();
-       
+
             $productSupplier = $this->productSupplierService->updateSupplierProduct($slug, $credentials);
             return response()->json([
                 'status' => true,
