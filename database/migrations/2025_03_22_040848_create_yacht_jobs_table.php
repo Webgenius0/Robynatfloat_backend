@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->decimal('rate_amount_to', 10, 2);
             $table->text('job_description');
 
-            $table->enum('status', ['active', 'inactive'])->default('inactive');
+            $table->enum('status', ['active', 'completed','cancel','pending'])->default('pending');
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
             $table->softDeletes();

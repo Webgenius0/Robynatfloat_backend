@@ -62,8 +62,8 @@ class YachtJobService {
      *
      * @return Collection
      */
-    public function getAllJobs() {
-        return $this->yachtJobRepository->getAllJobs();
+    public function getAllJobs(array $statusChange): Collection {
+        return $this->yachtJobRepository->getAllJobs($statusChange);
     }
 
     /**

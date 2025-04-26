@@ -26,10 +26,14 @@ use App\Repositories\API\V1\Supplier\SupplierRepository as SupplierSupplierRepos
 use App\Repositories\API\V1\Supplier\SupplierRepositoryInterface as SupplierSupplierRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtCrewRepository;
 use App\Repositories\API\V1\Yacht\YachtCrewRepositoryInterface;
+use App\Repositories\API\V1\Yacht\YachtDashboardRepository;
+use App\Repositories\API\V1\Yacht\YachtDashboardRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtFreelancerRepository;
 use App\Repositories\API\V1\Yacht\YachtFreelancerRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtJobRepository;
 use App\Repositories\API\V1\Yacht\YachtJobRepositoryInterface;
+use App\Repositories\API\V1\Yacht\YachtManageApplicationRepository;
+use App\Repositories\API\V1\Yacht\YachtManageApplicationRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtSupplierOrderRepository;
 use App\Repositories\API\V1\Yacht\YachtSupplierOrderRepositoryInterface;
 use App\Repositories\API\V1\Yacht\YachtSupplierRepository;
@@ -100,6 +104,8 @@ $this->app->bind(YachtSupplierRepositoryInterface::class, YachtSupplierRepositor
 $this->app->bind(YachtSupplierOrderRepositoryInterface::class, YachtSupplierOrderRepository::class);
 $this->app->bind(YachtCrewRepositoryInterface::class, YachtCrewRepository::class);
 $this->app->bind(YachtFreelancerRepositoryInterface::class, YachtFreelancerRepository::class);
+$this->app->bind(YachtDashboardRepositoryInterface::class, YachtDashboardRepository::class);
+$this->app->bind(YachtManageApplicationRepositoryInterface::class, YachtManageApplicationRepository::class);
 
 //Supplier Api
 

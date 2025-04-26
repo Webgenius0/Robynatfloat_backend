@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers\API\V1\Yacht;
-
+use Illuminate\Http\Request;
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\Yacht\StoreYachtJobRequest;
@@ -50,12 +50,28 @@ class YachtJobController extends Controller {
      *
      * @return JsonResponse
      */
-    public function index(): JsonResponse {
+    // public function index(Request $statusChange): JsonResponse {
+    //     try {
+    //         $jobs = $this->yachtJobService->getAllJobs($statusChange);
+    //         return Helper::success(200, 'Yacht jobs retrieved successfully', YachtJobResource::collection($jobs));
+    //     } catch (Exception $e) {
+    //         Log::error('YachtJobController::index', ['error' => $e->getMessage()]);
+    //         return Helper::error(500, 'Server error.');
+    //     }
+    // }
+
+    public function getAllJobsStatusBased(Request $request): JsonResponse
+    {
         try {
-            $jobs = $this->yachtJobService->getAllJobs();
+            $statusChange = [
+                'status' => $request->query('status') // 👈 wrap it into array
+            ];
+
+            $jobs = $this->yachtJobService->getAllJobs($statusChange);
+
             return Helper::success(200, 'Yacht jobs retrieved successfully', YachtJobResource::collection($jobs));
         } catch (Exception $e) {
-            Log::error('YachtJobController::index', ['error' => $e->getMessage()]);
+            Log::error('YachtJobController::getAllJobsStatusBased', ['error' => $e->getMessage()]);
             return Helper::error(500, 'Server error.');
         }
     }
@@ -114,5 +130,21 @@ class YachtJobController extends Controller {
         }
     }
 
-    
+    /**
+     * Delete a yacht job using model binding (lookup by slug).
+     *
+     * @param YachtJob $job
+     * @return JsonResponse
+     */
+    public function destroy(YachtJob $slug): JsonResponse {
+        try {
+            $slug->delete();
+            return Helper::success(200, 'Yacht job deleted successfully');
+        } catch (Exception $e) {
+            Log::error('YachtJobController::destroy', ['error' => $e->getMessage()]);
+            return Helper::error(500, 'Server error.');
+        }
+    }
+
+
 }

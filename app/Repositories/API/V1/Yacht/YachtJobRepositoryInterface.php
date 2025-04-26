@@ -4,6 +4,7 @@ namespace App\Repositories\API\V1\Yacht;
 
 use App\Models\YachtJob;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Request;
 
 interface YachtJobRepositoryInterface {
     /**
@@ -20,7 +21,7 @@ interface YachtJobRepositoryInterface {
      *
      * @return Collection
      */
-    public function getAllJobs(): Collection;
+    public function getAllJobs( array $statusChange): Collection;
 
 
     /**
@@ -42,6 +43,6 @@ interface YachtJobRepositoryInterface {
     public function updateYachtJob(int $id, array $data): ?YachtJob;
 
 
-    
+
     public function getAllSupplier();
 }

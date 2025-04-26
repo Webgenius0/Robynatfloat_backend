@@ -1,8 +1,21 @@
 <?php
-    
+
 namespace App\Repositories\API\V1\Yacht;
 
 interface YachtDashboardRepositoryInterface
 {
-    // Define the methods your repository should implement
+    /**
+     * Get the active job list.
+     *
+     * @return mixed
+     */
+    public function getActiveJob();
+
+    /**
+
+     */
+    public function pendingApplication();
+
+    public function getJobApplication();
+
 }

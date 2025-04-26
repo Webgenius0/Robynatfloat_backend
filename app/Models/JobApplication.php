@@ -61,4 +61,10 @@ class JobApplication extends Model {
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
+    public function profile(): BelongsTo {
+        return $this->belongsTo(profile::class, 'user_id');
+    }
+    public function role(): BelongsTo {
+        return $this->belongsTo(Role::class, 'user_id');
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Repositories\API\V1\Yacht;
 use App\Models\User;
 use App\Models\YachtJob;
 use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
 
@@ -26,14 +27,22 @@ class YachtJobRepository implements YachtJobRepositoryInterface {
     }
 
 
-    /**
-     * Retrieve all yacht jobs.
-     *
-     * @return Collection
-     */
-    public function getAllJobs(): Collection {
-        return YachtJob::all();
-    }
+   /**
+ * Retrieve all yacht jobs.
+ *
+ * @param array $statusChange
+ * @return Collection
+ */
+public function getAllJobs(array $statusChange): Collection
+{
+   try{
+    $statusChange = YachtJob::where('status', $statusChange)->get();
+        return $statusChange;
+   }catch (\Exception $e) {
+    Log::error('YachtJobRepository::getAllJobs', ['error' => $e->getMessage()]);
+    throw $e;
+}
+}
 
 
     /**
