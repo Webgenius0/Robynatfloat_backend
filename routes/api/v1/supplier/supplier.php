@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\Freelancer\FreelancerJobApplicationController;
 use App\Http\Controllers\API\V1\Supplier\ServiceController;
 use App\Http\Controllers\API\V1\Supplier\ProductSupplierController;
 use App\Http\Controllers\API\V1\Supplier\SupplierController;
@@ -16,18 +17,18 @@ Route::middleware('auth:api')->group(function () {
 
     //Supplier Dashboard controller
     Route::controller(SupplierDashboardController::class)->prefix('v1/supplier')->group(function () {
-        // Route::get('/dashboard', 'getSupplierDashboard');
-        // Route::get('/dashboard/overview', 'getSupplierOverview');
-        // Route::get('/dashboard/overview/{slug}', 'getSupplierOverviewById');
+        Route::get('/total-order', 'getTotalOrder');
+        Route::get('/total-product', 'getTotalProduct');
+        Route::get('/total-job-application', 'getTotalJobApplication');
     });
 
     //supplier My Job Controller
     Route::controller(SupplierMyJobController::class)->prefix('v1/supplier')->group(function () {
-        // Route::get('/my-job', 'getAllMyJob');
-        // Route::post('/my-job', 'addMyJob');
-        // Route::get('/my-job/{slug}', 'getMyJobById');
-        // Route::post('/my-job/{slug}', 'updateMyJob');
-        // Route::delete('/my-job/{slug}', 'deleteMyJob');
+        Route::get('/suggested-job', 'getSuggestedJob');
+        Route::get('/suggested-job/{slug}', 'getSuggestedJobBySlug');
+        Route::post('/apply-job/{job}', 'applyToJob');
+        Route::get('/applied-job', 'getAppliedJobs');
+        Route::get('/applied-job/{slug}', 'getAppliedJobBySlug');
     });
 
 

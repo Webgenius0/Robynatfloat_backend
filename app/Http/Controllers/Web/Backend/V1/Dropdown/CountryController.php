@@ -40,7 +40,7 @@ class CountryController extends Controller
             if ($request->ajax()) {
                 return $this->countryService->index($request);
             }
-            
+
             return view('backend.layouts.dropdown.country.index');
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\Dropdown\CountryTypeController::index', ['error' => $e->getMessage()]);
