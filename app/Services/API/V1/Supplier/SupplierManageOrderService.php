@@ -44,5 +44,13 @@ class SupplierManageOrderService
             throw $e;
     }
 }
+    public function supplierStatusChange($request){
+        try{
+            return $this->supplierManageOrderRepository->supplierStatusChange($request);
+        }catch (\Exception $e){
+            Log::error('App\Services\API\V1\Supplier\SupplierManageOrderService:supplierStatusChange', ['error' => $e->getMessage()]);
+            throw $e;
+    }
+}
 
 }

@@ -76,4 +76,20 @@ public function deleteSupplierOrder($slug)
         throw $e;
     }
 }
+
+public function supplierStatusChange(Request $request){
+// dd($request->all());
+    try {
+        $response=$this->supplierManageOrderService->supplierStatusChange($request);
+        return $this->success(200, 'Supplier Status Change', $response);
+    }
+    catch (\Exception $e){
+        Log::error('App\Http\Controllers\API\V1\Supplier\SupplierManageOrderController:supplierStatusChange', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+
+
+}
+// }
+
 }

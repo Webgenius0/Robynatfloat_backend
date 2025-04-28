@@ -3,70 +3,115 @@
 namespace App\Repositories\API\V1\Supplier;
 
 use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Log;
 
 class SupplierManageOrderRepository implements SupplierManageOrderRepositoryInterface
-{
-   public function getAllOrder()
-   {
-    // dd('getAllOrder');
-    try {
-        $userId = auth()->id();
-// dd($userId);
-        $order= Order::where('user_id', $userId)->get(); // Fetch only user's orders
-        return $order;
-    } catch (\Exception $e) {
-        Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:getAllOrder', ['error' => $e->getMessage()]);
-        throw $e;
-    }
-   }
-
-   public function getSupplierOrderById($slug)
-   {
-    // dd('getSupplierOrderById');
-    try {
-        $userId = auth()->id();
-        $order= Order::where('user_id', $userId)->where('id', $slug)->first(); // Fetch only user's orders
-        return $order;
-    } catch (\Exception $e) {
-        Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:getSupplierOrderById', ['error' => $e->getMessage()]);
-        throw $e;
-    }
-   }
-    public function updateSupplierOrderStatus($request, $slug)
+{public function getAllOrder()
     {
-     // dd('updateSupplierOrder');
-     try {
-        // dd($request->all());
-          $userId = auth()->id();
-        //   dd($userId);
-          $order= Order::where('user_id', $userId)->where('id', $slug)->first(); // Fetch only user's orders
+        try {
+            $userId = auth()->id();
 
-          $order->update([
+            $orders = Order::whereHas('product', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->get();
+
+            return $orders;
+        } catch (\Exception $e) {
+            Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:getAllOrder', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+
+    public function getSupplierOrderById($slug)
+    {
+        try {
+            $userId = auth()->id();
+
+            $order = Order::where('id', $slug)
+                ->whereHas('product', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                })
+                ->first();
+
+            return $order;
+        } catch (\Exception $e) {
+            Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:getSupplierOrderById', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+
+    public function updateSupplierOrderStatus($request, $slug)
+{
+    try {
+        $userId = auth()->id();
+
+        $order = Order::where('id', $slug)
+            ->whereHas('product', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->first();
+
+        if (!$order) {
+            throw new \Exception('Order not found or unauthorized.');
+        }
+
+        $order->update([
             'status' => $request->input('status'),
         ]);
-        // dd($order);
-          return $order;
-     } catch (\Exception $e) {
-          Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:updateSupplierOrder', ['error' => $e->getMessage()]);
-          throw $e;
-     }
+
+        return $order;
+    } catch (\Exception $e) {
+        Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:updateSupplierOrderStatus', ['error' => $e->getMessage()]);
+        throw $e;
     }
-    public function deleteSupplierOrder($slug)
-    {
-     // dd('deleteSupplierOrder');
-     try {
-          $userId = auth()->id();
-          $order= Order::where('user_id', $userId)->where('id', $slug)->first(); // Fetch only user's orders
-          if ($order) {
-                $order->delete();
-                return true;
-          }
-          return false;
-     } catch (\Exception $e) {
-          Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:deleteSupplierOrder', ['error' => $e->getMessage()]);
-          throw $e;
-     }
+}
+
+public function deleteSupplierOrder($slug)
+{
+    try {
+        $userId = auth()->id();
+
+        $order = Order::where('id', $slug)
+            ->whereHas('product', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->first();
+
+        if ($order) {
+            $order->delete();
+            return true;
+        }
+
+        return false;
+    } catch (\Exception $e) {
+        Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:deleteSupplierOrder', ['error' => $e->getMessage()]);
+        throw $e;
     }
+}
+
+
+public function supplierStatusChange($request)
+{
+    try {
+        $userId = auth()->id();
+
+        $orders = Order::where('status', $request->status)
+            ->whereHas('product', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
+            })
+            ->count();
+
+        return $orders;
+    } catch (\Exception $e) {
+        Log::error('App\Repositories\API\V1\Supplier\SupplierManageOrderRepository:supplierStatusChange', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+}
+
+
 
 }

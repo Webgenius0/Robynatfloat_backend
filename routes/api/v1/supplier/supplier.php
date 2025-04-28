@@ -43,11 +43,12 @@ Route::middleware('auth:api')->group(function () {
 
     //Supplier Manage Order Controller
     Route::controller(SupplierManageOrderController::class)->prefix('v1/supplier')->group(function () {
+
         Route::get('/all-supplier-order', 'getAllOrder');
-        // Route::post('/supplier-order', 'addSupplierOrder');
-        Route::get('/supplier-order/{slug}', 'getSupplierOrderById');
-        Route::put('/supplier-order/{slug}', 'updateSupplierOrderStatus');
-        Route::delete('/supplier-order/{slug}', 'deleteSupplierOrder');
+        Route::get('/order/{slug}', 'getSupplierOrderById');
+        Route::put('/update-order/{slug}', 'updateSupplierOrderStatus');
+        Route::delete('/delete-order/{slug}', 'deleteSupplierOrder');
+        Route::get('/order/statusChange', 'supplierStatusChange' );
 
     });
     //Supplier Message Controller
@@ -75,6 +76,7 @@ Route::middleware('auth:api')->group(function () {
     //         Route::delete('/destroy/{slug}', 'serviceDelete');
     //     });
     // });
+
 
 
 });

@@ -12,6 +12,10 @@ use App\Repositories\API\V1\Auth\PasswordRepository;
 use App\Repositories\API\V1\Auth\PasswordRepositoryInterface;
 use App\Repositories\API\V1\Auth\UserRepository;
 use App\Repositories\API\V1\Auth\UserRepositoryInterface;
+use App\Repositories\API\V1\Crew\CrewDashboardRepository;
+use App\Repositories\API\V1\Crew\CrewDashboardRepositoryInterface;
+use App\Repositories\API\V1\Crew\CrewJobRepository;
+use App\Repositories\API\V1\Crew\CrewJobRepositoryInterface;
 use App\Repositories\API\V1\Freelancer\JobApplicationRepository;
 use App\Repositories\API\V1\Freelancer\JobApplicationRepositoryInterface;
 use App\Repositories\API\V1\Freelancer\ProfileRepository;
@@ -123,7 +127,8 @@ $this->app->bind(SupplierDashboardRepositoryInterface::class, SupplierDashboardR
 $this->app->bind(SupplierMyJobRepositoryInterface::class, SupplierMyJobRepository::class);
 $this->app->bind(ApplyJobRepositoryInterface::class, ApplyJobRepository::class);
 //Crew Api
-
+$this->app->bind(CrewDashboardRepositoryInterface::class, CrewDashboardRepository::class);
+$this->app->bind(CrewJobRepositoryInterface::class, CrewJobRepository::class);
 
 
 //Freelancer Api

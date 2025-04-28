@@ -8,4 +8,5 @@ interface SupplierManageOrderRepositoryInterface
     public function getSupplierOrderById($slug);
     public function updateSupplierOrderStatus($request, $slug);
     public function deleteSupplierOrder($slug);
+    public function supplierStatusChange($request);
 }
