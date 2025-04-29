@@ -3,31 +3,29 @@
 namespace App\Repositories\API\V1\Freelancer;
 
 use App\Models\JobApplication;
+use App\Models\YachtJob;
 use Exception;
 use Illuminate\Support\Facades\Log;
 
 class JobApplicationRepository implements JobApplicationRepositoryInterface {
-    public function store(array $data): JobApplication {
-        try {
-            return JobApplication::create($data);
-        } catch (Exception $e) {
-            Log::error('JobApplicationRepository::store', ['error' => $e->getMessage()]);
-            throw $e;
-        }
-    }
 
-    /**
-     * Return all applications for a given user, including the related job.
-     */
-    public function listMyAppliedJobs(int $userId) {
-        try {
-            return JobApplication::where('user_id', $userId)
-                ->with('job')
-                ->latest()
-                ->get();
-        } catch (Exception $e) {
-            Log::error('JobApplicationRepository::listMyAppliedJobs', ['error' => $e->getMessage()]);
-            throw $e;
-        }
-    }
+        public function getAllJobsStatusBased(){
+         try{
+             $jobs = YachtJob::all();
+             return $jobs;
+         }catch(\Exception $e){
+             Log::error('App\Repositories\API\V1\Freelancer\jobApplicationRepository:getAllJobsStatusBased ' . $e->getMessage());
+             throw $e;
+         }
+     }
+
+     public function getJobBySlug($slug){
+         try{
+             $job = YachtJob::where('slug', $slug)->first();
+             return $job;
+         }catch(\Exception $e){
+             Log::error('App\Repositories\API\V1\Freelancer\jobApplicationRepository:getJobBySlug ' . $e->getMessage());
+             throw $e;
+         }
+     }
 }

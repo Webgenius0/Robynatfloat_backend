@@ -8,38 +8,28 @@ use Exception;
 use Illuminate\Support\Facades\Log;
 
 class JobApplicationService {
-    protected JobApplicationRepositoryInterface $repo;
+    protected JobApplicationRepositoryInterface $jobApplicationRepository;
 
-    public function __construct(JobApplicationRepositoryInterface $repo) {
-        $this->repo = $repo;
+    public function __construct(JobApplicationRepositoryInterface $jobApplicationRepository) {
+        $this->jobApplicationRepository = $jobApplicationRepository;
     }
 
-    /**
-     * Store a new job application.
-     *
-     * @param array $data
-     * @return JobApplication
-     * @throws Exception
-     */
-    public function store(array $data): JobApplication {
-        try {
-            return $this->repo->store($data);
-        } catch (Exception $e) {
-            Log::error('JobApplicationService::store', ['error' => $e->getMessage()]);
+    public function getAllJobsStatusBased(){
+        try{
+            $response = $this->jobApplicationRepository->getAllJobsStatusBased();
+            return $response;
+        }catch(\Exception $e){
+            Log::error('App\Services\API\V1\Freelancer\JobApplicationService:getAllJobsStatusBased ' . $e->getMessage());
             throw $e;
         }
     }
 
-    /**
-     * Return all applications for the specified user ID.
-     *
-     * @param int $userId
-     */
-    public function listMyAppliedJobs(int $userId) {
-        try {
-            return $this->repo->listMyAppliedJobs($userId);
-        } catch (Exception $e) {
-            Log::error('JobApplicationService::listMyAppliedJobs', ['error' => $e->getMessage()]);
+    public function getJobBySlug($slug){
+        try{
+            $response=$this->jobApplicationRepository->getJobBySlug($slug);
+            return $response;
+        }catch(\Exception $e){
+            Log::error('App\Services\API\V1\Freelancer\JobApplicationService:getJobBySlug ' . $e->getMessage());
             throw $e;
         }
     }

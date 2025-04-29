@@ -16,6 +16,8 @@ use App\Repositories\API\V1\Crew\CrewDashboardRepository;
 use App\Repositories\API\V1\Crew\CrewDashboardRepositoryInterface;
 use App\Repositories\API\V1\Crew\CrewJobRepository;
 use App\Repositories\API\V1\Crew\CrewJobRepositoryInterface;
+use App\Repositories\API\V1\Freelancer\FreelancerDashboardRepository;
+use App\Repositories\API\V1\Freelancer\FreelancerDashboardRepositoryInterface;
 use App\Repositories\API\V1\Freelancer\JobApplicationRepository;
 use App\Repositories\API\V1\Freelancer\JobApplicationRepositoryInterface;
 use App\Repositories\API\V1\Freelancer\ProfileRepository;
@@ -133,6 +135,7 @@ $this->app->bind(CrewJobRepositoryInterface::class, CrewJobRepository::class);
 
 //Freelancer Api
 $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
+$this->app->bind(FreelancerDashboardRepositoryInterface::class, FreelancerDashboardRepository::class);
 // Job Application Freelancer
 $this->app->bind(JobApplicationRepositoryInterface::class, JobApplicationRepository::class);
 

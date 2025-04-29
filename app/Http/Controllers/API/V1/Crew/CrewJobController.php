@@ -79,7 +79,7 @@ class CrewJobController extends Controller
             $appliedJobs = $this->applyJobService->getAppliedJobs();
             return $this->success(200, 'Job list retrieved successfully', $appliedJobs);
         } catch (\Exception $e) {
-            Log::error('App\Http\Controllers\API\V1\Supplier\SupplierMyJobController:getAppliedJobs', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\API\V1\Crew\CrewJobController:getAppliedJobs', ['error' => $e->getMessage()]);
             throw $e;
         }
     }
@@ -88,7 +88,7 @@ class CrewJobController extends Controller
             $appliedJob = $this->applyJobService->getAppliedJobBySlug($slug);
             return $this->success(200, 'Job list retrieved successfully', $appliedJob);
         } catch (\Exception $e) {
-            Log::error('App\Http\Controllers\API\V1\Supplier\SupplierMyJobController:getAppliedJobBySlug', ['error' => $e->getMessage()]);
+            Log::error('App\Http\Controllers\API\V1\Crew\CrewJobController:getAppliedJobBySlug', ['error' => $e->getMessage()]);
             throw $e;
         }
     }

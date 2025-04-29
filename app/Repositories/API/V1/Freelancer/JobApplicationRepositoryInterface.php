@@ -5,6 +5,6 @@ namespace App\Repositories\API\V1\Freelancer;
 use App\Models\JobApplication;
 
 interface JobApplicationRepositoryInterface {
-    public function store(array $data): JobApplication;
-    public function listMyAppliedJobs(int $userId);
+    public function getAllJobsStatusBased();
+    public function getJobBySlug($slug);
 }

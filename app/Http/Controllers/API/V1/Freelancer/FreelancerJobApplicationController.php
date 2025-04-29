@@ -4,10 +4,13 @@ namespace App\Http\Controllers\API\V1\Freelancer;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\API\V1\ApplyJobRequest;
 use App\Http\Requests\API\V1\Freelancer\StoreJobApplicationRequest;
+use App\Http\Resources\API\V1\ApplyJobResource;
 use App\Http\Resources\API\V1\Freelancer\FreelancerJobResource;
 use App\Http\Resources\API\V1\Freelancer\JobApplicationResource;
 use App\Models\YachtJob;
+use App\Services\API\V1\ApplyJobService;
 use App\Services\API\V1\Freelancer\JobApplicationService;
 use Exception;
 use Illuminate\Http\JsonResponse;
@@ -16,22 +19,40 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class FreelancerJobApplicationController extends Controller {
-    protected JobApplicationService $service;
+    protected JobApplicationService $jobApplicationService;
+    protected ApplyJobService $applyJobService;
 
-    public function __construct(JobApplicationService $service) {
-        $this->service = $service;
+    public function __construct(JobApplicationService $jobApplicationService, ApplyJobService $applyJobService) {
+        $this->jobApplicationService = $jobApplicationService;
+        $this->applyJobService = $applyJobService;
     }
 
-    /**
-     * Store a new application for the given YachtJob.
-     *
-     * @param StoreJobApplicationRequest $request
-     * @param YachtJob $job
-     * @return JsonResponse
-     */
-    public function store(StoreJobApplicationRequest $request, YachtJob $job): JsonResponse {
+    public function getAllJobsStatusBased(){
+
+        try{
+            $response=$this->jobApplicationService->getAllJobsStatusBased();
+            return $this->success(200, 'Jobs', $response);
+        }catch(\Exception $e){
+            Log::error('App\Http\Controllers\API\V1\Freelancer\FreelancerJobApplicationController:getAllJobsStatusBased ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function getJobBySlug($slug){
+        try{
+            $response=$this->jobApplicationService->getJobBySlug($slug);
+            return $this->success(200, 'Job', $response);
+        }catch(\Exception $e){
+            Log::error('App\Http\Controllers\API\V1\Freelancer\FreelancerJobApplicationController:getJobBySlug ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
+    public function applyToJob(ApplyJobRequest $request, YachtJob $job): JsonResponse {
+        // dd($job);
         try {
             $data = $request->validated();
+            // dd($data);
 
             // Use Helper::uploadFile to store the CV in 'cvs' directory on the public disk
             $cvPath               = Helper::uploadFile($request->file('cv'), 'cvs');
@@ -41,10 +62,10 @@ class FreelancerJobApplicationController extends Controller {
 
             // Generate unique slug for application
             $data['slug'] = Str::slug($data['name'] . '-' . now()->timestamp . '-' . Str::random(6));
+// dd($data);
+            $application = $this->applyJobService->applyToJob($data);
 
-            $application = $this->service->store($data);
-
-            return Helper::success(201, 'Application submitted successfully', new JobApplicationResource($application));
+            return Helper::success(201, 'Application submitted successfully', new ApplyJobResource($application));
         } catch (Exception $e) {
             Log::error('FreelancerJobApplicationController::store', [
                 'error' => $e->getMessage(),
@@ -53,29 +74,24 @@ class FreelancerJobApplicationController extends Controller {
         }
     }
 
-    /**
-     * List all jobs the currently authenticated user has applied to.
-     *
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function listMyAppliedJobs(Request $request): JsonResponse {
+    public function getAppliedJobs(){
         try {
-            $user         = $request->user();
-            $applications = $this->service->listMyAppliedJobs($user->id);
-
-            // Map each application to its YachtJob
-            $jobs = $applications->map(fn($application) => $application->job)
-                ->filter()
-                ->unique('id')
-                ->values();
-
-            return Helper::success(200, 'My applied jobs retrieved successfully', FreelancerJobResource::collection($jobs));
-        } catch (Exception $e) {
-            Log::error('FreelancerJobApplicationController::listMyAppliedJobs', [
-                'error' => $e->getMessage(),
-            ]);
-            return Helper::error(500, 'Server error.');
+            // dd('getAppliedJobs');
+            $appliedJobs = $this->applyJobService->getAppliedJobs();
+            return $this->success(200, 'Job list retrieved successfully', $appliedJobs);
+        } catch (\Exception $e) {
+            Log::error('App\Http\Controllers\API\V1\Freelancer\FreelancerJobApplicationController:getAppliedJobs', ['error' => $e->getMessage()]);
+            throw $e;
         }
     }
+    public function getAppliedJobBySlug($slug){
+        try {
+            $appliedJob = $this->applyJobService->getAppliedJobBySlug($slug);
+            return $this->success(200, 'Job list retrieved successfully', $appliedJob);
+        } catch (\Exception $e) {
+            Log::error('App\Http\Controllers\API\V1\Freelancer\FreelancerJobApplicationController:getAppliedJobBySlug', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
 }
