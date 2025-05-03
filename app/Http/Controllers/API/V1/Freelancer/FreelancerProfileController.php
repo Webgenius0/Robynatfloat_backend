@@ -47,7 +47,8 @@ class FreelancerProfileController extends Controller {
      * @param UpdateProfileRequest $request
      * @return JsonResponse
      */
-    public function updateProfile(UpdateProfileRequest $request): JsonResponse {
+    public function profileUpdate(UpdateProfileRequest $request): JsonResponse {
+        // dd($request);
         DB::beginTransaction();
         try {
             $user        = $request->user();

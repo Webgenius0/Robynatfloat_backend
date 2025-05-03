@@ -4,6 +4,7 @@ use App\Http\Controllers\API\V1\Auth\AuthController;
 use App\Http\Controllers\API\V1\Auth\ForgerPasswordController;
 use App\Http\Controllers\API\V1\Auth\OTPController;
 use App\Http\Controllers\API\V1\Auth\PasswordController;
+use App\Http\Controllers\API\V1\Freelancer\FreelancerProfileController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -56,9 +57,15 @@ Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
     //profile Update routes
     Route::middleware('auth:api')->group(function () {
         // Profile Update - Only accessible to logged-in users
-        Route::controller(AuthController::class)->group(function () {
+        Route::controller(FreelancerProfileController::class)->group(function () {
             Route::post('/profile-update', 'profileUpdate')->name('profile.update');
+            Route::get('/profile-update', 'profile');
         });
     });
+    // Route::middleware('auth:api')->group(function () {
+    //     Route::controller(::class)->prefix('v1/freelancer')->group(function () {
 
+    //         Route::post('/profile', 'updateProfile');
+    //     });
+    // });
 });
