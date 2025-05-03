@@ -17,6 +17,14 @@ return new class extends Migration {
             $table->string('phone_number')->nullable();
             $table->string('location')->nullable();
             $table->string('handle')->unique();
+            $table->string('yacht_name')->nullable();
+            $table->string('yacht_size')->nullable();
+            $table->string('business_name')->nullable();
+            $table->string('business_category')->nullable();
+            $table->string('nationality')->nullable();
+            $table->string('department')->nullable();
+            $table->string('freelancer_name')->nullable();
+            $table->string('freelancer_category')->nullable();
 
             $table->string('email', 255)->unique();
             $table->timestamp('email_verified_at')->nullable();
