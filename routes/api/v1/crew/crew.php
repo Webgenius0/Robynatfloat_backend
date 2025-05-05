@@ -4,7 +4,7 @@ use App\Http\Controllers\API\V1\Crew\CrewDashboardController;
 use App\Http\Controllers\API\V1\Crew\CrewJobController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api','api.verified'])->group(function () {
 
 //Crew Dashboard route
 Route::controller(CrewDashboardController::class)->prefix('v1/crew')->group(function () {

@@ -41,7 +41,7 @@ Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
 
 
     // Authenticated routes - Accessible only by authenticated users
-    Route::middleware('auth:api')->group(function () {
+    Route::middleware(['auth:api','api.verified'])->group(function () {
         // Authentication-related routes
         Route::controller(AuthController::class)->group(function () {
             Route::post('/logout', 'logout')->name('logout');
@@ -55,7 +55,7 @@ Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
     });
 
     //profile Update routes
-    Route::middleware('auth:api')->group(function () {
+    Route::middleware(['auth:api','api.verified'])->group(function () {
         // Profile Update - Only accessible to logged-in users
         Route::controller(FreelancerProfileController::class)->group(function () {
             Route::post('/profile-update', 'profileUpdate')->name('profile.update');

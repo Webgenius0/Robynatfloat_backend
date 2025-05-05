@@ -11,7 +11,7 @@ use App\Http\Controllers\API\V1\Yacht\YachtSupplierOrderController;
 use Illuminate\Support\Facades\Route;
 
 // This route is for the Yacht Job API in the Yacht dashboard.
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api','api.verified'])->group(function () {
 
 
     //YachtDashboard Route List

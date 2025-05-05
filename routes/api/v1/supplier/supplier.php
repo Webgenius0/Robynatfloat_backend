@@ -11,7 +11,7 @@ use App\Http\Controllers\API\V1\Supplier\SupplierMessageController;
 use App\Http\Controllers\API\V1\Supplier\SupplierMyJobController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth:api')->group(function () {
+Route::middleware(['auth:api','api.verified'])->group(function () {
 
 
 
