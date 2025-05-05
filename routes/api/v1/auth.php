@@ -9,18 +9,17 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
+    Route::get('/get-user', [AuthController::class, 'getUser'])->name('get.user')->middleware('auth:api');
     // Guest routes - Accessible by unauthenticated users only
     Route::middleware('guest:api')->group(function () {
         // Authentication-related routes
         Route::controller(AuthController::class)->group(function () {
             Route::post('/login', 'login')->name('login');
             Route::post('/register', 'register')->name('register');
+
         });
 
-        //profile Update routes
-        // Route::controller(AuthController::class)->group(function () {
-        //     Route::post('/profile-update', 'profileUpdate')->name('profile.update');
-        // });
+
 
         // Password-related routes
         Route::controller(PasswordController::class)->group(function () {

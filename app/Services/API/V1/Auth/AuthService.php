@@ -137,4 +137,13 @@ class AuthService
             throw $e;
         }
     }
+    public function getUser()
+    {
+        try {
+            return $this->userRepository->getUser();
+        } catch (Exception $e) {
+            Log::error('AuthService::getUserList', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

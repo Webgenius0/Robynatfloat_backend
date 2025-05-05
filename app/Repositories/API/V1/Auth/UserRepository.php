@@ -45,7 +45,7 @@ class UserRepository implements UserRepositoryInterface
                 'department' => $credentials['department'],
                 'freelancer_name' => $credentials['freelancer_name'],
                 'freelancer_category' => $credentials['freelancer_category'],
-                
+
             ]);
             // creating user profile
             $user->profile()->create([]);
@@ -105,5 +105,18 @@ class UserRepository implements UserRepositoryInterface
             throw $e;
         }
 
+    }
+
+    public function getUser(): User
+    {
+        try {
+            // dd('getUser');
+            $user = auth()->user(); // OR: User::find(auth()->id())
+            // dd($user);
+            return $user;
+        } catch (Exception $e) {
+            Log::error('UserRepository::getUser', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 }

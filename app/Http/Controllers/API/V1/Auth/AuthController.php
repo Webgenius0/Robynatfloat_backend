@@ -152,4 +152,19 @@ class AuthController extends Controller
             return $this->error(500, 'server Error', $e->getMessage());
         }
     }
+
+    public function getUser()
+    {
+        // dd('getUser');
+        try {
+            $response = $this->authService->getUser();
+            return $this->success(200, 'User List', $response);
+        } catch (Exception $e) {
+            Log::error('AuthService::getUserList', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error', $e->getMessage());
+        }
+
+
+    }
+
 }

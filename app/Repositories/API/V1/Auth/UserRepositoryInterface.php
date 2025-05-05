@@ -34,4 +34,6 @@ interface UserRepositoryInterface
      */
     public function updateUser(array $credentials, User $user): void;
 
+    public function getUser(): User;
+
 }
