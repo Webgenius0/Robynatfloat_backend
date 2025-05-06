@@ -64,7 +64,7 @@ class YachtJobController extends Controller {
     {
         try {
             $statusChange = [
-                'status' => $request->query('status') 
+                'status' => $request->query('status') // 👈 wrap it into array
             ];
 
             $jobs = $this->yachtJobService->getAllJobs($statusChange);
