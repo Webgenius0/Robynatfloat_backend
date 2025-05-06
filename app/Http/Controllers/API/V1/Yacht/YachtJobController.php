@@ -6,8 +6,7 @@ use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\API\V1\Yacht\StoreYachtJobRequest;
 use App\Http\Requests\API\V1\Yacht\UpdateYachtJobRequest;
-use App\Http\Resources\API\V1\ApplyJobResource;
-// use App\Http\Resources\API\V1\Yacht\ApplyJobResource;
+use App\Http\Resources\API\V1\Yacht\YachtJobResource;
 use App\Models\Skill;
 use App\Models\YachtJob;
 use App\Services\API\V1\Yacht\YachtJobService;
@@ -39,7 +38,7 @@ class YachtJobController extends Controller {
 
             $yachtJob->load('skills');
 
-            return Helper::success(201, 'Yacht job created successfully', new ApplyJobResource($yachtJob));
+            return Helper::success(201, 'Yacht job created successfully', new YachtJobResource($yachtJob));
         } catch (Exception $e) {
             Log::error('YachtJobController::store', ['error' => $e->getMessage()]);
             return Helper::error(500, 'Server error.');
@@ -54,7 +53,7 @@ class YachtJobController extends Controller {
     // public function index(Request $statusChange): JsonResponse {
     //     try {
     //         $jobs = $this->yachtJobService->getAllJobs($statusChange);
-    //         return Helper::success(200, 'Yacht jobs retrieved successfully', ApplyJobResource::collection($jobs));
+    //         return Helper::success(200, 'Yacht jobs retrieved successfully', YachtJobResource::collection($jobs));
     //     } catch (Exception $e) {
     //         Log::error('YachtJobController::index', ['error' => $e->getMessage()]);
     //         return Helper::error(500, 'Server error.');
@@ -65,12 +64,12 @@ class YachtJobController extends Controller {
     {
         try {
             $statusChange = [
-                'status' => $request->query('status') // 👈 wrap it into array
+                'status' => $request->query('status') 
             ];
 
             $jobs = $this->yachtJobService->getAllJobs($statusChange);
 
-            return Helper::success(200, 'Yacht jobs retrieved successfully', ApplyJobResource::collection($jobs));
+            return Helper::success(200, 'Yacht jobs retrieved successfully', YachtJobResource::collection($jobs));
         } catch (Exception $e) {
             Log::error('YachtJobController::getAllJobsStatusBased', ['error' => $e->getMessage()]);
             return Helper::error(500, 'Server error.');
@@ -85,7 +84,7 @@ class YachtJobController extends Controller {
      */
     public function show(YachtJob $job): JsonResponse {
         try {
-            return Helper::success(200, 'Yacht job retrieved successfully', new ApplyJobResource($job));
+            return Helper::success(200, 'Yacht job retrieved successfully', new YachtJobResource($job));
         } catch (Exception $e) {
             Log::error('YachtJobController::show', ['error' => $e->getMessage()]);
             return Helper::error(500, 'Server error.');
@@ -124,7 +123,7 @@ class YachtJobController extends Controller {
 
             $updatedJob->load('skills');
 
-            return Helper::success(200, 'Yacht job updated successfully', new ApplyJobResource($updatedJob));
+            return Helper::success(200, 'Yacht job updated successfully', new YachtJobResource($updatedJob));
         } catch (Exception $e) {
             Log::error('YachtJobController::update', ['error' => $e->getMessage()]);
             return Helper::error(500, 'Server error.');
