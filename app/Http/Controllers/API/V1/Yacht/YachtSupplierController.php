@@ -19,7 +19,7 @@ class YachtSupplierController extends Controller
         // dd('getAllSupplier');
         try {
             $suppliers = $this->yachtSupplierService->getAllSupplier();
-           return response()->json($suppliers, 200,['message' => 'Supplier List Fetched Successfully']);
+          return $this->success(200, 'Supplier List Fetched Successfully', $suppliers);
         } catch (\Exception $e) {
             // Handle the exception
             Log::error('App\Http\Controllers\API\V1\Yacht\YachtSupplierController:getAllSupplier', ['error' => $e->getMessage()]);
@@ -34,7 +34,7 @@ class YachtSupplierController extends Controller
             if (!$supplier) {
                 return response()->json(['message' => 'Supplier not found'], 404);
             }
-           return response()->json($supplier, 200,['message' => 'Supplier List Fetched Successfully']);
+           return $this->success(200, 'Supplier List Fetched Successfully', $supplier);
         } catch (\Exception $e) {
             // Handle the exception
             Log::error('App\Http\Controllers\API\V1\Yacht\YachtSupplierController:getAllSupplier', ['error' => $e->getMessage()]);
@@ -49,7 +49,7 @@ class YachtSupplierController extends Controller
             if (!$supplier) {
                 return response()->json(['message' => 'Supplier not found'], 404);
             }
-           return response()->json($supplier, 200,['message' => 'Supplier List Fetched Successfully']);
+           return $this->success(200, 'Supplier Product List Fetched Successfully', $supplier);
         } catch (\Exception $e) {
             // Handle the exception
             Log::error('App\Http\Controllers\API\V1\Yacht\YachtSupplierController:getAllSupplier', ['error' => $e->getMessage()]);
@@ -67,7 +67,7 @@ class YachtSupplierController extends Controller
             if (!$supplier) {
                 return response()->json(['message' => 'Supplier not found'], 404);
             }
-           return response()->json($supplier, 200,['message' => 'Supplier List Fetched Successfully']);
+           return $this->success(200, 'Supplier Product List Fetched Successfully', $supplier);
         } catch (\Exception $e) {
             // Handle the exception
             Log::error('App\Http\Controllers\API\V1\Yacht\YachtSupplierController:getAllSupplier', ['error' => $e->getMessage()]);

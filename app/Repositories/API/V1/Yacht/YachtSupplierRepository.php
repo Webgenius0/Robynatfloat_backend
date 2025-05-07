@@ -13,7 +13,7 @@ class YachtSupplierRepository implements YachtSupplierRepositoryInterface
         // dd('getAllSupplier');
         // Your logic to get all suppliers
       try{
-         $suppliers = User::with('profile')->where('role_id', 3)->get();
+         $suppliers = User::with('profile')->where('role_id', 3)->paginate(10);
         return $suppliers;
       }
       catch (\Exception $e) {
@@ -42,7 +42,7 @@ class YachtSupplierRepository implements YachtSupplierRepositoryInterface
     public function getSupplierProducts()
     {
       try{
-        $supplierProducts = Product::with('images')->get();
+        $supplierProducts = Product::with('images')->paginate(10);
         return $supplierProducts;
       }
       catch (\Exception $e) {

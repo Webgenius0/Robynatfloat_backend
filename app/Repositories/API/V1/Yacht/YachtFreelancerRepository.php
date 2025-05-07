@@ -12,7 +12,7 @@ class YachtFreelancerRepository implements YachtFreelancerRepositoryInterface
     {
         // Your logic to get all suppliers
         try {
-            $freelancers = User::with('profile')->where('role_id', 5)->get();
+            $freelancers = User::with('profile')->where('role_id', 5)->paginate(10);
             return $freelancers;
         } catch (\Exception $e) {
             // Handle the exception

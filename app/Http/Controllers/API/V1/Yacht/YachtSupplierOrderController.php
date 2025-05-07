@@ -20,7 +20,7 @@ class YachtSupplierOrderController extends Controller
             $data = $yachtSupplierOrderRequest->validated();
             $order = $this->yachtSupplierOrderService->storeOrders($data);
 
-            return response()->json(['message' => 'Order created successfully', 'order' => $order], 201);
+            return $this->success(201, 'Order Created Successfully', $order);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to create order'], 500);
         }
@@ -33,7 +33,7 @@ class YachtSupplierOrderController extends Controller
                 return response()->json(['message' => 'No orders found'], 404);
             }
 
-            return response()->json(['orders' => $orders], 200);
+            return $this->success(200, 'Orders Fetched Successfully', $orders);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to retrieve orders'], 500);
         }
@@ -43,7 +43,7 @@ class YachtSupplierOrderController extends Controller
         try {
             $order = $this->yachtSupplierOrderService->getOrderById($id);
 
-            return response()->json(['order' => $order], 200);
+            return $this->success(200, 'Order Fetched Successfully', $order);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Failed to retrieve order'], 500);
         }

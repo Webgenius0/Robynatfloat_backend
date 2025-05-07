@@ -13,7 +13,7 @@ class YachtCrewRepository implements YachtCrewRepositoryInterface
         // dd('getAllSupplier');
         // Your logic to get all suppliers
       try{
-         $crews = User::with('profile')->where('role_id', 4)->get();
+         $crews = User::with('profile')->where('role_id', 4)->paginate(10);
         return $crews;
       }
       catch (\Exception $e) {

@@ -11,7 +11,7 @@ class YachtManageApplicationRepository implements YachtManageApplicationReposito
     {
         // dd('getJobApplication');
         try {
-            $getAllJobApplication = JobApplication::with('user', 'profile', 'role')->get();
+            $getAllJobApplication = JobApplication::with(['user', 'profile', 'role'])->latest()->paginate(10);
             return $getAllJobApplication;
         }catch (\Exception $e) {
             Log::error('app/Repositories/API/V1/Yacht/YachtManageApplicationRepository.php:getJobApplication ' . $e->getMessage());
@@ -21,7 +21,7 @@ class YachtManageApplicationRepository implements YachtManageApplicationReposito
     public function getJobApplicationBySlug($slug)
     {
         try {
-            $getJobApplicationBySlug = JobApplication::with('user', 'profile', 'role')->where('slug', $slug)->first();
+            $getJobApplicationBySlug = JobApplication::with(['user', 'profile', 'role'])->where('slug', $slug)->first();
             return $getJobApplicationBySlug;
         }catch (\Exception $e) {
             Log::error('app/Repositories/API/V1/Yacht/YachtManageApplicationRepository.php:getJobApplicationBySlug ' . $e->getMessage());
