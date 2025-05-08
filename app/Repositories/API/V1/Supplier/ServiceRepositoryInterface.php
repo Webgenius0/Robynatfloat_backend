@@ -13,4 +13,9 @@ interface ServiceRepositoryInterface
     public function serviceUpdate(array $credentials, Service $service, $slug): Service;
     public function serviceDelete($slug);
     public function serviceShow($slug);
+    public function galleryStore(array $request);
+    public function getGallery();
+    public function updateGallery(array $request, $slug);
+    public function destroyGallery($slug);
+
 }

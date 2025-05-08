@@ -63,4 +63,39 @@ class ServiceService
             throw $e;
         }
     }
+    public function galleryStore(array $request){
+        try {
+            return $this->serviceRepository->galleryStore($request);
+        } catch (Exception $e) {
+            Log::error('App\Services\API\V1\Service\ServiceService::galleryStore', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    public function getGallery(){
+        try {
+            return $this->serviceRepository->getGallery();
+        } catch (Exception $e) {
+            Log::error('App\Services\API\V1\Service\ServiceService::getGallery', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    public function updateGallery(array $request, $slug){
+        try{
+            return $this->serviceRepository->updateGallery($request,$slug);
+        }catch(Exception $e){
+            Log::error('App\Services\API\V1\Service\ServiceService::updateGallery', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
+
+    public function destroyGallery($slug){
+        try {
+            return $this->serviceRepository->destroyGallery($slug);
+        } catch (Exception $e) {
+            Log::error('App\Services\API\V1\Service\ServiceService::destroyGallery', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
 }

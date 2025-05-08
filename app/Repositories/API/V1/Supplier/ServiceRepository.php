@@ -2,10 +2,12 @@
 namespace App\Repositories\API\V1\Supplier;
 
 use App\Helpers\Helper;
+use App\Models\GalleryImage;
 use App\Models\Service;
 use App\Repositories\API\V1\Supplier\ServiceRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceRepository implements ServiceRepositoryInterface
 {
@@ -127,6 +129,86 @@ class ServiceRepository implements ServiceRepositoryInterface
             throw $e;
         }
     }
+
+    public function galleryStore(array $request)
+{
+    try {
+        // Check if an image is present
+        if (isset($request['gallery_image'])) {
+            $imageFile = $request['gallery_image'];
+
+            // Store the image in the 'public/services' directory
+            $path = $imageFile->store('gallery_images', 'public');
+
+            // Create a new gallery image record
+            $galleryImage = GalleryImage::create([
+                'user_id' => auth()->id(),
+                'gallery_image' => $path,
+            ]);
+
+            return $galleryImage;
+        } else {
+            throw new \Exception('No image file provided.');
+        }
+    } catch (\Exception $e) {
+        // Log any errors that occur during image storage
+        Log::error('Failed to store gallery image: ' . $e->getMessage());
+        throw $e;
+    }
+}
+public function getGallery(){
+    try{
+        $gallery = GalleryImage::where('user_id', auth()->id())->get();
+        return $gallery;
+    }catch(Exception $e){
+        Log::error('App\Repositories\API\V1\Service\ServiceRepository::getGallery', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+}
+
+public function updateGallery(array $request,$slug){
+    try{
+        $galleryImage = GalleryImage::where('id', $slug)->first();
+        // Check if a new image is provided
+        if (isset($request['gallery_image'])) {
+            $imageFile = $request['gallery_image'];
+
+            // Delete the old image if it exists
+            if ($galleryImage->gallery_image && Storage::disk('public')->exists($galleryImage->gallery_image)) {
+                Storage::disk('public')->delete($galleryImage->gallery_image);
+            }
+
+            // Store the new image
+            $path = $imageFile->store('gallery_images', 'public');
+
+            // Update the image path
+            $galleryImage->update([
+                'gallery_image' => $path,
+            ]);
+        }
+
+        return $galleryImage;
+
+
+    }catch(Exception $e){
+        Log::error('App\Repositories\API\V1\Service\ServiceRepository::updateGallery', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+}
+
+public function destroyGallery($slug){
+    try {
+        $galleryImage = GalleryImage::where('id', $slug)->first();
+        if ($galleryImage->gallery_image && Storage::disk('public')->exists($galleryImage->gallery_image)) {
+            Storage::disk('public')->delete($galleryImage->gallery_image);
+        }
+        $galleryImage->delete();
+        return $galleryImage;
+    } catch (Exception $e) {
+        Log::error('App\Repositories\API\V1\Service\ServiceRepository::destroyGallery', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+}
 
 
 }

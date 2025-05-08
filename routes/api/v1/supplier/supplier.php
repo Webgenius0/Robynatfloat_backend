@@ -74,6 +74,10 @@ Route::middleware(['auth:api','api.verified'])->group(function () {
             Route::get('/service-show/{slug}', 'serviceShow');
             Route::put('/service-update/{slug}', 'serviceUpdate');
             Route::delete('/service-destroy/{slug}', 'serviceDelete');
+            Route::post('/gallery-store','galleryStore');
+            Route::get('/gallery','getGallery');
+            Route::post('/gallery-update/{slug} ','updateGallery');
+            Route::delete('/gallery-destroy/{slug} ','destroyGallery');
         });
     });
 

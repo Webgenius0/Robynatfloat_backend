@@ -50,10 +50,7 @@ class ServiceController extends Controller
         $updatedService = $this->serviceService->serviceUpdate($validatedData, $service, $slug);
 
         // Return success response
-        return response()->json([
-            'message' => 'Updated successfully.',
-            'data' => $updatedService,
-        ], 200);
+        return $this->success(200, 'Service updated successfully.', $updatedService);
 
     } catch (\Exception $e) {
         // Log the error and return a 404 error if the service is not found
@@ -79,9 +76,60 @@ class ServiceController extends Controller
     public function serviceDelete($slug): JsonResponse{
         try {
             $response = $this->serviceService->serviceDelete($slug);
-            return $this->success(200, ' Deleted Successfull', $response);
+            return $this->success(200, ' Deleted Successfully', $response);
         } catch (Exception $e) {
             Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+    public function galleryStore(Request $request): JsonResponse{
+        try {
+            // dd($request);
+            $validated = $request->validate([
+                // 'user_id' => 'required|exists:users,id',
+                'gallery_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+            // dd($validated);
+            $response = $this->serviceService->galleryStore($validated);
+            return $this->success(200, 'Gallery Created Successfully', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+    public function getGallery(): JsonResponse{
+        try {
+            $response = $this->serviceService->getGallery();
+            return $this->success(200, 'Gallery Retrieved Successfully', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::edit', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+    public function updateGallery(Request $request,$slug): JsonResponse{
+        try {
+            $validated = $request->validate([
+                'gallery_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
+
+
+            $response = $this->serviceService->updateGallery($validated,$slug);
+            return $this->success(200, 'Gallery Updated Successfully', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::update', ['error' => $e->getMessage()]);
+            return $this->error(500, 'Server Error.');
+        }
+    }
+
+    public function destroyGallery($slug): JsonResponse{
+        try {
+            $response = $this->serviceService->destroyGallery($slug);
+            return $this->success(200, 'Gallery Deleted Successfully', $response);
+        } catch (Exception $e) {
+            Log::error('App\Http\Controllers\Web\Backend\V1\service\serviceController::destroy', ['error' => $e->getMessage()]);
             return $this->error(500, 'Server Error.');
         }
     }
