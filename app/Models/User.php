@@ -226,4 +226,9 @@ class User extends Authenticatable implements JWTSubject, MustVerifyEmail {
     public function jobApplications(): HasMany {
         return $this->hasMany(JobApplication::class);
     }
+
+   //message one to many
+    public function messages(): HasMany {
+        return $this->hasMany(Message::class);
+    }
 }

@@ -3,7 +3,9 @@
 namespace App\Services\API\V1\Supplier;
 
 use App\Models\Service;
-use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
+use App\Repositories\API\V1\Supplier\ServiceRepositoryInterface;
+// use App\Repositories\API\V1\Service\ServiceRepositoryInterface;
+// use App\Repositories\API\V1\Supplier\ServiceRepositoryInterface as SupplierServiceRepositoryInterface;
 use Exception;
 use Illuminate\Support\Facades\Log;
 

@@ -28,7 +28,7 @@ class SupplierDashboardController extends Controller
         public function getTotalProduct(){
             try {
                 $totalProduct = $this->supplierDashboardService->getTotalProduct();
-                return $this->success(200, 'Product list retrieved successfully', $totalProduct);
+                return $this->success(200, 'Total Count list successfully', $totalProduct);
             } catch (\Exception $e) {
                 Log::error('App\Http\Controllers\API\V1\Supplier\SupplierDashboardController:getTotalProduct', ['error' => $e->getMessage()]);
                 throw $e;

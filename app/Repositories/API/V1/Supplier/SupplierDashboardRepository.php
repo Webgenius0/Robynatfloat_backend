@@ -12,11 +12,11 @@ class SupplierDashboardRepository implements SupplierDashboardRepositoryInterfac
 
     public function getTotalOrder(){
         try{
-            $totalOrder = Order::where('user_id', auth()->user()->id)->count();
+            // $totalOrder = Order::where('user_id', auth()->user()->id)->count();
             $allOrder= Order::where('user_id', auth()->user()->id)->get();
 
         return [
-            'totalOrder' => $totalOrder,
+            // 'totalOrder' => $totalOrder,
             'allOrder' => $allOrder
         ];
         }catch(\Exception $e){
@@ -27,8 +27,14 @@ class SupplierDashboardRepository implements SupplierDashboardRepositoryInterfac
 
     public function getTotalProduct(){
         try{
+            $totalOrder = Order::where('user_id', auth()->user()->id)->count();
             $totalProduct = Product::where('user_id', auth()->user()->id)->count();
-        return $totalProduct;
+            $totalApplication = JobApplication::where('user_id', auth()->user()->id)->count();
+        return [
+            'totalOrder'=>$totalOrder,
+            'totalProduct'=>$totalProduct,
+            'totalApplication'=>$totalApplication
+        ];
         }catch(\Exception $e){
             Log::error('App\Repositories\API\V1\Supplier\SupplierDashboardRepository:totalProduct', ['error' => $e->getMessage()]);
             throw $e;

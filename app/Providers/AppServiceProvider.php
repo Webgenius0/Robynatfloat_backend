@@ -128,6 +128,7 @@ $this->app->bind(SupplierManageOrderRepositoryInterface::class, SupplierManageOr
 $this->app->bind(SupplierDashboardRepositoryInterface::class, SupplierDashboardRepository::class);
 $this->app->bind(SupplierMyJobRepositoryInterface::class, SupplierMyJobRepository::class);
 $this->app->bind(ApplyJobRepositoryInterface::class, ApplyJobRepository::class);
+$this->app->bind(ServiceRepositoryInterface::class, ServiceRepository::class);
 //Crew Api
 $this->app->bind(CrewDashboardRepositoryInterface::class, CrewDashboardRepository::class);
 $this->app->bind(CrewJobRepositoryInterface::class, CrewJobRepository::class);

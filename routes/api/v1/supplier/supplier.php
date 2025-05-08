@@ -18,8 +18,8 @@ Route::middleware(['auth:api','api.verified'])->group(function () {
     //Supplier Dashboard controller
     Route::controller(SupplierDashboardController::class)->prefix('v1/supplier')->group(function () {
         Route::get('/total-order', 'getTotalOrder');
-        Route::get('/total-product', 'getTotalProduct');
-        Route::get('/total-job-application', 'getTotalJobApplication');
+        Route::get('/total-count-list', 'getTotalProduct');
+        // Route::get('/total-job-application', 'getTotalJobApplication');
     });
 
     //supplier My Job Controller
@@ -66,16 +66,16 @@ Route::middleware(['auth:api','api.verified'])->group(function () {
     //     Route::delete('/supplier-product/{slug}', 'deleteSupplierProduct');
 
     // });
-    // Route::middleware('auth:api')->group(function () {
-    //     // Profile Update - Only accessible to logged-in users
-    //     Route::controller(ServiceController::class)->prefix('v1/service')->group(function () {
-    //         Route::post('/store', 'serviceStore');
-    //         Route::get('/index', 'serviceIndex');
-    //         Route::get('/show/{slug}', 'serviceShow');
-    //         Route::put('/update/{slug}', 'serviceUpdate');
-    //         Route::delete('/destroy/{slug}', 'serviceDelete');
-    //     });
-    // });
+    Route::middleware('auth:api')->group(function () {
+        // Profile Update - Only accessible to logged-in users
+        Route::controller(ServiceController::class)->prefix('v1/supplier')->group(function () {
+            Route::post('/service-store', 'serviceStore');
+            Route::get('/service-index', 'serviceIndex');
+            Route::get('/service-show/{slug}', 'serviceShow');
+            Route::put('/service-update/{slug}', 'serviceUpdate');
+            Route::delete('/service-destroy/{slug}', 'serviceDelete');
+        });
+    });
 
 
 

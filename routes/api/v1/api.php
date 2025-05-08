@@ -1,8 +1,16 @@
 <?php
 
+use App\Http\Controllers\API\V1\ChatController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+//chat message
+//! Message Routes
+Route::middleware('auth:api')->group(function () {
+    Route::get('/messages/{user}', [ChatController::class, 'GetMessages']);
+    Route::post('/send-messages/{user}', [ChatController::class, 'SendMessage']);
+    Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
+});
 
 
 require __DIR__.'/auth.php';
