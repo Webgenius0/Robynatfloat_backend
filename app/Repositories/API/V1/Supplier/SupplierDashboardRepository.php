@@ -31,9 +31,10 @@ class SupplierDashboardRepository implements SupplierDashboardRepositoryInterfac
             $totalProduct = Product::where('user_id', auth()->user()->id)->count();
             $totalApplication = JobApplication::where('user_id', auth()->user()->id)->count();
         return [
-            'totalOrder'=>$totalOrder,
-            'totalProduct'=>$totalProduct,
-            'totalApplication'=>$totalApplication
+            'total_order'=>$totalOrder,
+            'total_product'=>$totalProduct,
+            'total_application'=>$totalApplication,
+            'total_revenue'=>0
         ];
         }catch(\Exception $e){
             Log::error('App\Repositories\API\V1\Supplier\SupplierDashboardRepository:totalProduct', ['error' => $e->getMessage()]);
