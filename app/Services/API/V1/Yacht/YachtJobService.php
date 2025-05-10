@@ -2,6 +2,7 @@
 
 namespace App\Services\API\V1\Yacht;
 
+use App\Helpers\Helper;
 use App\Models\Skill;
 use App\Models\YachtJob;
 use App\Repositories\API\V1\Yacht\YachtJobRepositoryInterface;
@@ -62,8 +63,8 @@ class YachtJobService {
      *
      * @return Collection
      */
-    public function getAllJobs(array $statusChange): Collection {
-        return $this->yachtJobRepository->getAllJobs($statusChange);
+    public function getAllJobsStatusBased(array $withStatus): Collection {
+        return $this->yachtJobRepository->getAllJobsStatusBased($withStatus);
     }
 
     /**
@@ -85,5 +86,15 @@ class YachtJobService {
      */
     public function updateYachtJob(int $id, array $data): ?YachtJob {
         return $this->yachtJobRepository->updateYachtJob($id, $data);
+    }
+
+    public function statusChange($slug, array $data) {
+        try {
+            return $this->yachtJobRepository->statusChange($slug, $data);
+
+        } catch (Exception $e) {
+            Log::error('YachtJobController::getJobBySlug', ['error' => $e->getMessage()]);
+            throw $e;
+        }
     }
 }

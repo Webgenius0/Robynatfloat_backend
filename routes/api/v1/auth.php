@@ -52,7 +52,7 @@ Route::prefix('/v1/auth')->name('api.v1.auth.')->group(function () {
         // Profile Update - Only accessible to logged-in users
         Route::controller(FreelancerProfileController::class)->group(function () {
             Route::post('/profile-update', 'profileUpdate')->name('profile.update');
-            Route::get('/profile-update', 'profile');
+            // Route::get('/profile-update', 'profile');
         });
     });
     // Route::middleware('auth:api')->group(function () {

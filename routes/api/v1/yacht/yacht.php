@@ -23,10 +23,12 @@ Route::middleware(['auth:api','api.verified'])->group(function () {
 //YachtJob Route List
     Route::controller(YachtJobController::class)->prefix('v1/yacht')->group(function () {
         Route::get('/job', 'getAllJobsStatusBased');
+        Route::post('/job/{slug}/status', 'statusChange');
         Route::post('/job', 'store');
         Route::get('/job/{job}', 'show');
         Route::patch('/job/{job}', 'update');
         Route::delete('/job/{slug}', 'destroy');
+
         // Route::get('/all-suppler', 'getAllSupplier');
     });
 

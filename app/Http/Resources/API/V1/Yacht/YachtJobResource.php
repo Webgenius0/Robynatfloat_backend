@@ -28,6 +28,7 @@ class YachtJobResource extends JsonResource {
             'rate_amount_to'       => $this->rate_amount_to,
             'job_description'      => $this->job_description,
             'skills'               => $this->whenLoaded('skills', fn() => $this->skills->pluck('name')),
+            'created_at'               => $this->created_at
         ];
     }
 }

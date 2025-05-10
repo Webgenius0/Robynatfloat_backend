@@ -63,12 +63,12 @@ class YachtJobController extends Controller {
     public function getAllJobsStatusBased(Request $request): JsonResponse
     {
         try {
-            $statusChange = [
+            $withStatus = [
                 'status' => $request->query('status') // 👈 wrap it into array
             ];
 
-            $jobs = $this->yachtJobService->getAllJobs($statusChange);
-
+            $jobs = $this->yachtJobService->getAllJobsStatusBased($withStatus);
+            // dd($jobs);
             return Helper::success(200, 'Yacht jobs retrieved successfully', YachtJobResource::collection($jobs));
         } catch (Exception $e) {
             Log::error('YachtJobController::getAllJobsStatusBased', ['error' => $e->getMessage()]);
@@ -84,6 +84,7 @@ class YachtJobController extends Controller {
      */
     public function show(YachtJob $job): JsonResponse {
         try {
+            $job->load('skills');
             return Helper::success(200, 'Yacht job retrieved successfully', new YachtJobResource($job));
         } catch (Exception $e) {
             Log::error('YachtJobController::show', ['error' => $e->getMessage()]);
@@ -142,6 +143,21 @@ class YachtJobController extends Controller {
             return Helper::success(200, 'Yacht job deleted successfully');
         } catch (Exception $e) {
             Log::error('YachtJobController::destroy', ['error' => $e->getMessage()]);
+            return Helper::error(500, 'Server error.');
+        }
+    }
+
+    public function statusChange($slug,Request $request): JsonResponse {
+        try {
+            $request->validate([
+                'status' => 'required|in:active,completed,canceled', // Adjust as needed
+            ]);
+            // dd($request->all());
+
+            $job = $this->yachtJobService->statusChange($slug, $request->all());
+            return Helper::success(200, 'Yacht job retrieved successfully', new YachtJobResource($job));
+        } catch (Exception $e) {
+            Log::error('YachtJobController::getJobBySlug', ['error' => $e->getMessage()]);
             return Helper::error(500, 'Server error.');
         }
     }

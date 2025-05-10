@@ -33,10 +33,10 @@ class YachtJobRepository implements YachtJobRepositoryInterface {
  * @param array $statusChange
  * @return Collection
  */
-public function getAllJobs(array $statusChange): Collection
+public function getAllJobsStatusBased(array $withStatus): Collection
 {
    try{
-    $statusChange = YachtJob::where('status', $statusChange)->get();
+    $statusChange = YachtJob::where('status', $withStatus)->get();
         return $statusChange;
    }catch (\Exception $e) {
     Log::error('YachtJobRepository::getAllJobs', ['error' => $e->getMessage()]);
@@ -86,6 +86,23 @@ public function getAllJobs(array $statusChange): Collection
     throw $e;
 
   }
+}
+
+public function statusChange($slug, array $data) {
+    try {
+        $job = YachtJob::where('slug', $slug)->firstOrFail();
+
+        // Update the status
+        $job->status = $data['status'];
+        $job->save();
+        return $job;
+
+    } catch (Exception $e) {
+        Log::error('YachtJobController::getJobBySlug', ['error' => $e->getMessage()]);
+        throw $e;
+    }
+
+
 }
 }
 

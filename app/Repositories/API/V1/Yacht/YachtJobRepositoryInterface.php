@@ -21,7 +21,7 @@ interface YachtJobRepositoryInterface {
      *
      * @return Collection
      */
-    public function getAllJobs( array $statusChange): Collection;
+    public function getAllJobsStatusBased( array $withStatus): Collection;
 
 
     /**
@@ -45,4 +45,6 @@ interface YachtJobRepositoryInterface {
 
 
     public function getAllSupplier();
+
+    public function statusChange($slug, array $data);
 }

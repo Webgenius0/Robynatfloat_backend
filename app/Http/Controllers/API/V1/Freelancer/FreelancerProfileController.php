@@ -4,8 +4,8 @@ namespace App\Http\Controllers\API\V1\Freelancer;
 
 use App\Helpers\Helper;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Freelancer\UpdateProfileRequest;
-use App\Http\Resources\Api\V1\Freelancer\UserResource;
+use App\Http\Requests\API\V1\Freelancer\UpdateProfileRequest;
+use App\Http\Resources\API\V1\Freelancer\UserResource;
 use App\Services\API\V1\Freelancer\ProfileService;
 use Exception;
 use Illuminate\Http\JsonResponse;

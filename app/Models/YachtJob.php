@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\User;
 use App\Models\Skill;
 use App\Models\JobApplication;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -48,10 +49,12 @@ class YachtJob extends Model {
         'rate_amount_to'       => 'decimal:2',
         'job_description'      => 'string',
         'status'               => 'string',
-        'created_at'           => 'datetime',
-        'updated_at'           => 'datetime',
+        // 'created_at'           => 'datetime',
+        // 'updated_at'           => 'datetime',
         'deleted_at'           => 'datetime',
     ];
+
+    // protected $appends = ['timestamp'];
 
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
@@ -67,5 +70,10 @@ class YachtJob extends Model {
 
     public function skills(): BelongsToMany {
         return $this->belongsToMany(Skill::class, 'job_skills');
+    }
+
+
+    public function getTimestampAttribute(): string {
+        return $this->created_at ? $this->created_at->format('Y-m-d\TH:i:sP') . ' GMT+00:00' : 'N/A';
     }
 }
