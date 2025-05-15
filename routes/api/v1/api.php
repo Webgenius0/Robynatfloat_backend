@@ -1,16 +1,20 @@
 <?php
 
 use App\Http\Controllers\API\V1\ChatController;
+use App\Http\Controllers\API\V1\PaymentController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-//chat message
+
 //! Message Routes
 Route::middleware('auth:api')->group(function () {
     Route::get('/messages/{user}', [ChatController::class, 'GetMessages']);
     Route::post('/send-messages/{user}', [ChatController::class, 'SendMessage']);
     Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
 });
+//Payment Routes
+Route::post('/payment',[PaymentController::class,'payment']);
+
 
 
 require __DIR__.'/auth.php';

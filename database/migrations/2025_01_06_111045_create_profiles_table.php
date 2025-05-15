@@ -23,6 +23,10 @@ return new class extends Migration {
             $table->string('instagram')->nullable();
             $table->string('youtube')->nullable();
             $table->string('linkedin')->nullable();
+            $table->string('yacht_length')->nullable();
+            $table->string('yacht_year_build')->nullable();
+            $table->string('yacht_location')->nullable();
+            
 
             $table->softDeletes();
             $table->timestamps();

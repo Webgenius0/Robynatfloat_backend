@@ -44,6 +44,9 @@ class UpdateProfileRequest extends FormRequest {
             'youtube'                => 'sometimes|nullable|url',
             'linkedin'               => 'sometimes|nullable|url',
             'web'                    => 'sometimes|nullable|url',
+            'yacht_length'           => 'sometimes|nullable|string|max:50',
+            'yacht_year_build'       => 'sometimes|nullable|string|max:4',
+            'yacht_location'         => 'sometimes|nullable|string|max:255',
 
             // Experiences – an array of experiences
             'experiences'            => 'sometimes|array',

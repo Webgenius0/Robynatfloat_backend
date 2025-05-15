@@ -281,6 +281,21 @@
                 <!-- Nav item yacth end -->
 
                 <!-- Nav item users end .................. -->
+ <li class="nav-item">
+    <div class="navbar-heading">Pricing</div>
+</li>
+<li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('admin.subscription.plan.*') ? 'active' : '' }}"
+        href="{{ route('admin.subscription.plan.index') }}">
+        <svg fill="{{ request()->routeIs('admin.subscription.plan.*') ? '#624bff' : '#9199a5' }}"
+            height="18px" width="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            style="margin-right: 5px">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm1-13h-2v6h2V7zm0 8h-2v2h2v-2z"></path>
+        </svg>
+        Subscription Plan
+    </a>
+</li>
+
 
 
                 <!-- Nav item dropdown seart ............... -->

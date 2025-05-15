@@ -157,7 +157,7 @@ class AuthController extends Controller
     {
         // dd('getUser');
         try {
-            $response = $this->authService->getUser();
+             $response = $this->authService->getUser()->load('profile','profile.images');
             return $this->success(200, 'User List', $response);
         } catch (Exception $e) {
             Log::error('AuthService::getUserList', ['error' => $e->getMessage()]);

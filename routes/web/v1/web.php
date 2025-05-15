@@ -30,5 +30,7 @@ Route::prefix('/admin')->group(function () {
         require __DIR__. '/blog/blog.php';
         //settings
         require __DIR__. '/setting/setting.php';
+        //subscription
+        require __DIR__. '/subscription/subscription.php';
     });
 });

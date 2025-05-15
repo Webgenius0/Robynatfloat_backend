@@ -37,13 +37,23 @@ class ProfileRepository implements ProfileRepositoryInterface {
 
             // Update profile
             $profileData = array_intersect_key($data, array_flip([
-                'bio', 'cv_url', 'facebook', 'instagram', 'youtube', 'linkedin',
+                'bio', 'cv_url', 'facebook', 'instagram', 'youtube', 'linkedin','yacht_length', 'yacht_year_build', 'yacht_location',
+
             ]));
             if (request()->hasFile('cv_url')) {
                 $profileData['cv_url'] = Helper::uploadFile(request()->file('cv_url'), 'documents');
             }
             $user->profile ? $user->profile->update($profileData) : $user->profile()->create($profileData);
 
+             // Handle yacht images
+       // Handle yacht images (ensure profile exists)
+if ($user->profile && request()->hasFile('yacht_images')) {
+    foreach (request()->file('yacht_images') as $image) {
+        $url = Helper::uploadFile($image, 'yachts');
+        $user->profile->images()->create(['url' => $url]);
+    }
+}
+// dd($user->profile->images);
             // Update experiences
             if (isset($data['experiences']) && is_array($data['experiences'])) {
                 foreach ($data['experiences'] as $exp) {
