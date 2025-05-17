@@ -13,7 +13,11 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
 });
 //Payment Routes
-Route::post('/payment',[PaymentController::class,'payment']);
+Route::controller(PaymentController::class)->prefix('v1/payment')->group(function () {
+    Route::get('/subscription', 'getSubscription');
+    Route::post('/create-payment', 'CreatePayment');
+
+});
 
 
 

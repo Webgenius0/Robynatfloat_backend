@@ -7,13 +7,13 @@ use App\Models\Feature;
 use App\Models\Plan;
 use App\Models\PlanFeature;
 use Illuminate\Http\Request;
-use PhpParser\Node\Expr\FuncCall;
+use Illuminate\Support\Str;
 
 class FeaturePlanController extends Controller
-
-   {
+{
     public function index()
     {
+        // dd('hi');
         $planFeatures = PlanFeature::with(['plan', 'feature'])->latest()->get();
         return view('backend.layouts.subscription.planFeature.index', compact('planFeatures'));
     }
@@ -29,12 +29,20 @@ class FeaturePlanController extends Controller
     {
         $request->validate([
             'plan_id' => 'required|exists:plans,id',
-            'feature_id' => 'required|exists:features,id',
+            'feature_name' => 'required|string|max:255',
+            'description' => 'nullable|string',
         ]);
-
+// dd($request);
+        // Create or find the feature
+        $feature = Feature::updateOrCreate(
+            ['name' => $request->feature_name],
+            ['slug' => Str::slug($request->feature_name), 'description' => $request->description]
+);
+// dd($feature);
+        // Attach the feature to the plan
         PlanFeature::create([
             'plan_id' => $request->plan_id,
-            'feature_id' => $request->feature_id,
+            'feature_id' => $feature->id,
         ]);
 
         return redirect()->route('admin.subscription.featurePlan.index')->with('success', 'Feature plan added successfully.');
@@ -48,21 +56,34 @@ class FeaturePlanController extends Controller
         return view('backend.layouts.subscription.planFeature.edit', compact('planFeature', 'plans', 'features'));
     }
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'plan_id' => 'required|exists:plans,id',
-            'feature_id' => 'required|exists:features,id',
-        ]);
+   public function update(Request $request, $id)
+{
+    // Validate the incoming request
+    $request->validate([
+        'plan_id' => 'required|exists:plans,id',
+        'feature_id' => 'required|exists:features,id',
+        'description' => 'nullable|string',
+    ]);
 
-        $planFeature = PlanFeature::findOrFail($id);
-        $planFeature->update([
-            'plan_id' => $request->plan_id,
-            'feature_id' => $request->feature_id,
-        ]);
+    // Find the PlanFeature record
+    $planFeature = PlanFeature::findOrFail($id);
 
-        return redirect()->route('admin.subscription.featurePlan.index')->with('success', 'Feature plan updated successfully.');
+    // Update the plan and feature association
+    $planFeature->update([
+        'plan_id' => $request->plan_id,
+        'feature_id' => $request->feature_id,
+    ]);
+
+    // Optionally, update the feature description if provided
+    if ($request->filled('description')) {
+        $feature = Feature::findOrFail($request->feature_id);
+        $feature->update(['description' => $request->description]);
     }
+
+    // Redirect back with success message
+    return redirect()->route('admin.subscription.featurePlan.index')->with('success', 'Feature plan updated successfully.');
+}
+
 
     public function destroy($id)
     {
@@ -72,4 +93,3 @@ class FeaturePlanController extends Controller
         return redirect()->route('admin.subscription.featurePlan.index')->with('success', 'Feature plan deleted successfully.');
     }
 }
-

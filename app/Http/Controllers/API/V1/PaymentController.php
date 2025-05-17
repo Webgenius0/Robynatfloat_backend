@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
+use App\Models\PlanFeature;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Stripe\PaymentIntent;
@@ -11,6 +13,17 @@ use Stripe\Stripe;
 class PaymentController extends Controller
 
    {
+
+    public function getSubscription(){
+        try{
+            $planFeatures = PlanFeature::with(['plan', 'feature'])->latest()->get();
+            return $this->success(200, 'Plan Features', $planFeatures);
+
+        }catch(Exception $e){
+            Log::error('App\Http\Controllers\API\V1\PaymentController::getSubscription', ['error' => $e->getMessage()]);
+            throw $e;
+        }
+    }
     public function Payment(Request $request)
     {
 
