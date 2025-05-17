@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ResetController;
+use App\Http\Controllers\Web\Backend\V1\Dashboard\DashboardController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -9,9 +10,11 @@ Route::get('/', function () {
 Route::get('/reset', [ResetController::class, 'RunMigrations'])->name('reset');
 
 Route::prefix('/admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('backend.layouts.dashboard.index');
-    })->middleware(['auth', 'web.verified'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'web.verified'])->name('dashboard');
+    // Route::get('/profile', [DashboardController::class, 'profileEdit'])->middleware(['auth', 'web.verified'])->name('profile.edit');
+    // Route::post('/profile', [DashboardController::class, 'profileUpdate'])->middleware(['auth', 'web.verified'])->name('profile.update');
+
+    // })->middleware(['auth', 'web.verified'])->name('dashboard');
 
     require __DIR__ . '/auth/auth.php';
 

@@ -39,7 +39,7 @@ class Image extends Model
 
     /**
      * Define a polymorphic relationship.
-     * Indicates that this model can belongto multiple other models.
+     * Indicates that this model can belong to multiple other models.
      * @return MorphTo<Model, Image>
      */
     public function imageable():MorphTo

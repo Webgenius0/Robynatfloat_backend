@@ -34,14 +34,14 @@ class RegisterRequest extends FormRequest
             'password'   => "required|confirmed",
             'role_id' => "required|exists:roles,id",
             'yacht_name' => "nullable|string",
-            'yacht_size' => "nullable|string",
+            'yacht_type' => "nullable|string",
             'business_name' => "nullable|string",
             'business_category' => "nullable|string",
             'nationality' => "nullable|string",
             'department' => "nullable|string",
             'freelancer_name' => "nullable|string",
             'freelancer_category' => "nullable|string",
-            
+
 
         ];
     }

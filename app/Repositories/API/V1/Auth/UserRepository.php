@@ -38,7 +38,7 @@ class UserRepository implements UserRepositoryInterface
                 'password' => Hash::make($credentials['password']),
                 'role_id' => $credentials['role_id'],
                 'yacht_name' => $credentials['yacht_name'],
-                'yacht_size' => $credentials['yacht_size'],
+                'yacht_type' => $credentials['yacht_type'],
                 'business_name' => $credentials['business_name'],
                 'business_category' => $credentials['business_category'],
                 'nationality' => $credentials['nationality'],
