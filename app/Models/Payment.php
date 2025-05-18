@@ -10,17 +10,13 @@ class Payment extends Model
    use HasFactory;
 
     protected $fillable = [
-        'subscription_id',
-        'amount',
-        'payment_method',
-        'payment_status',
-        'transaction_id',
-        'paid_at',
+       'user_id', 'amount', 'currency', 'stripe_payment_intent_id', 'stripe_transfer_id', 'status',
     ];
 
-      protected $casts = [
-        'paid_at' => 'datetime',
-    ];
+    public function payable()
+    {
+        return $this->morphTo();
+    }
 
     protected $hidden = [
         'created_at',
@@ -30,5 +26,9 @@ class Payment extends Model
     public function subscription()
     {
         return $this->belongsTo(Subscription::class);
+    }
+      public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

@@ -27,7 +27,7 @@ class ProfileRepository implements ProfileRepositoryInterface {
         try {
             // Update user fields
             $userData = array_intersect_key($data, array_flip([
-                'first_name', 'last_name', 'email', 'location', 'phone_number',
+                'first_name', 'last_name', 'email', 'location', 'phone_number','yacht_type'
             ]));
 
             if (request()->hasFile('avatar')) {

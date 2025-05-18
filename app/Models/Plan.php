@@ -31,4 +31,9 @@ class Plan extends Model
                 ->using(PlanFeature::class)
                 ->withTimestamps();
 }
+
+ public function payments()
+    {
+        return $this->morphMany(Payment::class, 'payable');
+    }
 }

@@ -13,11 +13,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
 });
 //Payment Routes
-Route::controller(PaymentController::class)->prefix('v1/payment')->group(function () {
-    Route::get('/subscription', 'getSubscription');
-    Route::post('/create-payment', 'CreatePayment');
 
-});
 
 
 
@@ -27,3 +23,4 @@ require __DIR__.'/yacht/yacht.php';
 require __DIR__.'/freelancer/freelancer.php';
 require __DIR__.'/supplier/supplier.php';
 require __DIR__.'/crew/crew.php';
+require __DIR__.'/payment/payment.php';
