@@ -4,7 +4,6 @@
 namespace App\Http\Controllers\API\V1\Payment;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\V1\Payment\PaymentRequest;
 use App\Models\Order;
 use App\Models\Payment;
 use App\Models\Plan;
@@ -16,6 +15,7 @@ use Illuminate\Support\Facades\Log;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Stripe\Checkout\Session;
 use Stripe\PaymentIntent;
 use Stripe\Stripe;
 
@@ -40,73 +40,104 @@ class PaymentController extends Controller
     }
 
     public function createPayment(Request $request, $type, $id, $user_id)
-    {
-        // Validate the incoming request
-        $request->validate([
-            'amount' => 'required|integer|min:1',
-            'currency' => 'required|string|size:3',
-        ]);
-// dd($request);
-        // Map the type to the model
-        $modelClass = match ($type) {
-            'plan' => Plan::class,
-            'order' => Order::class,
-            default => null,
-        };
+{
+    // Validate the incoming request
+    $request->validate([
+        'amount' => 'required|integer|min:1',
+        'currency' => 'required|string|in:usd',
+    ]);
 
-        if (!$modelClass) {
-            return response()->json(['error' => 'Invalid payment type.'], 400);
-        }
+    // Map the type to the model
+    $modelClass = match ($type) {
+        'plan' => Plan::class,
+        'order' => Order::class,
+        default => null,
+    };
 
-        // Fetch the payable model
-        $payable = $modelClass::find($id);
-        if (!$payable) {
-            return response()->json(['error' => 'Payable item not found.'], 404);
-        }
-
-        // Fetch the user
-        $user = User::find($user_id);
-        if (!$user) {
-            return response()->json(['error' => 'User not found.'], 404);
-        }
-// dd($user);
-        try {
-            // Set Stripe secret key
-            Stripe::setApiKey(env('STRIPE_SECRET'));
-
-            // Create a payment intent with split payments
-            $paymentIntent = PaymentIntent::create([
-                'amount' => $request->amount,
-                'currency' => $request->currency,
-                'automatic_payment_methods' => ['enabled' => true],
-                'metadata' => [
-                    'type' => $type,
-                    'model_id' => $id,
-                    'user_id' => $user_id,
-                ],
-            ]);
-
-            // dd($paymentIntent);
-
-            // Store the payment in the database
-            $payable->payments()->create([
-                'user_id' => $user_id,
-                'amount' => $request->amount,
-                'currency' => $request->currency,
-                'status' => 'pending',
-                'payment_intent_id' => $paymentIntent->id,
-            ]);
-
-            // Return the client secret
-            return response()->json([
-                'payment_url' => route('stripe.checkout', ['payment_intent' => $paymentIntent->id]),
-                'client_secret' => $paymentIntent->client_secret,
-                'message' => 'Payment initiated successfully.',
-            ], 201);
-
-        } catch (\Exception $e) {
-            Log::error('Stripe Error: ' . $e->getMessage());
-            return response()->json(['error' => 'Failed to create payment.'], 500);
-        }
+    if (!$modelClass) {
+        return response()->json(['error' => 'Invalid payment type.'], 400);
     }
+
+    // Fetch the payable model
+    $payable = $modelClass::find($id);
+    if (!$payable) {
+        return response()->json(['error' => 'Payable item not found.'], 404);
+    }
+
+    // Fetch the user
+    $user = User::find($user_id);
+    if (!$user) {
+        return response()->json(['error' => 'User not found.'], 404);
+    }
+
+    try {
+        // Set Stripe secret key
+        Stripe::setApiKey(env('STRIPE_SECRET'));
+
+        // Create Stripe Checkout Session
+        $session = Session::create([
+            'payment_method_types' => ['card'],
+            'line_items' => [[
+                'price_data' => [
+                    'currency' => $request->currency,
+                    'product_data' => [
+                        'name' => ucfirst($type) . ' #' . $id,
+                        'description' => "Payment for {$type} ID {$id}",
+                    ],
+                    'unit_amount' => $request->amount * 100,
+                ],
+                'quantity' => 1,
+            ]],
+            'mode' => 'payment',
+            'success_url' => route('payment.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url' => route('payment.cancel'),
+            'metadata' => [
+                'type' => $type,
+                'model_id' => $id,
+                'user_id' => $user_id,
+            ],
+        ]);
+
+        // Store the payment record as pending
+        $payable->payments()->create([
+            'user_id' => $user_id,
+            'amount' => $request->amount,
+            'currency' => $request->currency,
+            'status' => 'pending',
+            'payment_intent_id' => $session->payment_intent, // Note: Stripe Checkout creates PaymentIntent internally
+        ]);
+
+        return response()->json([
+            'payment_url' => $session->url,
+            'message' => 'Checkout session created successfully.',
+        ], 201);
+
+    } catch (\Exception $e) {
+        Log::error('Stripe Error: ' . $e->getMessage());
+        return response()->json(['error' => 'Failed to create payment session.'], 500);
+    }
+}
+
+public function paymentSuccess(Request $request)
+{
+    $session_id = $request->query('session_id');
+
+    if (!$session_id) {
+        return response()->json([
+            'message' => 'Payment session not found',
+        ], 404);
+    }
+
+    return response()->json([
+        'message' => 'Payment successful',
+        'session_id' => $session_id,
+    ]);
+}
+
+public function paymentCancel()
+{
+    return response()->json([
+        'message' => 'Payment canceled by user',
+    ]);
+}
 }
