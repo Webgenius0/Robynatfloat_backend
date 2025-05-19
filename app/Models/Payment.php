@@ -10,7 +10,13 @@ class Payment extends Model
    use HasFactory;
 
     protected $fillable = [
-       'user_id', 'amount', 'currency', 'stripe_payment_intent_id', 'stripe_transfer_id', 'status',
+        'user_id',
+        'payment_method',
+        'stripe_payment_id',
+        'currency',
+        'amount',
+        'status',
+        'metadata',
     ];
 
     public function payable()

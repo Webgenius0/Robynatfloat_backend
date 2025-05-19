@@ -13,7 +13,9 @@ return new class extends Migration
     {
         Schema::create('features', function (Blueprint $table) {
             $table->id();
-              $table->string('name')->nullable(false);
+              $table->string('plan_name')->nullable(false);
+             $table->integer('plan_price')->nullable(false);
+             $table->integer('plan_full_price')->nullable(false);
             $table->string('slug' )->unique()->nullable(false);
             $table->longText('description')->nullable();
             $table->timestamps();

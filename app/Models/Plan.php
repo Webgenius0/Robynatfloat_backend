@@ -14,10 +14,8 @@ class Plan extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
+        'plan_type',
         'slug',
-        'monthly_price',
-        'full_price',
         'description',
     ];
 

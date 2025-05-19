@@ -18,18 +18,8 @@
             <div class="card mb-4">
                 <div class="card-body">
                     <div class="mb-3">
-                        <label for="name" class="form-label">Plan Name</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter plan name" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="monthly_price" class="form-label">Monthly Price</label>
-                        <input type="number" class="form-control" id="monthly_price" name="monthly_price" placeholder="Enter monthly price" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="full_price" class="form-label">Full Price</label>
-                        <input type="number" class="form-control" id="full_price" name="full_price" placeholder="Enter full price" required>
+                        <label for="name" class="form-label">Plan Type</label>
+                        <input type="text" class="form-control" id="name" name="plan_type" placeholder="Enter plan name" required>
                     </div>
 
                     <div class="mb-3">

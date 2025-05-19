@@ -31,17 +31,21 @@
                             <table class="table text-nowrap mb-0 table-centered table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Plan</th>
-                                        <th>Feature</th>
-                                        <th>Description</th>
+                                        <th>Plan Type</th>
+                                        <th>Plan Name</th>
+                                        <th>Plan Price</th>
+                                        <th>Plan Full Price</th>
+                                        <th> FeatureDescription</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($planFeatures as $planFeature)
                                     <tr>
-                                        <td>{{ $planFeature->plan->name }}</td>
-                                        <td>{{ $planFeature->feature->name }}</td>
+                                        <td>{{ $planFeature->plan->plan_type }}</td>
+                                        <td>{{ $planFeature->feature->plan_name }}</td>
+                                        <td>${{ number_format($planFeature->feature->plan_price, 2) }}</td>
+                                        <td>${{ number_format($planFeature->feature->plan_full_price, 2) }}</td>
                                         <td>{!! Str::limit($planFeature->feature->description ?? 'No Description', 50) !!}</td>
                                         <td>
                                             <a href="{{ route('admin.subscription.featurePlan.edit', $planFeature->id) }}" class="btn btn-sm btn-warning">Edit</a>

@@ -20,17 +20,7 @@
                 <div class="card-body">
                     <div class="mb-3">
                         <label for="name" class="form-label">Plan Name</label>
-                        <input type="text" class="form-control" id="name" name="name" value="{{ $plan->name }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="monthly_price" class="form-label">Monthly Price</label>
-                        <input type="number" class="form-control" id="monthly_price" name="monthly_price" value="{{ $plan->monthly_price }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="full_price" class="form-label">Full Price</label>
-                        <input type="number" class="form-control" id="full_price" name="full_price" value="{{ $plan->full_price }}" required>
+                        <input type="text" class="form-control" id="name" name="plan_type" value="{{ $plan->plan_type }}" required>
                     </div>
 
                     <div class="mb-3">

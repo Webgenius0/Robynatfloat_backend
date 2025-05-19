@@ -13,13 +13,14 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->morphs('payable'); // Polymorphic relation
-             $table->foreignId('user_id')->constrained()->onDelete('cascade');
-            $table->unsignedBigInteger('amount');
-            $table->string('currency', 3)->default('USD');
-            $table->string('stripe_payment_intent_id')->nullable();
-            $table->string('stripe_transfer_id')->nullable();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
+           $table->morphs('payable');
+            $table->string('payment_method')->default('stripe');
+            $table->string('stripe_payment_id')->nullable();
+            $table->string('currency')->default('usd');
+            $table->integer('amount');
             $table->string('status')->default('pending');
+            $table->json('metadata')->nullable();
             $table->timestamps();
         });
     }

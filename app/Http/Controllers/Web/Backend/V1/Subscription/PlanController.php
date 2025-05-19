@@ -22,18 +22,15 @@ class PlanController extends Controller
 
      public function store(Request $request)
     {
+        // dd($request);
         $request->validate([
-            'name' => 'required|string|max:255',
-            'monthly_price' => 'required|integer',
-            'full_price' => 'required|integer',
+            'plan_type' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
-
+// dd($request);
         Plan::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'monthly_price' => $request->monthly_price,
-            'full_price' => $request->full_price,
+            'plan_type' => $request->plan_type,
+            'slug' => Str::slug($request->plan_type),
             'description' => $request->description,
         ]);
 
@@ -48,17 +45,13 @@ class PlanController extends Controller
     public function update(Request $request, Plan $plan)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'monthly_price' => 'required|integer',
-            'full_price' => 'required|integer',
+            'plan_type' => 'required|string|max:255',
             'description' => 'nullable|string',
         ]);
 
         $plan->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-            'monthly_price' => $request->monthly_price,
-            'full_price' => $request->full_price,
+            'plan_type' => $request->plan_type,
+            'slug' => Str::slug($request->plan_type),
             'description' => $request->description,
         ]);
 

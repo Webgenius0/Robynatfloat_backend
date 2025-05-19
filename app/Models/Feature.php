@@ -15,9 +15,11 @@ class Feature extends Model
      * @var array
      */
     protected $fillable = [
-        'name',
-        'slug',
+        'plan_name',
+        'plan_price',
+        'plan_full_price',
         'description',
+        'slug',
     ];
     protected $hidden = [
         'created_at',

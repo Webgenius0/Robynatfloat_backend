@@ -31,18 +31,16 @@
                             <table class="table text-nowrap mb-0 table-centered table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Monthly Price</th>
-                                        <th>Full Price</th>
+                                        <th>Plan Type</th>
+                                        <th>Description</th>
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($plans as $plan)
                                     <tr>
-                                        <td>{{ $plan->name }}</td>
-                                        <td>${{ number_format($plan->monthly_price, 2) }}</td>
-                                        <td>${{ number_format($plan->full_price, 2) }}</td>
+                                        <td>{{ $plan->plan_type }}</td>
+                                        <td>{{ $plan->description }}</td>
                                         <td>
                                             <a href="{{ route('admin.subscription.plan.edit', $plan->slug) }}" class="btn btn-sm btn-warning">Edit</a>
 

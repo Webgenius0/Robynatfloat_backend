@@ -29,14 +29,22 @@ class FeaturePlanController extends Controller
     {
         $request->validate([
             'plan_id' => 'required|exists:plans,id',
-            'feature_name' => 'required|string|max:255',
-            'description' => 'nullable|string',
+        'plan_name' => 'nullable|string|max:255',
+        'plan_price' => 'nullable|integer',
+        'plan_full_price' => 'nullable|integer',
+        'description' => 'nullable|string',
         ]);
 // dd($request);
         // Create or find the feature
         $feature = Feature::updateOrCreate(
-            ['name' => $request->feature_name],
-            ['slug' => Str::slug($request->feature_name), 'description' => $request->description]
+            [
+                'plan_name'=> $request->plan_name,
+                'plan_price'=> $request->plan_price,
+                'plan_full_price'=> $request->plan_full_price,
+                'description' => $request->description,
+                'slug' => Str::slug($request->plan_name),
+            ]
+
 );
 // dd($feature);
         // Attach the feature to the plan
@@ -44,6 +52,7 @@ class FeaturePlanController extends Controller
             'plan_id' => $request->plan_id,
             'feature_id' => $feature->id,
         ]);
+        // dd($feature);
 
         return redirect()->route('admin.subscription.featurePlan.index')->with('success', 'Feature plan added successfully.');
     }
@@ -62,6 +71,8 @@ class FeaturePlanController extends Controller
     $request->validate([
         'plan_id' => 'required|exists:plans,id',
         'feature_id' => 'required|exists:features,id',
+        'plan_price'=> 'nullable|integer',
+        'plan_full_price'=> 'nullable|integer',
         'description' => 'nullable|string',
     ]);
 
@@ -72,6 +83,8 @@ class FeaturePlanController extends Controller
     $planFeature->update([
         'plan_id' => $request->plan_id,
         'feature_id' => $request->feature_id,
+        'plan_price'=> $request->plan_price,
+        'plan_full_price'=> $request->plan_full_price
     ]);
 
     // Optionally, update the feature description if provided

@@ -27,7 +27,7 @@
                                 <select name="plan_id" id="plan" class="form-control" required>
                                     @foreach($plans as $plan)
                                         <option value="{{ $plan->id }}" {{ $planFeature->plan_id == $plan->id ? 'selected' : '' }}>
-                                            {{ $plan->name }}
+                                            {{ $plan->plan_type }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -42,7 +42,7 @@
                                 <select name="feature_id" id="feature" class="form-control" required>
                                     @foreach($features as $feature)
                                         <option value="{{ $feature->id }}" {{ $planFeature->feature_id == $feature->id ? 'selected' : '' }}>
-                                            {{ $feature->name }}
+                                            {{ $feature->plan_name }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -50,6 +50,16 @@
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+
+                            <div class="mb-3">
+                        <label for="plan_price" class="form-label">Plan Price</label>
+                        <input type="number" class="form-control" id="plan_price" name="plan_price" value="{{ $feature->plan_price }}" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="plan_full_price" class="form-label">Plan Full Price</label>
+                        <input type="number" class="form-control" id="plan_full_price" name="plan_full_price" value="{{ $feature->plan_full_price }}" required>
+                    </div>
 
                             <!-- Feature Description (Optional) -->
                             <div class="mb-3">

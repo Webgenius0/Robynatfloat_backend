@@ -26,22 +26,31 @@
 
                             <!-- Plan Selection -->
                             <div class="mb-3">
-                                <label for="plan" class="form-label">Select Plan</label>
+                                <label for="plan" class="form-label">Select Plan type</label>
                                 <select name="plan_id" id="plan" class="form-control" required>
                                     @foreach($plans as $plan)
-                                        <option value="{{ $plan->id }}">{{ $plan->name }}</option>
+                                        <option value="{{ $plan->id }}">{{ $plan->plan_type }}</option>
                                     @endforeach
                                 </select>
                             </div>
 
                             <!-- Feature Name -->
                             <div class="mb-3">
-                                <label for="feature_name" class="form-label">Feature Name</label>
-                                <input type="text" name="feature_name" id="feature_name" class="form-control" placeholder="Enter feature name" required>
-                                @error('feature_name')
+                                <label for="plan_name" class="form-label">Plan Name</label>
+                                <input type="text" name="plan_name" id="plan_name" class="form-control" placeholder="Enter feature name" required>
+                                @error('plan_name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
+                              <div class="mb-3">
+                        <label for="plan_price" class="form-label">Plan Price</label>
+                        <input type="number" class="form-control" id="plan_price" name="plan_price" placeholder="Enter Plan price"  required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="plan_full_price" class="form-label">Plan Full Price</label>
+                        <input type="number" class="form-control" id="plan_full_price" name="plan_full_price" placeholder="Enter Full plan price" required>
+                    </div>
 
                             <!-- Feature Description -->
                             <div class="mb-3">
