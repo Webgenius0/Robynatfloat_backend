@@ -37,7 +37,7 @@ class ProfileRepository implements ProfileRepositoryInterface {
 
             // Update profile
             $profileData = array_intersect_key($data, array_flip([
-                'bio', 'cv_url', 'facebook', 'instagram', 'youtube', 'linkedin','yacht_length', 'yacht_year_build', 'yacht_location',
+                'bio', 'web','cv_url', 'facebook', 'instagram', 'youtube', 'linkedin','yacht_length', 'yacht_year_build', 'yacht_location','designation'
 
             ]));
             if (request()->hasFile('cv_url')) {

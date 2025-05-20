@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->string('phone')->nullable();
 
             $table->string('web')->nullable();
+            $table->string('designation')->nullable();
             $table->longText('bio')->comment('profile about')->nullable();
 
             $table->string('cv_url')->nullable();
@@ -26,7 +27,7 @@ return new class extends Migration {
             $table->string('yacht_length')->nullable();
             $table->string('yacht_year_build')->nullable();
             $table->string('yacht_location')->nullable();
-            
+
 
             $table->softDeletes();
             $table->timestamps();
