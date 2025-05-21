@@ -21,21 +21,20 @@ class PlanController extends Controller
 
 
      public function store(Request $request)
-    {
-        // dd($request);
-        $request->validate([
-            'plan_type' => 'required|string|max:255',
-            'description' => 'nullable|string',
-        ]);
-// dd($request);
-        Plan::create([
-            'plan_type' => $request->plan_type,
-            'slug' => Str::slug($request->plan_type),
-            'description' => $request->description,
-        ]);
+{
+    $request->validate([
+        'plan_type' => 'required|in:Weekly,Monthly,Yearly',
+        'description' => 'nullable|string',
+    ]);
 
-        return redirect()->route('admin.subscription.plan.index')->with('success', 'Plan created successfully!');
-    }
+    Plan::create([
+        'plan_type' => $request->plan_type,
+        'slug' => Str::slug($request->plan_type),
+        'description' => $request->description,
+    ]);
+
+    return redirect()->route('admin.subscription.plan.index')->with('success', 'Plan created successfully!');
+}
 
     public function edit(Plan $plan)
     {

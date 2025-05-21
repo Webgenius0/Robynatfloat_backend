@@ -13,26 +13,34 @@
             </div>
         </div>
 
-        <form action="{{ route('admin.subscription.plan.update', $plan->slug) }}" method="POST">
-            @csrf
-            @method('PUT')
-            <div class="card mb-4">
-                <div class="card-body">
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Plan Name</label>
-                        <input type="text" class="form-control" id="name" name="plan_type" value="{{ $plan->plan_type }}" required>
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="4">{{ $plan->description }}</textarea>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Update Plan</button>
-                    <a href="{{ route('admin.subscription.plan.index') }}" class="btn btn-light">Cancel</a>
-                </div>
+       <form action="{{ route('admin.subscription.plan.update', $plan->slug) }}" method="POST">
+    @csrf
+    @method('PUT')
+    <div class="card mb-4">
+        <div class="card-body">
+            <!-- Plan Type Dropdown -->
+            <div class="mb-3">
+                <label for="plan_type" class="form-label">Plan Type</label>
+                <select class="form-select" id="plan_type" name="plan_type" required>
+                    <option value="" disabled>Select plan type</option>
+                    <option value="Weekly" {{ $plan->plan_type == 'Weekly' ? 'selected' : '' }}>Weekly</option>
+                    <option value="Monthly" {{ $plan->plan_type == 'Monthly' ? 'selected' : '' }}>Monthly</option>
+                    <option value="Yearly" {{ $plan->plan_type == 'Yearly' ? 'selected' : '' }}>Yearly</option>
+                </select>
             </div>
-        </form>
+
+            <!-- Description -->
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="4">{{ $plan->description }}</textarea>
+            </div>
+
+            <!-- Buttons -->
+            <button type="submit" class="btn btn-primary">Update Plan</button>
+            <a href="{{ route('admin.subscription.plan.index') }}" class="btn btn-light">Cancel</a>
+        </div>
+    </div>
+</form>
     </div>
 </div>
 @endsection

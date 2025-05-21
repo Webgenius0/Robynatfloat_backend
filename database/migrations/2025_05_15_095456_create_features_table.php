@@ -16,7 +16,7 @@ return new class extends Migration
               $table->string('plan_name')->nullable(false);
              $table->integer('plan_price')->nullable(false);
              $table->integer('plan_full_price')->nullable(false);
-            $table->string('slug')->unique();
+            $table->string('slug')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();
         });

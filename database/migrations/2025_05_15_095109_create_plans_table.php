@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('plans', function (Blueprint $table) {
              $table->id();
             $table->string('plan_type')->nullable(false);
-            $table->string('slug')->unique()->nullable(false);
+            $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
         });
