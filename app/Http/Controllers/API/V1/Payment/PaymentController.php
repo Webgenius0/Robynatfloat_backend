@@ -45,6 +45,8 @@ class PaymentController extends Controller
     $request->validate([
         'amount' => 'required|integer|min:1',
         'currency' => 'required|string|in:usd',
+        'success_url' => 'required|url',
+        'cancel_url' => 'required|url',
     ]);
 
     // Map the type to the model
@@ -89,8 +91,8 @@ class PaymentController extends Controller
                 'quantity' => 1,
             ]],
             'mode' => 'payment',
-            'success_url' => route('payment.success') . '?session_id={CHECKOUT_SESSION_ID}',
-            'cancel_url' => route('payment.cancel'),
+            'success_url' => $request->success_url . '?session_id={CHECKOUT_SESSION_ID}',
+            'cancel_url'  => $request->cancel_url,
             'metadata' => [
                 'type' => $type,
                 'model_id' => $id,
