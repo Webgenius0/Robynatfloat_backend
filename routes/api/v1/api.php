@@ -24,3 +24,4 @@ require __DIR__.'/freelancer/freelancer.php';
 require __DIR__.'/supplier/supplier.php';
 require __DIR__.'/crew/crew.php';
 require __DIR__.'/payment/payment.php';
+require __DIR__.'/blog/blog.php';

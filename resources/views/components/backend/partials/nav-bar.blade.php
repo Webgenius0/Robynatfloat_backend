@@ -312,6 +312,17 @@
         Subscription Features Plan
     </a>
 </li>
+<li class="nav-item">
+    <a class="nav-link {{ request()->routeIs('admin.transactions.*') ? 'active' : '' }}"
+        href="{{ route('admin.subscription.transactions.index') }}">
+        <svg fill="{{ request()->routeIs('admin.transactions.*') ? '#4caf50' : '#9e9e9e' }}"
+            height="18px" width="18px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+            style="margin-right: 5px">
+            <path d="M3 6l3 18h12l3-18H3zm16.2 2l-.6 4H5.4l-.6-4h14.4zM7.2 20l-.6-4h10.8l-.6 4H7.2zM9 2h6v2H9V2z" />
+        </svg>
+        Transactions
+    </a>
+</li>
 
 
 
