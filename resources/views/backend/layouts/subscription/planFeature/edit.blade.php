@@ -36,36 +36,38 @@
                                 @enderror
                             </div>
 
-                            <!-- Feature Selection -->
+                            <!-- Plan Name -->
                             <div class="mb-3">
-                                <label for="feature" class="form-label">Select Feature</label>
-                                <select name="feature_id" id="feature" class="form-control" required>
-                                    @foreach($features as $feature)
-                                        <option value="{{ $feature->id }}" {{ $planFeature->feature_id == $feature->id ? 'selected' : '' }}>
-                                            {{ $feature->plan_name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                                @error('feature_id')
+                                <label for="plan_name" class="form-label">Plan Name</label>
+                                <input type="text" class="form-control" id="plan_name" name="plan_name" value="{{ $planFeature->feature->plan_name ?? '' }}" required>
+                                @error('plan_name')
                                     <small class="text-danger">{{ $message }}</small>
                                 @enderror
                             </div>
 
+                            <!-- Plan Price -->
                             <div class="mb-3">
-                        <label for="plan_price" class="form-label">Plan Price</label>
-                        <input type="number" class="form-control" id="plan_price" name="plan_price" value="{{ $feature->plan_price }}" required>
-                    </div>
+                                <label for="plan_price" class="form-label">Plan Price</label>
+                                <input type="number" class="form-control" id="plan_price" name="plan_price" value="{{ $planFeature->feature->plan_price ?? '' }}" required>
+                                @error('plan_price')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
-                    <div class="mb-3">
-                        <label for="plan_full_price" class="form-label">Plan Full Price</label>
-                        <input type="number" class="form-control" id="plan_full_price" name="plan_full_price" value="{{ $feature->plan_full_price }}" required>
-                    </div>
+                            <!-- Plan Full Price -->
+                            <div class="mb-3">
+                                <label for="plan_full_price" class="form-label">Plan Full Price</label>
+                                <input type="number" class="form-control" id="plan_full_price" name="plan_full_price" value="{{ $planFeature->feature->plan_full_price ?? '' }}" required>
+                                @error('plan_full_price')
+                                    <small class="text-danger">{{ $message }}</small>
+                                @enderror
+                            </div>
 
-                            <!-- Feature Description (Optional) -->
+                            <!-- Feature Description -->
                             <div class="mb-3">
                                 <label for="description" class="form-label">Feature Description</label>
                                 <textarea name="description" id="description" class="form-control">
-                                    {{ $planFeature->feature->description ?? '' }}
+                                    {{ old('description', $planFeature->feature->description ?? '') }}
                                 </textarea>
                                 @error('description')
                                     <small class="text-danger">{{ $message }}</small>

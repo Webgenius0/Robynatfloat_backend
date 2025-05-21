@@ -67,35 +67,42 @@ class FeaturePlanController extends Controller
 
    public function update(Request $request, $id)
 {
-    // Validate the incoming request
+    // Validate request
     $request->validate([
         'plan_id' => 'required|exists:plans,id',
-        'feature_id' => 'required|exists:features,id',
-        'plan_price'=> 'nullable|integer',
-        'plan_full_price'=> 'nullable|integer',
+        'plan_name' => 'nullable|string|max:255',
+        'plan_price' => 'nullable|integer',
+        'plan_full_price' => 'nullable|integer',
         'description' => 'nullable|string',
     ]);
 
-    // Find the PlanFeature record
+    // Find PlanFeature
     $planFeature = PlanFeature::findOrFail($id);
 
-    // Update the plan and feature association
+    // Update or create Feature
+    $feature = Feature::updateOrCreate(
+        [
+            'id' => $planFeature->feature_id // Find by existing ID to update
+        ],
+        [
+            'plan_name' => $request->plan_name,
+            'plan_price' => $request->plan_price,
+            'plan_full_price' => $request->plan_full_price,
+            'description' => $request->description,
+            'slug' => Str::slug($request->plan_name),
+        ]
+    );
+
+    // Update PlanFeature with new plan_id and feature_id (in case feature changed)
     $planFeature->update([
         'plan_id' => $request->plan_id,
-        'feature_id' => $request->feature_id,
-        'plan_price'=> $request->plan_price,
-        'plan_full_price'=> $request->plan_full_price
+        'feature_id' => $feature->id,
     ]);
 
-    // Optionally, update the feature description if provided
-    if ($request->filled('description')) {
-        $feature = Feature::findOrFail($request->feature_id);
-        $feature->update(['description' => $request->description]);
-    }
-
-    // Redirect back with success message
-    return redirect()->route('admin.subscription.featurePlan.index')->with('success', 'Feature plan updated successfully.');
+    return redirect()->route('admin.subscription.featurePlan.index')
+        ->with('success', 'Feature plan updated successfully.');
 }
+
 
 
     public function destroy($id)
