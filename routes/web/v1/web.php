@@ -11,11 +11,7 @@ Route::get('/reset', [ResetController::class, 'RunMigrations'])->name('reset');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'web.verified'])->name('dashboard');
-    // Route::get('/profile', [DashboardController::class, 'profileEdit'])->middleware(['auth', 'web.verified'])->name('profile.edit');
-    // Route::post('/profile', [DashboardController::class, 'profileUpdate'])->middleware(['auth', 'web.verified'])->name('profile.update');
-
-    // })->middleware(['auth', 'web.verified'])->name('dashboard');
-
+   
     require __DIR__ . '/auth/auth.php';
 
     Route::name('admin.')->group(function () {
