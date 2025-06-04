@@ -169,7 +169,7 @@ try {
         ->joinSub($subQuery, 'latest_messages', function ($join) {
             $join->on('messages.id', '=', 'latest_messages.last_message_id');
         })
-        ->with(['sender:id,first_name,last_name,avatar'])
+        ->with(['sender:id,first_name,last_name,avatar,handle,created_at'])
         ->orderByDesc('messages.id')
         ->get();
 
