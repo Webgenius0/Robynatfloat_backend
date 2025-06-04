@@ -7,11 +7,14 @@ use Illuminate\Support\Facades\Route;
 
 
 //! Message Routes
-Route::middleware('auth:api')->group(function () {
-    Route::get('/messages/{user}', [ChatController::class, 'GetMessages']);
-    Route::post('/send-messages/{user}', [ChatController::class, 'SendMessage']);
-    Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
-});
+Route::middleware(['auth:api', 'api.verified'])
+    ->prefix('v1') 
+    ->group(function () {
+        Route::get('/messages/{user}', [ChatController::class, 'GetMessages']);
+        Route::post('/send-messages/{user}', [ChatController::class, 'SendMessage']);
+        Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
+    });
+
 //Payment Routes
 
 
