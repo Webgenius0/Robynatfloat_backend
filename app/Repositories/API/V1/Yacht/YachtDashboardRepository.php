@@ -30,7 +30,7 @@ class YachtDashboardRepository implements YachtDashboardRepositoryInterface
     }
     public function getJobApplication(){
         try {
-            $jobApplication= JobApplication::with('user','profile','role')->get();
+            $jobApplication= JobApplication::with('user','profile','role','experience')->get();
             return $jobApplication;
 
         } catch (\Exception $e) {

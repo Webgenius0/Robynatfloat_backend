@@ -27,5 +27,4 @@ class Message extends Model
         return $this->belongsTo(Chat::class);
     }
 
-    // protected $hidden = ['created_at', 'updated_at'];
 }
