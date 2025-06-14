@@ -67,4 +67,7 @@ class JobApplication extends Model {
     public function role(): BelongsTo {
         return $this->belongsTo(Role::class, 'user_id');
     }
+    public function experience(): BelongsTo {
+        return $this->belongsTo(Experience::class, 'user_id');
+    }
 }
