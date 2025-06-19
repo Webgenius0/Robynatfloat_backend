@@ -16,6 +16,7 @@ class ProfileService {
 
     public function updateProfile(User $user, array $data): ?User {
         try {
+            // dd($data);
             return $this->profileRepository->updateProfile($user, $data);
         } catch (Exception $e) {
             Log::error('ProfileService::updateProfile', ['error' => $e->getMessage()]);

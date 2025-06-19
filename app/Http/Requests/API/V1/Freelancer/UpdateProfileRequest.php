@@ -41,6 +41,7 @@ class UpdateProfileRequest extends FormRequest {
             'department'            => 'sometimes|nullable|string|max:255',
             'freelancer_name'         => 'sometimes|nullable|string|max:255',
             'freelancer_category'     => 'sometimes|nullable|string|max:255',
+            'price_per_hour ' => 'sometimes|nullable|numeric|min:0',
 
 
             // Profile fields (profiles table)
