@@ -10,13 +10,14 @@ use Illuminate\Support\Facades\Log;
 
 class BlogController extends Controller
 {
- public function getAllBlog()
+ public function getAllBlog(Request $request)
     {
         try {
+            $perPage = $request->query('per_page');
             $blogs = Blog::with('images')
                          ->select('id', 'title', 'slug', 'content', 'created_at')
                          ->latest()
-                         ->paginate(10); // Added pagination
+                         ->paginate($perPage); // Added pagination
 
             return $this->success(200, 'Blog List', $blogs); // assuming 'success()' is defined in a parent controller or trait
         } catch (Exception $e) {
