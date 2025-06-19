@@ -15,8 +15,13 @@ Route::middleware(['auth:api', 'api.verified'])
         Route::get('/messages/{user}', [ChatController::class, 'GetMessages']);
         Route::post('/send-messages/{user}', [ChatController::class, 'SendMessage']);
         Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
+    });
+    Route::prefix('v1')->group(function () {
         Route::get('/all-user-count',[AllUserListCountController::class, 'getAllUserCount'])->name('all.user.count');
     });
+
+
+
 
 
 
