@@ -145,7 +145,15 @@
 @push('scripts')
     <script src="{{ asset('assets/dev/js/datatables.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dropify/0.2.2/js/dropify.min.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/39.0.1/classic/ckeditor.js"></script>
     <script>
+           // Initialize CKEditor only for blog content field
+    ClassicEditor
+        .create(document.querySelector('#blog_content'))
+        .catch(error => {
+            console.error('CKEditor initialization error:', error);
+        });
+        
         let dTable;
         $(document).ready(function() {
             // Initialize DataTable
