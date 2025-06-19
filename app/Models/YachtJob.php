@@ -76,4 +76,7 @@ class YachtJob extends Model {
     public function getTimestampAttribute(): string {
         return $this->created_at ? $this->created_at->format('Y-m-d\TH:i:sP') . ' GMT+00:00' : 'N/A';
     }
+    public function profile() {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }

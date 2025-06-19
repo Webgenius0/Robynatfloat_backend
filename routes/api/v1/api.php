@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\API\V1\AllUserListCountController;
 use App\Http\Controllers\API\V1\ChatController;
 use App\Http\Controllers\API\V1\PaymentController;
+use App\Http\Controllers\Web\Backend\V1\Dashboard\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +15,10 @@ Route::middleware(['auth:api', 'api.verified'])
         Route::get('/messages/{user}', [ChatController::class, 'GetMessages']);
         Route::post('/send-messages/{user}', [ChatController::class, 'SendMessage']);
         Route::get('/users-with-last-message', [ChatController::class, 'GetUsersWithLastMessage']);
+        Route::get('/all-user-count',[AllUserListCountController::class, 'getAllUserCount'])->name('all.user.count');
     });
+
+
 
 //Payment Routes
 

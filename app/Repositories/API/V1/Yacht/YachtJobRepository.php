@@ -36,7 +36,7 @@ class YachtJobRepository implements YachtJobRepositoryInterface {
 public function getAllJobsStatusBased(array $withStatus): Collection
 {
    try{
-    $statusChange = YachtJob::where('status', $withStatus)->get();
+    $statusChange = YachtJob::where('status', $withStatus)->with('user', 'user.profile')->get();
         return $statusChange;
    }catch (\Exception $e) {
     Log::error('YachtJobRepository::getAllJobs', ['error' => $e->getMessage()]);

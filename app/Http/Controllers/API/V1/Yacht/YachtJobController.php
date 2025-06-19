@@ -84,7 +84,7 @@ class YachtJobController extends Controller {
      */
     public function show(YachtJob $job): JsonResponse {
         try {
-            $job->load('skills');
+            $job->load(['skills', 'user.profile']);
             return Helper::success(200, 'Yacht job retrieved successfully', new YachtJobResource($job));
         } catch (Exception $e) {
             Log::error('YachtJobController::show', ['error' => $e->getMessage()]);

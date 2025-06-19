@@ -2,16 +2,19 @@
 
 namespace App\Http\Resources\API\V1\Yacht;
 
+use App\Http\Resources\API\V1\Freelancer\UserResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class YachtJobResource extends JsonResource {
+class YachtJobResource extends JsonResource
+{
     /**
      * Transform the resource into an array.
      *
      * @return array<string, mixed>
      */
-    public function toArray(Request $request): array {
+    public function toArray(Request $request): array
+    {
         return [
             'id'                   => $this->id,
             'user_id'              => $this->user_id,
@@ -28,6 +31,8 @@ class YachtJobResource extends JsonResource {
             'rate_amount_to'       => $this->rate_amount_to,
             'job_description'      => $this->job_description,
             'skills'               => $this->whenLoaded('skills', fn() => $this->skills->pluck('name')),
+            'user' => new UserResource($this->whenLoaded('user')),
+            'profile' => $this->whenLoaded('user.profile'),
             'created_at'               => $this->created_at
         ];
     }
