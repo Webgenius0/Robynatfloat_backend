@@ -32,6 +32,7 @@ class CityController extends Controller {
      * @return \Illuminate\Contracts\View\View|\Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function index(Request $request): JsonResponse | RedirectResponse | View {
+        // dd($request->all());
         try {
             if ($request->ajax()) {
                 return $this->cityService->index($request);
@@ -44,6 +45,7 @@ class CityController extends Controller {
             if (empty($states)) {
                 return $this->error(404, 'No States Found.');
             }
+            // dd($countries, $states);
 
             return view('backend.layouts.dropdown.city.index', compact('countries', 'states'));
         } catch (Exception $e) {

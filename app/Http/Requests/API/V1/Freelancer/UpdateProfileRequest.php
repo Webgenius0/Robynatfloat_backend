@@ -35,6 +35,13 @@ class UpdateProfileRequest extends FormRequest {
             'location'               => 'sometimes|nullable|string|max:255',
             'phone_number'           => 'sometimes|nullable|string|max:50',
             'avatar'                 => 'sometimes|file|image|max:20480',
+            'business_name'          => 'sometimes|nullable|string|max:255',
+            'business_category'     => 'sometimes|nullable|string|max:255',
+            'nationality'           => 'sometimes|nullable|string|max:255',
+            'department'            => 'sometimes|nullable|string|max:255',
+            'freelancer_name'         => 'sometimes|nullable|string|max:255',
+            'freelancer_category'     => 'sometimes|nullable|string|max:255',
+
 
             // Profile fields (profiles table)
             'about'                  => 'sometimes|nullable|string',
@@ -65,6 +72,8 @@ class UpdateProfileRequest extends FormRequest {
 
             'languages'              => 'sometimes|array',
             'languages.*'            => 'integer|exists:languages,id',
+            //
+
         ];
     }
 }
